@@ -24,6 +24,7 @@
 		49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91321CDF93F300B8787B /* BUCBaseTableViewCell.m */; };
 		49DA91391CDF947200B8787B /* BUCMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */; };
 		49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */; };
+		49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91401CDF95C400B8787B /* BUCNetworkEngine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCMyProfileViewController.m; path = UI/MyProfile/BUCMyProfileViewController.m; sourceTree = "<group>"; };
 		49DA913B1CDF94AC00B8787B /* BUCHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCHomeCell.h; path = UI/Home/Views/BUCHomeCell.h; sourceTree = "<group>"; };
 		49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHomeCell.m; path = UI/Home/Views/BUCHomeCell.m; sourceTree = "<group>"; };
+		49DA913F1CDF95C400B8787B /* BUCNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCNetworkEngine.h; path = Tools/BUCNetworkEngine.h; sourceTree = "<group>"; };
+		49DA91401CDF95C400B8787B /* BUCNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCNetworkEngine.m; path = Tools/BUCNetworkEngine.m; sourceTree = "<group>"; };
 		AF7E450261B0582219AD711F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC85198A0E5303200DFC69BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -199,6 +202,8 @@
 			children = (
 				49DA911D1CDF91A500B8787B /* BUCNetworkAPI.h */,
 				49DA911E1CDF91A500B8787B /* BUCNetworkAPI.m */,
+				49DA913F1CDF95C400B8787B /* BUCNetworkEngine.h */,
+				49DA91401CDF95C400B8787B /* BUCNetworkEngine.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
 				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
+				49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
