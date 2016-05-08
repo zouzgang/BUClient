@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		284322AE7B3E77EBB54EF166 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85198A0E5303200DFC69BE /* libPods.a */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -15,6 +16,14 @@
 		49DA90F61CDF8F5100B8787B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA90F41CDF8F5100B8787B /* LaunchScreen.storyboard */; };
 		49DA91011CDF8F5100B8787B /* BUCilentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91001CDF8F5100B8787B /* BUCilentTests.m */; };
 		49DA910C1CDF8F5100B8787B /* BUCilentUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA910B1CDF8F5100B8787B /* BUCilentUITests.m */; };
+		49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA911A1CDF914C00B8787B /* BUCBaseViewController.m */; };
+		49DA911F1CDF91A500B8787B /* BUCNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA911E1CDF91A500B8787B /* BUCNetworkAPI.m */; };
+		49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91221CDF92BC00B8787B /* BUCTabViewController.m */; };
+		49DA91271CDF92E700B8787B /* BUCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91261CDF92E700B8787B /* BUCHomeViewController.m */; };
+		49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA912A1CDF936700B8787B /* BUCDiscoverViewController.m */; };
+		49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91321CDF93F300B8787B /* BUCBaseTableViewCell.m */; };
+		49DA91391CDF947200B8787B /* BUCMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */; };
+		49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D39087C48B1B4005FECCF72 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +61,24 @@
 		49DA91071CDF8F5100B8787B /* BUCilentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUCilentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA910B1CDF8F5100B8787B /* BUCilentUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUCilentUITests.m; sourceTree = "<group>"; };
 		49DA910D1CDF8F5100B8787B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DA91191CDF914C00B8787B /* BUCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCBaseViewController.h; path = Base/BUCBaseViewController.h; sourceTree = "<group>"; };
+		49DA911A1CDF914C00B8787B /* BUCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBaseViewController.m; path = Base/BUCBaseViewController.m; sourceTree = "<group>"; };
+		49DA911D1CDF91A500B8787B /* BUCNetworkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCNetworkAPI.h; path = Tools/BUCNetworkAPI.h; sourceTree = "<group>"; };
+		49DA911E1CDF91A500B8787B /* BUCNetworkAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCNetworkAPI.m; path = Tools/BUCNetworkAPI.m; sourceTree = "<group>"; };
+		49DA91211CDF92BC00B8787B /* BUCTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCTabViewController.h; path = UI/BUCTabViewController.h; sourceTree = "<group>"; };
+		49DA91221CDF92BC00B8787B /* BUCTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCTabViewController.m; path = UI/BUCTabViewController.m; sourceTree = "<group>"; };
+		49DA91251CDF92E700B8787B /* BUCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCHomeViewController.h; path = UI/Home/BUCHomeViewController.h; sourceTree = "<group>"; };
+		49DA91261CDF92E700B8787B /* BUCHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHomeViewController.m; path = UI/Home/BUCHomeViewController.m; sourceTree = "<group>"; };
+		49DA91291CDF936700B8787B /* BUCDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCDiscoverViewController.h; path = UI/Discover/BUCDiscoverViewController.h; sourceTree = "<group>"; };
+		49DA912A1CDF936700B8787B /* BUCDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCDiscoverViewController.m; path = UI/Discover/BUCDiscoverViewController.m; sourceTree = "<group>"; };
+		49DA91311CDF93F300B8787B /* BUCBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCBaseTableViewCell.h; path = Base/BUCBaseTableViewCell.h; sourceTree = "<group>"; };
+		49DA91321CDF93F300B8787B /* BUCBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBaseTableViewCell.m; path = Base/BUCBaseTableViewCell.m; sourceTree = "<group>"; };
+		49DA91371CDF947200B8787B /* BUCMyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCMyProfileViewController.h; path = UI/MyProfile/BUCMyProfileViewController.h; sourceTree = "<group>"; };
+		49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCMyProfileViewController.m; path = UI/MyProfile/BUCMyProfileViewController.m; sourceTree = "<group>"; };
+		49DA913B1CDF94AC00B8787B /* BUCHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCHomeCell.h; path = UI/Home/Views/BUCHomeCell.h; sourceTree = "<group>"; };
+		49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHomeCell.m; path = UI/Home/Views/BUCHomeCell.m; sourceTree = "<group>"; };
+		AF7E450261B0582219AD711F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FC85198A0E5303200DFC69BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				284322AE7B3E77EBB54EF166 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +107,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		438C9EDAAB77C0B7ACE94AFE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AF7E450261B0582219AD711F /* Pods.debug.xcconfig */,
+				2D39087C48B1B4005FECCF72 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		49DA90DA1CDF8F5100B8787B = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +123,8 @@
 				49DA90FF1CDF8F5100B8787B /* BUCilentTests */,
 				49DA910A1CDF8F5100B8787B /* BUCilentUITests */,
 				49DA90E41CDF8F5100B8787B /* Products */,
+				438C9EDAAB77C0B7ACE94AFE /* Pods */,
+				AFC72E598F31E33D58905C74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +143,9 @@
 			children = (
 				49DA90E91CDF8F5100B8787B /* AppDelegate.h */,
 				49DA90EA1CDF8F5100B8787B /* AppDelegate.m */,
+				49DA91201CDF91AA00B8787B /* Tools */,
+				49DA911C1CDF915200B8787B /* Base */,
+				49DA91241CDF92C000B8787B /* UI */,
 				49DA90EC1CDF8F5100B8787B /* ViewController.h */,
 				49DA90ED1CDF8F5100B8787B /* ViewController.m */,
 				49DA90EF1CDF8F5100B8787B /* Main.storyboard */,
@@ -140,6 +183,83 @@
 			path = BUCilentUITests;
 			sourceTree = "<group>";
 		};
+		49DA911C1CDF915200B8787B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91191CDF914C00B8787B /* BUCBaseViewController.h */,
+				49DA911A1CDF914C00B8787B /* BUCBaseViewController.m */,
+				49DA91311CDF93F300B8787B /* BUCBaseTableViewCell.h */,
+				49DA91321CDF93F300B8787B /* BUCBaseTableViewCell.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		49DA91201CDF91AA00B8787B /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				49DA911D1CDF91A500B8787B /* BUCNetworkAPI.h */,
+				49DA911E1CDF91A500B8787B /* BUCNetworkAPI.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		49DA91241CDF92C000B8787B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91211CDF92BC00B8787B /* BUCTabViewController.h */,
+				49DA91221CDF92BC00B8787B /* BUCTabViewController.m */,
+				49DA91281CDF92EC00B8787B /* Home */,
+				49DA912C1CDF936B00B8787B /* Discover */,
+				49DA913A1CDF947600B8787B /* MyProfile */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		49DA91281CDF92EC00B8787B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91251CDF92E700B8787B /* BUCHomeViewController.h */,
+				49DA91261CDF92E700B8787B /* BUCHomeViewController.m */,
+				49DA913E1CDF94B100B8787B /* Views */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		49DA912C1CDF936B00B8787B /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91291CDF936700B8787B /* BUCDiscoverViewController.h */,
+				49DA912A1CDF936700B8787B /* BUCDiscoverViewController.m */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
+		49DA913A1CDF947600B8787B /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91371CDF947200B8787B /* BUCMyProfileViewController.h */,
+				49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */,
+			);
+			name = MyProfile;
+			sourceTree = "<group>";
+		};
+		49DA913E1CDF94B100B8787B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49DA913B1CDF94AC00B8787B /* BUCHomeCell.h */,
+				49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		AFC72E598F31E33D58905C74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC85198A0E5303200DFC69BE /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +267,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49DA91101CDF8F5100B8787B /* Build configuration list for PBXNativeTarget "BUCilent" */;
 			buildPhases = (
+				5B156D776346574F7D444512 /* Check Pods Manifest.lock */,
 				49DA90DF1CDF8F5100B8787B /* Sources */,
 				49DA90E01CDF8F5100B8787B /* Frameworks */,
 				49DA90E11CDF8F5100B8787B /* Resources */,
+				60D264F11DB285676228AF65 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -265,13 +387,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5B156D776346574F7D444512 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		60D264F11DB285676228AF65 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		49DA90DF1CDF8F5100B8787B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DA91271CDF92E700B8787B /* BUCHomeViewController.m in Sources */,
+				49DA91391CDF947200B8787B /* BUCMyProfileViewController.m in Sources */,
+				49DA911F1CDF91A500B8787B /* BUCNetworkAPI.m in Sources */,
+				49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
+				49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */,
+				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
 				49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */,
+				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
+				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +574,7 @@
 		};
 		49DA91111CDF8F5100B8787B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF7E450261B0582219AD711F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BUCilent/Info.plist;
@@ -422,6 +586,7 @@
 		};
 		49DA91121CDF8F5100B8787B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D39087C48B1B4005FECCF72 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BUCilent/Info.plist;
@@ -496,6 +661,7 @@
 				49DA91121CDF8F5100B8787B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49DA91131CDF8F5100B8787B /* Build configuration list for PBXNativeTarget "BUCilentTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +670,7 @@
 				49DA91151CDF8F5100B8787B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49DA91161CDF8F5100B8787B /* Build configuration list for PBXNativeTarget "BUCilentUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +679,7 @@
 				49DA91181CDF8F5100B8787B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
