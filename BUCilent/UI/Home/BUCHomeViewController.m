@@ -23,7 +23,7 @@
 
 @implementation BUCHomeViewController {
     UITableView *_tableView;
-    NSArray *_dataArray;
+    NSArray <BUCHomeModel *> *_dataArray;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -85,7 +85,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
+    detail.tid = _dataArray[indexPath.row].tid;
+    detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
 

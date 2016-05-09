@@ -10,4 +10,6 @@
 
 @interface BUCPostDetailViewController : BUCBaseViewController
 
+@property (nonatomic, strong) NSNumber *tid;
+
 @end

@@ -71,14 +71,14 @@
         make.top.equalTo(self.view).offset(160);
         make.left.equalTo(self.view).offset(24);
         make.right.equalTo(self.view).offset(-24);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(32);
     }];
     
     [_passwordTextField mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_usernameTextField.mas_bottom).offset(12);
         make.left.equalTo(self.view).offset(24);
         make.right.equalTo(self.view).offset(-24);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(32);
 
     }];
     

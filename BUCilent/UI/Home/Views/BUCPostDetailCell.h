@@ -7,7 +7,12 @@
 //
 
 #import "BUCBaseTableViewCell.h"
+@class BUCPostDetailModel;
 
-@interface BUCPostDetailCell : BUCBaseTableViewCell 
+@interface BUCPostDetailCell : BUCBaseTableViewCell
+
+@property (nonatomic, strong) BUCPostDetailModel *postDetailModel;
+
+- (CGFloat)height;
     
 @end

@@ -134,14 +134,11 @@ const CGFloat kTopPadding = 12;
 - (void)setHomeModel:(BUCHomeModel *)homeModel {
     _homeModel = homeModel;
     if (_homeModel) {
-        _titleLabel.text = [homeModel.pname stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-        _replyLabel.text = [NSString stringWithFormat:@"%@回复了帖子", [homeModel.lastRelpyDict[@"who"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ]];
-        _timeLabel.text = [homeModel.lastRelpyDict[@"when"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _contentLabel.text = [homeModel.lastRelpyDict[@"what"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _forumLabel.text = [homeModel.fname stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _authorLabel.text = [homeModel.author stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
+        _titleLabel.text = [self urldecode:homeModel.pname];
+        _replyLabel.text = [NSString stringWithFormat:@"%@回复了帖子", [self urldecode:homeModel.lastRelpyDict[@"who"]]];
+        _timeLabel.text = [self urldecode:homeModel.lastRelpyDict[@"when"]];
+        _contentLabel.text = [self urldecode:homeModel.lastRelpyDict[@"what"]];
+        _forumLabel.text = [self urldecode:homeModel.fname];
         [self updateConstraints];
     }
 }

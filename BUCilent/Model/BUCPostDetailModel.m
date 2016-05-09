@@ -9,5 +9,10 @@
 #import "BUCPostDetailModel.h"
 
 @implementation BUCPostDetailModel
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"authorID"         : @"authorid"
+             };
+}
 
 @end
