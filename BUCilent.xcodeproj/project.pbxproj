@@ -35,6 +35,14 @@
 		49DA915D1CE06D0200B8787B /* BUCHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA915C1CE06D0200B8787B /* BUCHomeModel.m */; };
 		49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA915F1CE06FD300B8787B /* BUCHomeLastReplyModel.m */; };
 		49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91621CE07C8200B8787B /* UIColor+BUC.m */; };
+		49DA91661CE0803800B8787B /* BUCPostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91651CE0803800B8787B /* BUCPostDetailViewController.m */; };
+		49DA91691CE0807E00B8787B /* BUCPostDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91681CE0807E00B8787B /* BUCPostDetailCell.m */; };
+		49DA916C1CE086DD00B8787B /* BUCPostDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA916B1CE086DD00B8787B /* BUCPostDetailModel.m */; };
+		49DA916F1CE0881700B8787B /* BUCHtmlScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA916E1CE0881700B8787B /* BUCHtmlScraper.m */; };
+		49DA91771CE0889A00B8787B /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91721CE0889A00B8787B /* TFHpple.m */; };
+		49DA91781CE0889A00B8787B /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91741CE0889A00B8787B /* TFHppleElement.m */; };
+		49DA91791CE0889A00B8787B /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91761CE0889A00B8787B /* XPathQuery.m */; };
+		49DA917B1CE088CC00B8787B /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DA917A1CE088CC00B8787B /* libxml2.2.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +119,21 @@
 		49DA915F1CE06FD300B8787B /* BUCHomeLastReplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHomeLastReplyModel.m; path = Model/BUCHomeLastReplyModel.m; sourceTree = "<group>"; };
 		49DA91611CE07C8200B8787B /* UIColor+BUC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+BUC.h"; path = "Category/UIColor+BUC.h"; sourceTree = "<group>"; };
 		49DA91621CE07C8200B8787B /* UIColor+BUC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+BUC.m"; path = "Category/UIColor+BUC.m"; sourceTree = "<group>"; };
+		49DA91641CE0803800B8787B /* BUCPostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCPostDetailViewController.h; path = UI/Home/BUCPostDetailViewController.h; sourceTree = "<group>"; };
+		49DA91651CE0803800B8787B /* BUCPostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCPostDetailViewController.m; path = UI/Home/BUCPostDetailViewController.m; sourceTree = "<group>"; };
+		49DA91671CE0807E00B8787B /* BUCPostDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCPostDetailCell.h; path = UI/Home/Views/BUCPostDetailCell.h; sourceTree = "<group>"; };
+		49DA91681CE0807E00B8787B /* BUCPostDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCPostDetailCell.m; path = UI/Home/Views/BUCPostDetailCell.m; sourceTree = "<group>"; };
+		49DA916A1CE086DD00B8787B /* BUCPostDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCPostDetailModel.h; path = Model/BUCPostDetailModel.h; sourceTree = "<group>"; };
+		49DA916B1CE086DD00B8787B /* BUCPostDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCPostDetailModel.m; path = Model/BUCPostDetailModel.m; sourceTree = "<group>"; };
+		49DA916D1CE0881700B8787B /* BUCHtmlScraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCHtmlScraper.h; path = Tools/BUCHtmlScraper.h; sourceTree = "<group>"; };
+		49DA916E1CE0881700B8787B /* BUCHtmlScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHtmlScraper.m; path = Tools/BUCHtmlScraper.m; sourceTree = "<group>"; };
+		49DA91711CE0889A00B8787B /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		49DA91721CE0889A00B8787B /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		49DA91731CE0889A00B8787B /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		49DA91741CE0889A00B8787B /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		49DA91751CE0889A00B8787B /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		49DA91761CE0889A00B8787B /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		49DA917A1CE088CC00B8787B /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		AF7E450261B0582219AD711F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC85198A0E5303200DFC69BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -120,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DA917B1CE088CC00B8787B /* libxml2.2.tbd in Frameworks */,
 				284322AE7B3E77EBB54EF166 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +258,7 @@
 		49DA91201CDF91AA00B8787B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				49DA91701CE0889A00B8787B /* Happle */,
 				49DA911D1CDF91A500B8787B /* BUCNetworkAPI.h */,
 				49DA911E1CDF91A500B8787B /* BUCNetworkAPI.m */,
 				49DA913F1CDF95C400B8787B /* BUCNetworkEngine.h */,
@@ -242,6 +267,8 @@
 				49DA914F1CDFAA2D00B8787B /* BUCDataManager.m */,
 				49DA91511CDFADD000B8787B /* BUCUserManager.h */,
 				49DA91521CDFADD100B8787B /* BUCUserManager.m */,
+				49DA916D1CE0881700B8787B /* BUCHtmlScraper.h */,
+				49DA916E1CE0881700B8787B /* BUCHtmlScraper.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -266,6 +293,8 @@
 			children = (
 				49DA91251CDF92E700B8787B /* BUCHomeViewController.h */,
 				49DA91261CDF92E700B8787B /* BUCHomeViewController.m */,
+				49DA91641CE0803800B8787B /* BUCPostDetailViewController.h */,
+				49DA91651CE0803800B8787B /* BUCPostDetailViewController.m */,
 				49DA913E1CDF94B100B8787B /* Views */,
 			);
 			name = Home;
@@ -294,6 +323,8 @@
 			children = (
 				49DA913B1CDF94AC00B8787B /* BUCHomeCell.h */,
 				49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */,
+				49DA91671CE0807E00B8787B /* BUCPostDetailCell.h */,
+				49DA91681CE0807E00B8787B /* BUCPostDetailCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -329,13 +360,29 @@
 				49DA915C1CE06D0200B8787B /* BUCHomeModel.m */,
 				49DA915E1CE06FD300B8787B /* BUCHomeLastReplyModel.h */,
 				49DA915F1CE06FD300B8787B /* BUCHomeLastReplyModel.m */,
+				49DA916A1CE086DD00B8787B /* BUCPostDetailModel.h */,
+				49DA916B1CE086DD00B8787B /* BUCPostDetailModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		49DA91701CE0889A00B8787B /* Happle */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91711CE0889A00B8787B /* TFHpple.h */,
+				49DA91721CE0889A00B8787B /* TFHpple.m */,
+				49DA91731CE0889A00B8787B /* TFHppleElement.h */,
+				49DA91741CE0889A00B8787B /* TFHppleElement.m */,
+				49DA91751CE0889A00B8787B /* XPathQuery.h */,
+				49DA91761CE0889A00B8787B /* XPathQuery.m */,
+			);
+			path = Happle;
 			sourceTree = "<group>";
 		};
 		AFC72E598F31E33D58905C74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49DA917A1CE088CC00B8787B /* libxml2.2.tbd */,
 				FC85198A0E5303200DFC69BE /* libPods.a */,
 			);
 			name = Frameworks;
@@ -514,16 +561,23 @@
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
 				49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */,
 				49DA91481CDFA26200B8787B /* BUCLoadingView.m in Sources */,
+				49DA91781CE0889A00B8787B /* TFHppleElement.m in Sources */,
 				49DA91561CDFAE3B00B8787B /* BUCBaseModel.m in Sources */,
+				49DA91691CE0807E00B8787B /* BUCPostDetailCell.m in Sources */,
 				49DA914C1CDFA41300B8787B /* NSString+Tools.m in Sources */,
 				49DA915D1CE06D0200B8787B /* BUCHomeModel.m in Sources */,
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
 				49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */,
+				49DA91661CE0803800B8787B /* BUCPostDetailViewController.m in Sources */,
+				49DA91791CE0889A00B8787B /* XPathQuery.m in Sources */,
 				49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */,
 				49DA915A1CDFAE6100B8787B /* BUCAccountModel.m in Sources */,
 				49DA91501CDFAA2D00B8787B /* BUCDataManager.m in Sources */,
+				49DA916F1CE0881700B8787B /* BUCHtmlScraper.m in Sources */,
 				49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
+				49DA916C1CE086DD00B8787B /* BUCPostDetailModel.m in Sources */,
+				49DA91771CE0889A00B8787B /* TFHpple.m in Sources */,
 				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
 				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
@@ -670,6 +724,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = BUCilent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MySuperCompany.BUCilent;
@@ -683,6 +738,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = BUCilent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MySuperCompany.BUCilent;
