@@ -13,6 +13,7 @@
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
 #import "BUCTabViewController.h"
+#import "AppDelegate.h"
 
 @interface BUCLoginViewController ()
 
@@ -137,8 +138,9 @@
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"login success");
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[BUCTabViewController alloc] init];
-        [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+        AppDelegate *delagte = [UIApplication sharedApplication].delegate;
+        delagte.window.rootViewController = [[BUCTabViewController alloc] init];
+        [delagte.window makeKeyAndVisible];
     }];
     
 }
@@ -147,6 +149,7 @@
 - (void)displayLoginView {
     _loadingView.hidden = NO;
     [_loadingView startAnimation];
+    [self.view endEditing:YES];
     [self.view bringSubviewToFront:_loadingView];
 }
 

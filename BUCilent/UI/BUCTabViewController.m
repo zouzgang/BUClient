@@ -22,6 +22,14 @@
 
 }
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -53,7 +61,7 @@
                                   image:[[UIImage imageNamed:@"Tabbar_Home_Down"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                           selectedImage:[[UIImage imageNamed:@"Tabbar_Home_Up"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     UITabBarItem *discoveryItem =
-    [[UITabBarItem alloc] initWithTitle:@"板块列表"
+    [[UITabBarItem alloc] initWithTitle:@"发现"
                                   image:[[UIImage imageNamed:@"Tabbar_Discovery_Down"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                           selectedImage:[[UIImage imageNamed:@"Tabbar_Discovery_Up"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     UITabBarItem *myProfileItem =

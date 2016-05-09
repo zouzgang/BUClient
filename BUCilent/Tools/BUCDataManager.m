@@ -46,8 +46,13 @@
 - (void)updateSessionOnError:(BUCStringBlock)errorBlock onSuccess:(BUCVoidBlock)voidBlock {
     NSMutableDictionary *json = [[NSMutableDictionary alloc] init];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults stringForKey:@"username"];
+    NSString *password = [defaults stringForKey:@"password"];
+    
+    [json setObject:password forKey:@"password"];
+    [json setObject:username forKey:@"username"];
     [json setObject:@"login" forKey:@"action"];
-//    [json setObject:self.password forKey:@"password"];
     
     [self request:[BUCNetworkAPI requestURL:kApiLogin] parameters:json attachment:nil isForm:NO count:0 onError:errorBlock onSuccess:^(NSDictionary *result) {
         _session = [result objectForKey:@"session"];
@@ -59,7 +64,9 @@
 - (void)request:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm count:(NSInteger)count onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
     [_networkEngine POST:URLString parameters:parameters attachment:attachment isForm:isForm onError:errorBlcok onSuccess:^(NSDictionary *resultBlock) {
         if ([[resultBlock objectForKey:@"result"] isEqualToString:@"success"]) {
-            result(resultBlock);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                result(resultBlock);
+            });
         } else if ([[resultBlock objectForKey:@"result"] isEqualToString:@"fail"]) {
             NSString *msg = [resultBlock objectForKey:@"msg"];
             NSLog(@"ERROR:%@ COUNT:%ld URL:%@", msg, (long)count, URLString);
