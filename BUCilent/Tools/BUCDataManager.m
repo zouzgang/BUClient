@@ -13,8 +13,6 @@
 
 @implementation BUCDataManager {
     BUCNetworkEngine *_networkEngine;
-    
-    NSString *_session;
 }
 
 + (BUCDataManager *)sharedInstance {
@@ -55,7 +53,8 @@
     [json setObject:@"login" forKey:@"action"];
     
     [self request:[BUCNetworkAPI requestURL:kApiLogin] parameters:json attachment:nil isForm:NO count:0 onError:errorBlock onSuccess:^(NSDictionary *result) {
-        _session = [result objectForKey:@"session"];
+        self.username = [result objectForKey:@"username"];
+        self.session = [result objectForKey:@"session"];
         voidBlock();
     }];
 
@@ -65,6 +64,10 @@
     [_networkEngine POST:URLString parameters:parameters attachment:attachment isForm:isForm onError:errorBlcok onSuccess:^(NSDictionary *resultBlock) {
         if ([[resultBlock objectForKey:@"result"] isEqualToString:@"success"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                if ([URLString isEqualToString:[BUCNetworkAPI requestURL:kApiLogin]]) {
+                    self.username = [resultBlock objectForKey:@"username"];
+                    self.session = [resultBlock objectForKey:@"session"];
+                }
                 result(resultBlock);
             });
         } else if ([[resultBlock objectForKey:@"result"] isEqualToString:@"fail"]) {

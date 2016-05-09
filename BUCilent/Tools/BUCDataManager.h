@@ -11,6 +11,10 @@
 
 @interface BUCDataManager : NSObject
 
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *session;
+
+
 + (BUCDataManager *)sharedInstance;
 
 - (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;

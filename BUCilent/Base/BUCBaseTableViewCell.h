@@ -10,4 +10,9 @@
 
 @interface BUCBaseTableViewCell : UITableViewCell
 
+- (void)setupViews;
+- (void)setupConstraints;
+- (void)refreshConstraints;
++ (NSString *)cellReuseIdentifier;
+
 @end

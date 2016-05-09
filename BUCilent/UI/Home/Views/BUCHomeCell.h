@@ -7,7 +7,10 @@
 //
 
 #import "BUCBaseTableViewCell.h"
+@class BUCHomeModel;
 
 @interface BUCHomeCell : BUCBaseTableViewCell
+
+@property (nonatomic, strong) BUCHomeModel *homeModel;
 
 @end

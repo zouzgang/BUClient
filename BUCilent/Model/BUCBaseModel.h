@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MTLJSONAdapter.h>
+#import "MTLModel.h"
+#import "NSValueTransformer+MTLPredefinedTransformerAdditions.h"
 
-@interface BUCBaseModel : NSObject
+@interface BUCBaseModel : MTLModel <MTLJSONSerializing>
 
 @end

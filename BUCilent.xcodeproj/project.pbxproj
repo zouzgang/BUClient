@@ -32,6 +32,9 @@
 		49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91521CDFADD100B8787B /* BUCUserManager.m */; };
 		49DA91561CDFAE3B00B8787B /* BUCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91551CDFAE3B00B8787B /* BUCBaseModel.m */; };
 		49DA915A1CDFAE6100B8787B /* BUCAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91591CDFAE6100B8787B /* BUCAccountModel.m */; };
+		49DA915D1CE06D0200B8787B /* BUCHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA915C1CE06D0200B8787B /* BUCHomeModel.m */; };
+		49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA915F1CE06FD300B8787B /* BUCHomeLastReplyModel.m */; };
+		49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91621CE07C8200B8787B /* UIColor+BUC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,12 @@
 		49DA91551CDFAE3B00B8787B /* BUCBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBaseModel.m; path = Model/BUCBaseModel.m; sourceTree = "<group>"; };
 		49DA91581CDFAE6100B8787B /* BUCAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCAccountModel.h; path = Model/BUCAccountModel.h; sourceTree = "<group>"; };
 		49DA91591CDFAE6100B8787B /* BUCAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCAccountModel.m; path = Model/BUCAccountModel.m; sourceTree = "<group>"; };
+		49DA915B1CE06D0200B8787B /* BUCHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCHomeModel.h; path = Model/BUCHomeModel.h; sourceTree = "<group>"; };
+		49DA915C1CE06D0200B8787B /* BUCHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHomeModel.m; path = Model/BUCHomeModel.m; sourceTree = "<group>"; };
+		49DA915E1CE06FD300B8787B /* BUCHomeLastReplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCHomeLastReplyModel.h; path = Model/BUCHomeLastReplyModel.h; sourceTree = "<group>"; };
+		49DA915F1CE06FD300B8787B /* BUCHomeLastReplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHomeLastReplyModel.m; path = Model/BUCHomeLastReplyModel.m; sourceTree = "<group>"; };
+		49DA91611CE07C8200B8787B /* UIColor+BUC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+BUC.h"; path = "Category/UIColor+BUC.h"; sourceTree = "<group>"; };
+		49DA91621CE07C8200B8787B /* UIColor+BUC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+BUC.m"; path = "Category/UIColor+BUC.m"; sourceTree = "<group>"; };
 		AF7E450261B0582219AD711F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC85198A0E5303200DFC69BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -303,6 +312,8 @@
 			children = (
 				49DA914A1CDFA41300B8787B /* NSString+Tools.h */,
 				49DA914B1CDFA41300B8787B /* NSString+Tools.m */,
+				49DA91611CE07C8200B8787B /* UIColor+BUC.h */,
+				49DA91621CE07C8200B8787B /* UIColor+BUC.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -314,6 +325,10 @@
 				49DA91551CDFAE3B00B8787B /* BUCBaseModel.m */,
 				49DA91581CDFAE6100B8787B /* BUCAccountModel.h */,
 				49DA91591CDFAE6100B8787B /* BUCAccountModel.m */,
+				49DA915B1CE06D0200B8787B /* BUCHomeModel.h */,
+				49DA915C1CE06D0200B8787B /* BUCHomeModel.m */,
+				49DA915E1CE06FD300B8787B /* BUCHomeLastReplyModel.h */,
+				49DA915F1CE06FD300B8787B /* BUCHomeLastReplyModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -495,12 +510,15 @@
 				49DA91391CDF947200B8787B /* BUCMyProfileViewController.m in Sources */,
 				49DA911F1CDF91A500B8787B /* BUCNetworkAPI.m in Sources */,
 				49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */,
+				49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
 				49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */,
 				49DA91481CDFA26200B8787B /* BUCLoadingView.m in Sources */,
 				49DA91561CDFAE3B00B8787B /* BUCBaseModel.m in Sources */,
 				49DA914C1CDFA41300B8787B /* NSString+Tools.m in Sources */,
+				49DA915D1CE06D0200B8787B /* BUCHomeModel.m in Sources */,
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
+				49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */,
 				49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */,
 				49DA915A1CDFAE6100B8787B /* BUCAccountModel.m in Sources */,
 				49DA91501CDFAA2D00B8787B /* BUCDataManager.m in Sources */,

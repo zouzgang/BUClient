@@ -10,15 +10,30 @@
 
 @implementation BUCBaseTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self setupViews];
+    }
+    
+    return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setupViews {
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.opaque = YES;
+}
 
-    // Configure the view for the selected state
+
++ (NSString *)cellReuseIdentifier {
+    return NSStringFromClass([self class]);
+}
+
+- (void)refreshConstraints {
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 @end
