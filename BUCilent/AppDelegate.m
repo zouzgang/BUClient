@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BUCLoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,9 +17,34 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [self initUI];
+    
     return YES;
 }
+
+- (void)initUI {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:17],
+                                  NSForegroundColorAttributeName:[UIColor whiteColor]};
+    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -64) forBarMetrics:UIBarMetricsDefault];
+    
+    BUCLoginViewController *login = [[BUCLoginViewController alloc] init];
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:login];
+    
+    self.window.rootViewController = navigation;
+    [self.window makeKeyAndVisible];
+}
+
+#pragma mark -
+
+
+#pragma mark - ------
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

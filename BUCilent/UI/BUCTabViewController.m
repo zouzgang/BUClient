@@ -7,31 +7,85 @@
 //
 
 #import "BUCTabViewController.h"
+#import "BUCHomeViewController.h"
+#import "BUCDiscoverViewController.h"
+#import "BUCMyProfileViewController.h"
 
 @interface BUCTabViewController ()
 
 @end
 
-@implementation BUCTabViewController
+@implementation BUCTabViewController {
+    BUCHomeViewController *_homeVC;
+    BUCDiscoverViewController *_discoverVC;
+    BUCMyProfileViewController *_myProfileVC;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self initUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)initUI {
+    [[UITabBar appearance] setBackgroundImage:[self imageWithColor:[UIColor whiteColor]]];
+    
+    _homeVC = [[BUCHomeViewController alloc] init];
+    _discoverVC = [[BUCDiscoverViewController alloc] init];
+    _myProfileVC = [[BUCMyProfileViewController alloc] init];
+    
+    UINavigationController *_homeNavigationController =
+    [[UINavigationController alloc] initWithRootViewController:_homeVC];
+    UINavigationController *_discoveryNavigationController =
+    [[UINavigationController alloc] initWithRootViewController:_discoverVC];
+    UINavigationController *_myProfileNavigationController =
+    [[UINavigationController alloc] initWithRootViewController:_myProfileVC];
+    
+    NSArray *controllers = @[_homeNavigationController,
+                             _discoveryNavigationController,
+                             _myProfileNavigationController];
+    self.viewControllers = controllers;
+    self.selectedIndex = 0;
+    
+    UITabBarItem *homeItem =
+    [[UITabBarItem alloc] initWithTitle:@"首页"
+                                  image:[[UIImage imageNamed:@"Tabbar_Home_Down"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                          selectedImage:[[UIImage imageNamed:@"Tabbar_Home_Up"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    UITabBarItem *discoveryItem =
+    [[UITabBarItem alloc] initWithTitle:@"板块列表"
+                                  image:[[UIImage imageNamed:@"Tabbar_Discovery_Down"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                          selectedImage:[[UIImage imageNamed:@"Tabbar_Discovery_Up"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    UITabBarItem *myProfileItem =
+    [[UITabBarItem alloc] initWithTitle:@"我的"
+                                  image:[[UIImage imageNamed:@"Tabbar_MyProfile_Down"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                          selectedImage:[[UIImage imageNamed:@"Tabbar_MyProfile_Up"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+    _homeNavigationController.tabBarItem = homeItem;
+    _discoveryNavigationController.tabBarItem = discoveryItem;
+    _myProfileNavigationController.tabBarItem = myProfileItem;
+    
+    [homeItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    [discoveryItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    [myProfileItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+#pragma mark - image and color
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+    NSParameterAssert(color != nil);
+    
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    [color setFill];
+    UIRectFill(rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
-*/
+
 
 @end

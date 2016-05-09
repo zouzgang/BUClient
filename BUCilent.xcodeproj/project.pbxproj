@@ -25,6 +25,13 @@
 		49DA91391CDF947200B8787B /* BUCMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */; };
 		49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */; };
 		49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91401CDF95C400B8787B /* BUCNetworkEngine.m */; };
+		49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91431CDF9F6700B8787B /* BUCLoginViewController.m */; };
+		49DA91481CDFA26200B8787B /* BUCLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91471CDFA26200B8787B /* BUCLoadingView.m */; };
+		49DA914C1CDFA41300B8787B /* NSString+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA914B1CDFA41300B8787B /* NSString+Tools.m */; };
+		49DA91501CDFAA2D00B8787B /* BUCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA914F1CDFAA2D00B8787B /* BUCDataManager.m */; };
+		49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91521CDFADD100B8787B /* BUCUserManager.m */; };
+		49DA91561CDFAE3B00B8787B /* BUCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91551CDFAE3B00B8787B /* BUCBaseModel.m */; };
+		49DA915A1CDFAE6100B8787B /* BUCAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91591CDFAE6100B8787B /* BUCAccountModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +87,21 @@
 		49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCHomeCell.m; path = UI/Home/Views/BUCHomeCell.m; sourceTree = "<group>"; };
 		49DA913F1CDF95C400B8787B /* BUCNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCNetworkEngine.h; path = Tools/BUCNetworkEngine.h; sourceTree = "<group>"; };
 		49DA91401CDF95C400B8787B /* BUCNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCNetworkEngine.m; path = Tools/BUCNetworkEngine.m; sourceTree = "<group>"; };
+		49DA91421CDF9F6700B8787B /* BUCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCLoginViewController.h; path = UI/BUCLoginViewController.h; sourceTree = "<group>"; };
+		49DA91431CDF9F6700B8787B /* BUCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCLoginViewController.m; path = UI/BUCLoginViewController.m; sourceTree = "<group>"; };
+		49DA91451CDFA0D300B8787B /* BUCilent_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUCilent_PrefixHeader.pch; sourceTree = "<group>"; };
+		49DA91461CDFA26200B8787B /* BUCLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCLoadingView.h; path = UI/Views/BUCLoadingView.h; sourceTree = "<group>"; };
+		49DA91471CDFA26200B8787B /* BUCLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCLoadingView.m; path = UI/Views/BUCLoadingView.m; sourceTree = "<group>"; };
+		49DA914A1CDFA41300B8787B /* NSString+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Tools.h"; path = "Category/NSString+Tools.h"; sourceTree = "<group>"; };
+		49DA914B1CDFA41300B8787B /* NSString+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Tools.m"; path = "Category/NSString+Tools.m"; sourceTree = "<group>"; };
+		49DA914E1CDFAA2D00B8787B /* BUCDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCDataManager.h; path = Tools/BUCDataManager.h; sourceTree = "<group>"; };
+		49DA914F1CDFAA2D00B8787B /* BUCDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCDataManager.m; path = Tools/BUCDataManager.m; sourceTree = "<group>"; };
+		49DA91511CDFADD000B8787B /* BUCUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCUserManager.h; path = Tools/BUCUserManager.h; sourceTree = "<group>"; };
+		49DA91521CDFADD100B8787B /* BUCUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCUserManager.m; path = Tools/BUCUserManager.m; sourceTree = "<group>"; };
+		49DA91541CDFAE3B00B8787B /* BUCBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCBaseModel.h; path = Model/BUCBaseModel.h; sourceTree = "<group>"; };
+		49DA91551CDFAE3B00B8787B /* BUCBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBaseModel.m; path = Model/BUCBaseModel.m; sourceTree = "<group>"; };
+		49DA91581CDFAE6100B8787B /* BUCAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCAccountModel.h; path = Model/BUCAccountModel.h; sourceTree = "<group>"; };
+		49DA91591CDFAE6100B8787B /* BUCAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCAccountModel.m; path = Model/BUCAccountModel.m; sourceTree = "<group>"; };
 		AF7E450261B0582219AD711F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC85198A0E5303200DFC69BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,7 +169,9 @@
 				49DA90E91CDF8F5100B8787B /* AppDelegate.h */,
 				49DA90EA1CDF8F5100B8787B /* AppDelegate.m */,
 				49DA91201CDF91AA00B8787B /* Tools */,
+				49DA914D1CDFA41700B8787B /* Category */,
 				49DA911C1CDF915200B8787B /* Base */,
+				49DA91571CDFAE3F00B8787B /* Model */,
 				49DA91241CDF92C000B8787B /* UI */,
 				49DA90EC1CDF8F5100B8787B /* ViewController.h */,
 				49DA90ED1CDF8F5100B8787B /* ViewController.m */,
@@ -164,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				49DA90E71CDF8F5100B8787B /* main.m */,
+				49DA91451CDFA0D300B8787B /* BUCilent_PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -204,6 +229,10 @@
 				49DA911E1CDF91A500B8787B /* BUCNetworkAPI.m */,
 				49DA913F1CDF95C400B8787B /* BUCNetworkEngine.h */,
 				49DA91401CDF95C400B8787B /* BUCNetworkEngine.m */,
+				49DA914E1CDFAA2D00B8787B /* BUCDataManager.h */,
+				49DA914F1CDFAA2D00B8787B /* BUCDataManager.m */,
+				49DA91511CDFADD000B8787B /* BUCUserManager.h */,
+				49DA91521CDFADD100B8787B /* BUCUserManager.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -211,8 +240,11 @@
 		49DA91241CDF92C000B8787B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				49DA91491CDFA26C00B8787B /* Views */,
 				49DA91211CDF92BC00B8787B /* BUCTabViewController.h */,
 				49DA91221CDF92BC00B8787B /* BUCTabViewController.m */,
+				49DA91421CDF9F6700B8787B /* BUCLoginViewController.h */,
+				49DA91431CDF9F6700B8787B /* BUCLoginViewController.m */,
 				49DA91281CDF92EC00B8787B /* Home */,
 				49DA912C1CDF936B00B8787B /* Discover */,
 				49DA913A1CDF947600B8787B /* MyProfile */,
@@ -255,6 +287,35 @@
 				49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		49DA91491CDFA26C00B8787B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91461CDFA26200B8787B /* BUCLoadingView.h */,
+				49DA91471CDFA26200B8787B /* BUCLoadingView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		49DA914D1CDFA41700B8787B /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				49DA914A1CDFA41300B8787B /* NSString+Tools.h */,
+				49DA914B1CDFA41300B8787B /* NSString+Tools.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		49DA91571CDFAE3F00B8787B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49DA91541CDFAE3B00B8787B /* BUCBaseModel.h */,
+				49DA91551CDFAE3B00B8787B /* BUCBaseModel.m */,
+				49DA91581CDFAE6100B8787B /* BUCAccountModel.h */,
+				49DA91591CDFAE6100B8787B /* BUCAccountModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		AFC72E598F31E33D58905C74 /* Frameworks */ = {
@@ -436,11 +497,18 @@
 				49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
 				49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */,
+				49DA91481CDFA26200B8787B /* BUCLoadingView.m in Sources */,
+				49DA91561CDFAE3B00B8787B /* BUCBaseModel.m in Sources */,
+				49DA914C1CDFA41300B8787B /* NSString+Tools.m in Sources */,
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
 				49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */,
+				49DA915A1CDFAE6100B8787B /* BUCAccountModel.m in Sources */,
+				49DA91501CDFAA2D00B8787B /* BUCDataManager.m in Sources */,
+				49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
 				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
+				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
 				49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -583,6 +651,7 @@
 			baseConfigurationReference = AF7E450261B0582219AD711F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = BUCilent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MySuperCompany.BUCilent;
@@ -595,6 +664,7 @@
 			baseConfigurationReference = 2D39087C48B1B4005FECCF72 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = BUCilent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MySuperCompany.BUCilent;
