@@ -52,7 +52,7 @@
     }];
     
     [_nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_backgroudView.mas_top);
+        make.top.equalTo(_backgroudView.mas_top).offset(80);
         make.left.equalTo(_backgroudView.mas_left);
         make.bottom.equalTo(_backgroudView.mas_bottom);
     }];

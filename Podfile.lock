@@ -1,0 +1,23 @@
+PODS:
+  - Mantle (1.5.4):
+    - Mantle/extobjc (= 1.5.4)
+  - Mantle/extobjc (1.5.4)
+  - Masonry (0.6.4)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core (= 3.7.1)
+  - SDWebImage/Core (3.7.1)
+  - UITableView+FDTemplateLayoutCell (1.4.beta)
+
+DEPENDENCIES:
+  - Mantle (= 1.5.4)
+  - Masonry
+  - SDWebImage (= 3.7.1)
+  - UITableView+FDTemplateLayoutCell (= 1.4.beta)
+
+SPEC CHECKSUMS:
+  Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
+  UITableView+FDTemplateLayoutCell: 9d20bf0518f3c01e42ae614243b97f1161063d27
+
+COCOAPODS: 0.38.2

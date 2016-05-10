@@ -24,6 +24,7 @@ const CGFloat kDetailCellTopPadding = 12;
     UILabel *_contentLabel;
     UIButton *_replyButton;
     UIView *_separatorLine;
+    UIView *_separatorLineTop;
     
     NSAttributedString *_atttibutedString;
 }
@@ -54,9 +55,13 @@ const CGFloat kDetailCellTopPadding = 12;
     
     _countLabel = [[UILabel alloc] init];
     _countLabel.textColor = [UIColor blackColor];
-    _countLabel.font = [UIFont systemFontOfSize:14];
+    _countLabel.font = [UIFont systemFontOfSize:13];
     _countLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:_countLabel];
+    
+    _separatorLineTop = [[UIView alloc] init];
+    _separatorLineTop.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
+    [self.contentView addSubview:_separatorLineTop];
     
     _contentLabel = [[UILabel alloc] init];
     _contentLabel.numberOfLines = 0;
@@ -64,6 +69,7 @@ const CGFloat kDetailCellTopPadding = 12;
     
     _replyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_replyButton setTitle:@"回复" forState:UIControlStateNormal];
+    _replyButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_replyButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [_replyButton addTarget:self action:@selector(didReplyButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_replyButton];
@@ -94,21 +100,28 @@ const CGFloat kDetailCellTopPadding = 12;
     }];
     
     [_countLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_authorLabel.mas_centerY);
+        make.top.equalTo(self.contentView).offset(kDetailCellTopPadding);
         make.right.equalTo(self.contentView).offset(-kDetailCellLeftPadding);
-        make.width.mas_equalTo(120);
+        make.width.mas_equalTo(100);
+    }];
+    
+    [_separatorLineTop mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_avatarImageView.mas_bottom).offset(kDetailCellLeftPadding / 2);
+        make.left.equalTo(_avatarImageView.mas_left);
+        make.right.equalTo(self.contentView);
+        make.height.mas_equalTo(0.5);
     }];
     
     [_contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_avatarImageView.mas_bottom).offset(kDetailCellTopPadding);
         make.left.equalTo(self.contentView).offset(kDetailCellLeftPadding);
         make.right.equalTo(self.contentView).offset(-kDetailCellLeftPadding);
+        make.bottom.equalTo(self.contentView).offset(-2 * kDetailCellTopPadding);
     }];
     
     [_replyButton mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_contentLabel.mas_bottom).offset(kDetailCellTopPadding);
         make.right.equalTo(self.contentView).offset(-kDetailCellLeftPadding);
-        make.bottom.equalTo(self.contentView).offset(3 * kDetailCellTopPadding);
+        make.bottom.equalTo(self.contentView).offset(-kDetailCellTopPadding / 2);
     }];
     
     [_separatorLine mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -130,7 +143,7 @@ const CGFloat kDetailCellTopPadding = 12;
 
 - (CGSize)sizeThatFits:(CGSize)size {
     [self layoutIfNeeded];
-    CGFloat height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 3;
+    CGFloat height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2;
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, height);
 }
 
@@ -153,38 +166,36 @@ const CGFloat kDetailCellTopPadding = 12;
 
 - (void)setPostDetailModel:(BUCPostDetailModel *)postDetailModel {
     _postDetailModel = postDetailModel;
-    if (_postDetailModel) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            NSMutableString *content = [[NSMutableString alloc] init];
-            NSString *title = [self urldecode:_postDetailModel.subject];
-            if (title) {
-                title = [NSString stringWithFormat:@"<b>%@</b>\n\n", title];
-                [content appendString:title];
-            }
-            //////message
-            NSString *body = [self urldecode:_postDetailModel.message];
-            if (body != nil) {
-                [content appendString:body];
-            }
-            
-            _atttibutedString = [[NSMutableAttributedString alloc] init];
-            _atttibutedString = [[BUCHtmlScraper sharedInstance] richTextFromHtml:content].copy;
-            NSLog(@"attribute:%@",_atttibutedString);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                _authorLabel.text = _postDetailModel.author;
-                _timeLabel.text = _postDetailModel.dateline;
-                _contentLabel.attributedText = _atttibutedString;
-                
-                [self updateConstraints];
-            });
-        });
+    
+    NSMutableString *content = [[NSMutableString alloc] init];
+    NSString *title = [self urldecode:_postDetailModel.subject];
+    if (title) {
+        title = [NSString stringWithFormat:@"<b>%@</b>\n\n", title];
+        [content appendString:title];
     }
+    //////message
+    NSString *body = [self urldecode:_postDetailModel.message];
+    if (body != nil) {
+        [content appendString:body];
+    }
+    
+    _atttibutedString = [[NSMutableAttributedString alloc] init];
+    _atttibutedString = [[BUCHtmlScraper sharedInstance] richTextFromHtml:content].copy;
+    NSLog(@"attribute:%@",_atttibutedString);
+
+    _authorLabel.text = [self urldecode:_postDetailModel.author];
+    _timeLabel.text = [self urldecode:_postDetailModel.dateline];
+    _contentLabel.attributedText = _atttibutedString;
+    _countLabel.text = [NSString stringWithFormat:@"#%ld",(long)_count];
+    
+    [self updateConstraints];
 }
 
 #pragma mark - Action
 - (void)didReplyButtonClicked {
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickReplyButtonAtIndexPath:)]) {
+        [_delegate didClickReplyButtonAtIndexPath:_indexPath];
+    }
 }
 
 @end

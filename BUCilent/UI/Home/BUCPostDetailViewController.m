@@ -12,23 +12,32 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "BUCNetworkAPI.h"
 #import "BUCPostDetailModel.h"
-
+#import "BUCArray.h"
+#import "BUCFooterView.h"
+#import "BUCReplyViewController.h"
 #import <Masonry.h>
 
-@interface BUCPostDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+const NSInteger kPageSize = 20;
+
+@interface BUCPostDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, BUCPostDetailCellDelegate>
 
 @end
 
 @implementation BUCPostDetailViewController {
     UITableView *_tableView;
-    NSArray *_dataArray;
+    BUCFooterView *_footerView;
+    BUCArray *_dataArray;
+    
+    NSInteger _page;
+    BOOL _reverse;
+    BOOL _pullUp;
 
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _dataArray = [[NSArray alloc] init];
+        _dataArray = [[BUCArray alloc] init];
     }
     return self;
 }
@@ -46,6 +55,10 @@
     [_tableView registerClass:[BUCPostDetailCell class] forCellReuseIdentifier:[BUCPostDetailCell cellReuseIdentifier]];
     [self.view addSubview:_tableView];
     
+    _footerView = [[BUCFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    _tableView.tableFooterView = _footerView;
+    _tableView.tableFooterView.hidden = YES;
+    
     [self updateViewConstraints];
 }
 
@@ -60,7 +73,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadData];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(didReplyButtonClicked)];
+    
+    
+    [self loadData:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -71,6 +87,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BUCPostDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:[BUCPostDetailCell cellReuseIdentifier] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.count = !_reverse ? (indexPath.row + 1) : (_tidSum.integerValue - indexPath.row);
+    cell.indexPath = indexPath;
+    cell.delegate = self;
     cell.postDetailModel = _dataArray[indexPath.row];
     return cell;
 }
@@ -78,7 +97,6 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 600;
     CGFloat height = [tableView fd_heightForCellWithIdentifier:[BUCPostDetailCell cellReuseIdentifier] configuration:^(BUCPostDetailCell *cell) {
         cell.postDetailModel = _dataArray[indexPath.row];
     }];
@@ -90,28 +108,79 @@
 }
 
 #pragma mark - API
-- (void)loadData {
+- (void)loadData:(BOOL)isFirst {
+    if (isFirst) {
+        _page = 0;
+        _dataArray.totalSize = self.tidSum.integerValue + 1;
+        _dataArray.pageSize = kPageSize;
+    }
+    
+    
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
     parameters[@"session"] = [BUCDataManager sharedInstance].session;
     parameters[@"action"] = @"post";
     parameters[@"tid"] = self.tid;
     parameters[@"action"] = @"post";
-    parameters[@"from"] = @"0";
-    parameters[@"to"] = @"3";
+
+    parameters[@"from"] =[NSString stringWithFormat:@"%ld",_page * kPageSize];
+    parameters[@"to"] = ((_page + 1) * kPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",(_page + 1) * kPageSize] : [NSString stringWithFormat:@"%ld", (long)_dataArray.totalSize];
     
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"detail success");
-        _dataArray = [[MTLJSONAdapter modelsOfClass:BUCPostDetailModel.class fromJSONArray:[result objectForKey:@"postlist"] error:Nil] mutableCopy];
-//        _dataArray = [[MTLJSONAdapter modelsOfClass:BUCHomeModel.class fromJSONArray:[result objectForKey:@"newlist"] error:Nil] mutableCopy];
+        NSArray *array = [MTLJSONAdapter modelsOfClass:BUCPostDetailModel.class fromJSONArray:[result objectForKey:@"postlist"] error:Nil];
+        [_dataArray addObjectsFromArray:array];
+        _page += 1;
+        _dataArray.page = _page;
+        
+        _pullUp = NO;
+        _tableView.tableFooterView.hidden = YES;
+        [_footerView stopAnimation];
         [_tableView reloadData];
         
     }];
 }
 
 
+#pragma mark - UIScroviewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (_pullUp == NO && scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.size.height + 50)) {
+        
+        _tableView.tableFooterView.hidden = NO;
+        if ([_dataArray hasMore]) {
+            [_footerView startAnimation];
+            [self loadData:NO];
+        } else {
+            [_footerView showText];
+        }
+    }
+}
+
+#pragma mark - BUCPostDetailCellDelegate
+- (void)didClickReplyButtonAtIndexPath:(NSIndexPath *)indexPath {
+    //reply some
+}
+
+//"action":"newreply",
+//"username":"username",
+//"session":"session",
+//"tid":"tid",
+//"message":"message content",
+//"attachment":0 or 1 // 0: 无附件，1: 含附件
+
+#pragma mark - Action
+- (void)didReplyButtonClicked {
+    //reply atuhor
+    BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
+    reply.completBlock = ^(NSString *content, UIImage *attachment) {
+
+    };
+    reply.tid = self.tid;
+    [self.navigationController pushViewController:reply animated:YES];
+    
+}
 
 
 @end

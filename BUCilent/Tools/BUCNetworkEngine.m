@@ -74,7 +74,6 @@ fail:
 }
 
 - (NSURLRequest *)requestWithAPI:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm error:(NSError **)error {
-    //    baseURL = @"http://192.168.1.100/open_api/bu_%@.php";
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URLString]];
     NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
     NSData *data;

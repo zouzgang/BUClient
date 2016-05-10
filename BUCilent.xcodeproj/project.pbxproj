@@ -43,6 +43,9 @@
 		49DA91781CE0889A00B8787B /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91741CE0889A00B8787B /* TFHppleElement.m */; };
 		49DA91791CE0889A00B8787B /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91761CE0889A00B8787B /* XPathQuery.m */; };
 		49DA917B1CE088CC00B8787B /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DA917A1CE088CC00B8787B /* libxml2.2.tbd */; };
+		49DA917E1CE0E35E00B8787B /* BUCArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA917D1CE0E35E00B8787B /* BUCArray.m */; };
+		49DA91811CE0EF8C00B8787B /* BUCFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91801CE0EF8C00B8787B /* BUCFooterView.m */; };
+		49DA91841CE0F61800B8787B /* BUCReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA91831CE0F61800B8787B /* BUCReplyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +137,12 @@
 		49DA91751CE0889A00B8787B /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
 		49DA91761CE0889A00B8787B /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		49DA917A1CE088CC00B8787B /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		49DA917C1CE0E35E00B8787B /* BUCArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCArray.h; path = Category/BUCArray.h; sourceTree = "<group>"; };
+		49DA917D1CE0E35E00B8787B /* BUCArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCArray.m; path = Category/BUCArray.m; sourceTree = "<group>"; };
+		49DA917F1CE0EF8C00B8787B /* BUCFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCFooterView.h; path = UI/Home/Views/BUCFooterView.h; sourceTree = "<group>"; };
+		49DA91801CE0EF8C00B8787B /* BUCFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCFooterView.m; path = UI/Home/Views/BUCFooterView.m; sourceTree = "<group>"; };
+		49DA91821CE0F61800B8787B /* BUCReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCReplyViewController.h; path = UI/Home/BUCReplyViewController.h; sourceTree = "<group>"; };
+		49DA91831CE0F61800B8787B /* BUCReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCReplyViewController.m; path = UI/Home/BUCReplyViewController.m; sourceTree = "<group>"; };
 		AF7E450261B0582219AD711F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC85198A0E5303200DFC69BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -295,6 +304,8 @@
 				49DA91261CDF92E700B8787B /* BUCHomeViewController.m */,
 				49DA91641CE0803800B8787B /* BUCPostDetailViewController.h */,
 				49DA91651CE0803800B8787B /* BUCPostDetailViewController.m */,
+				49DA91821CE0F61800B8787B /* BUCReplyViewController.h */,
+				49DA91831CE0F61800B8787B /* BUCReplyViewController.m */,
 				49DA913E1CDF94B100B8787B /* Views */,
 			);
 			name = Home;
@@ -325,6 +336,8 @@
 				49DA913C1CDF94AC00B8787B /* BUCHomeCell.m */,
 				49DA91671CE0807E00B8787B /* BUCPostDetailCell.h */,
 				49DA91681CE0807E00B8787B /* BUCPostDetailCell.m */,
+				49DA917F1CE0EF8C00B8787B /* BUCFooterView.h */,
+				49DA91801CE0EF8C00B8787B /* BUCFooterView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -345,6 +358,8 @@
 				49DA914B1CDFA41300B8787B /* NSString+Tools.m */,
 				49DA91611CE07C8200B8787B /* UIColor+BUC.h */,
 				49DA91621CE07C8200B8787B /* UIColor+BUC.m */,
+				49DA917C1CE0E35E00B8787B /* BUCArray.h */,
+				49DA917D1CE0E35E00B8787B /* BUCArray.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -569,6 +584,7 @@
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
 				49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */,
 				49DA91661CE0803800B8787B /* BUCPostDetailViewController.m in Sources */,
+				49DA917E1CE0E35E00B8787B /* BUCArray.m in Sources */,
 				49DA91791CE0889A00B8787B /* XPathQuery.m in Sources */,
 				49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */,
 				49DA915A1CDFAE6100B8787B /* BUCAccountModel.m in Sources */,
@@ -576,12 +592,14 @@
 				49DA916F1CE0881700B8787B /* BUCHtmlScraper.m in Sources */,
 				49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
+				49DA91841CE0F61800B8787B /* BUCReplyViewController.m in Sources */,
 				49DA916C1CE086DD00B8787B /* BUCPostDetailModel.m in Sources */,
 				49DA91771CE0889A00B8787B /* TFHpple.m in Sources */,
 				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
 				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
 				49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */,
+				49DA91811CE0EF8C00B8787B /* BUCFooterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

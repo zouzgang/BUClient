@@ -63,6 +63,9 @@
     [self.view addSubview:_loginButton];
     
     
+    _loadingView = [[BUCLoadingView alloc] init];
+    [self.view addSubview:_loadingView];
+
     [self updateViewConstraints];
 }
 

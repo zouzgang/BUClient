@@ -13,17 +13,21 @@
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
 #import "BUCHomeModel.h"
+#import "BUCFooterView.h"
 
 #import "BUCPostDetailViewController.h"
 
 
-@interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @end
 
 @implementation BUCHomeViewController {
     UITableView *_tableView;
+//    BUCFooterView *_headerView;
     NSArray <BUCHomeModel *> *_dataArray;
+    
+    BOOL _pullDown;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -46,7 +50,7 @@
     _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [_tableView registerClass:[BUCHomeCell class] forCellReuseIdentifier:[BUCHomeCell cellReuseIdentifier]];
     [self.view addSubview:_tableView];
-
+    
     [self updateViewConstraints];
 }
 
@@ -61,6 +65,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self loadData];
 }
@@ -89,6 +98,7 @@
     
     BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
     detail.tid = _dataArray[indexPath.row].tid;
+    detail.tidSum = _dataArray[indexPath.row].tidSum;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
@@ -100,13 +110,24 @@
     parameters[@"session"] = [BUCDataManager sharedInstance].session;
     
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiHome] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
+        _pullDown = NO;
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"home success");
          _dataArray = [[MTLJSONAdapter modelsOfClass:BUCHomeModel.class fromJSONArray:[result objectForKey:@"newlist"] error:Nil] mutableCopy];
+        _pullDown = NO;
         [_tableView reloadData];
 
     }];
+}
+
+#pragma mark - UIScroviewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+//    if (_pullDown == NO && scrollView.contentOffset.y < -20) {
+//        _pullDown = YES;
+//        [self loadData];
+//    }
+
 }
 
 
