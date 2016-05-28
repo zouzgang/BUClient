@@ -8,6 +8,7 @@
 
 #import "BUCHtmlScraper.h"
 #include "TFHpple.h"
+#import "BUCTextAttachment.h"
 
 #define kMessageTextFont   [UIFont systemFontOfSize:16]
 
@@ -61,8 +62,6 @@
     return [self parseImageUrl:source];
 }
 
-
-//
 - (NSURL *)parseImageUrl:(NSString *)source {
     NSURL *url = [NSURL URLWithString:source];
     
@@ -115,8 +114,7 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     if (!body || !body.children || body.children.count == 0) {
         return nil;
     }
-    
-    
+
     return body;
 }
 
@@ -140,7 +138,6 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     
     NSDictionary *messageDict = @{NSFontAttributeName:kMessageTextFont};
     [output addAttributes:messageDict range:NSMakeRange(0, output.length)];
-    //    NSLog(@"----------------output = %@",output);
     return output;
 }
 
@@ -148,7 +145,6 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     NSString *tagName = node.tagName;
 //    NSLog(@"tagname =      %@",tagName);
     if ([node isTextNode]) {//纯文本节点
-        //        [output appendAttributedString:[[NSMutableAttributedString alloc] initWithString:node.content]];
         NSString *content = node.content;
         content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if (content.length == 0)
@@ -157,15 +153,27 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
         [output appendAttributedString:[[NSAttributedString alloc] initWithString:content]];
         return;
     }
-    
     //todo
-    //    if ([tagName isEqualToString:@"img"]) {
-    //        NSString *src = [node objectForKey:@"src"];
-    //        return;
-    //    }
+        if ([tagName isEqualToString:@"img"]) {
+            NSLog(@"node img:%@",node);
+            NSString *src = [node objectForKey:@"src"];
+            if ([src containsString:@"gif"])
+                return;
+            
+            BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
+            NSURL *uuu = [self parseImageUrl:src];
+            attachment.url = [self parseImageUrl:src];
+//            attachment.url = [NSURL URLWithString:@"https://media.licdn.com/mpr/mprx/0_DjKFeM6BTIAbmxgI70_NeVbFidbWCxSI7xkZeV5bp7PMgRswTR8I6sAWDXFn3ZuF2OtJbgcumwNW"];
+            attachment.bounds = CGRectMake(0, 0, 100, 100);
+            
+            [output appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+            [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+
+            return;
+        }
     
     if ([tagName isEqualToString:@"br"]) {
-        [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\r\n"]];
+        [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
         return;
     }
     
@@ -181,8 +189,7 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     if ([tagName isEqualToString:@"blockquote"] ||
         [tagName isEqualToString:@"table"] ||
         [tagName isEqualToString:@"tr"]) {
-        
-        
+        [stringTemp appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
     }
     
     UIColor *color;
@@ -190,7 +197,8 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     if ([tagName isEqualToString:@"a"]) {
         NSString *herf = [node objectForKey:@"herf"];
-        //        [attributes setObject:herf forKey:NSLinkAttributeName];
+        if (herf)
+            [attributes setObject:herf forKey:NSLinkAttributeName];
     }
     
     if ([tagName isEqualToString:@"b"]) {
@@ -223,13 +231,14 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     }
     
     if ([tagName isEqualToString:@"blockquote"]) {
-        [attributes setObject:[UIColor lightGrayColor] forKey:NSBackgroundColorAttributeName];
+        [attributes setObject:[UIColor redColor] forKey:NSBackgroundColorAttributeName];
         [attributes setObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
         paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.lineSpacing = 10;
         paragraphStyle.minimumLineHeight = size + 5;
         paragraphStyle.maximumLineHeight = size + 5;
         [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
+        NSLog(@"tempstring:%@",stringTemp);
     } else {
         if ([node objectForKey:@"style"]) {
             
@@ -244,21 +253,21 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
 
 
 
-- (void)appendCodeNode:(TFHppleElement *)codeNode output:(NSMutableAttributedString *)output superAttributes:(NSDictionary *)superAttributes {
-    
-    if (!codeNode.children || codeNode.children.count == 0) {
-        return;
-    }
-    
-    for (TFHppleElement *node in codeNode.children) {
-        if ([node.tagName isEqualToString:@"br"] || [node.tagName isEqualToString:@"span"]) {
-            continue;
-        }
-        
-        [self appendNode:node output:output superAttributes:superAttributes];
-        [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:superAttributes]];
-    }
-}
+//- (void)appendCodeNode:(TFHppleElement *)codeNode output:(NSMutableAttributedString *)output superAttributes:(NSDictionary *)superAttributes {
+//    
+//    if (!codeNode.children || codeNode.children.count == 0) {
+//        return;
+//    }
+//    
+//    for (TFHppleElement *node in codeNode.children) {
+//        if ([node.tagName isEqualToString:@"br"] || [node.tagName isEqualToString:@"span"]) {
+//            continue;
+//        }
+//        
+//        [self appendNode:node output:output superAttributes:superAttributes];
+//        [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:superAttributes]];
+//    }
+//}
 
 
 

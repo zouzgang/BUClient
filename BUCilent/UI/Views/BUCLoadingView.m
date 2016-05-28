@@ -32,7 +32,7 @@
     self.hidden = YES;
     
     _backgroudView = [[UIView alloc] init];
-    _backgroudView.backgroundColor = [UIColor whiteColor];
+    _backgroudView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6];
     [self addSubview:_backgroudView];
     
     _nameLabel = [[UILabel alloc] init];

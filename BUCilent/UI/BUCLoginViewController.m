@@ -92,7 +92,8 @@
     }];
     
     [_loadingView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(self.view.frame.size.width, self.view.frame.size.height));
     }];
     
     [super updateViewConstraints];

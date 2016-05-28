@@ -12,21 +12,30 @@
 #import <Masonry.h>
 #import "UIColor+BUC.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "BUCTextAttachment.h"
+
+#import "UIImageView+WebCache.h"
 
 const CGFloat kDetailCellLeftPadding = 12;
 const CGFloat kDetailCellTopPadding = 12;
+
+@interface BUCPostDetailCell () <UITextViewDelegate>
+
+@end
 
 @implementation BUCPostDetailCell {
     UIImageView *_avatarImageView;
     UILabel *_authorLabel;
     UILabel *_timeLabel;
     UILabel *_countLabel;
-    UILabel *_contentLabel;
+    UITextView *_contentTextView;
     UIButton *_replyButton;
     UIView *_separatorLine;
     UIView *_separatorLineTop;
+    UIImageView *_attachmentImageView;
     
     NSAttributedString *_atttibutedString;
+    
 }
 
 + (NSString *)cellReuseIdentifier {
@@ -63,9 +72,11 @@ const CGFloat kDetailCellTopPadding = 12;
     _separatorLineTop.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
     [self.contentView addSubview:_separatorLineTop];
     
-    _contentLabel = [[UILabel alloc] init];
-    _contentLabel.numberOfLines = 0;
-    [self.contentView addSubview:_contentLabel];
+    _contentTextView = [[UITextView alloc] init];
+    _contentTextView.scrollEnabled = NO;
+    _contentTextView.editable= NO;
+    _contentTextView.delegate = self;
+    [self.contentView addSubview:_contentTextView];
     
     _replyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_replyButton setTitle:@"回复" forState:UIControlStateNormal];
@@ -77,6 +88,9 @@ const CGFloat kDetailCellTopPadding = 12;
     _separatorLine = [[UIView alloc] init];
     _separatorLine.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
     [self.contentView addSubview:_separatorLine];
+    
+    _attachmentImageView = [[UIImageView alloc] init];
+    [self.contentView addSubview:_attachmentImageView];
     
     [self updateConstraints];
 
@@ -112,11 +126,13 @@ const CGFloat kDetailCellTopPadding = 12;
         make.height.mas_equalTo(0.5);
     }];
     
-    [_contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+    [_contentTextView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_avatarImageView.mas_bottom).offset(kDetailCellTopPadding);
         make.left.equalTo(self.contentView).offset(kDetailCellLeftPadding);
         make.right.equalTo(self.contentView).offset(-kDetailCellLeftPadding);
-        make.bottom.equalTo(self.contentView).offset(-2 * kDetailCellTopPadding);
+        if (!_postDetailModel.attachment) {
+            make.bottom.equalTo(self.contentView).offset(-2 * kDetailCellTopPadding);
+        }
     }];
     
     [_replyButton mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -131,28 +147,40 @@ const CGFloat kDetailCellTopPadding = 12;
         make.height.mas_equalTo(0.5);
     }];
     
+    [_attachmentImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.contentView);
+        make.top.equalTo(_contentTextView.mas_bottom).offset(kDetailCellTopPadding / 2);
+        if (_attachmentImageView.image.size.height < 150) {
+            make.size.mas_equalTo(_attachmentImageView.image.size);
+        } else {
+            make.size.mas_equalTo(CGSizeMake(150, 150));
+        }
+        
+        if (_postDetailModel.attachment) {
+            make.bottom.equalTo(self.contentView).offset(-2 * kDetailCellTopPadding);
+        }
+    }];
+    
     [super updateConstraints];
 }
-//
-//- (CGFloat)height:(BUCPostDetailModel *)model {
-//    [self layoutIfNeeded];
-//    CGFloat height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 3;
-//
-//    return height;
-//}
 
 - (CGSize)sizeThatFits:(CGSize)size {
     [self layoutIfNeeded];
-    CGFloat height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2;
+    CGFloat height;
+    if (_postDetailModel.attachment) {
+        height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2 + kDetailCellTopPadding / 2 + ((_attachmentImageView.image.size.height < 150) ? _attachmentImageView.image.size.height : 150);
+    } else {
+        height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2;
+    }
     return CGSizeMake([UIScreen mainScreen].bounds.size.width, height);
 }
 
 - (CGSize)heightOfContent {
-    NSTextStorage *textStorage = [[NSTextStorage alloc]init];
-    NSLayoutManager *layoutManager = [[NSLayoutManager alloc]init];
+    NSTextStorage *textStorage = [[NSTextStorage alloc] init];
+    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
     [textStorage addLayoutManager:layoutManager];
     
-    NSTextContainer *textContainer = [[NSTextContainer alloc]initWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 2 * kDetailCellLeftPadding, MAXFLOAT)];
+    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 2 * kDetailCellLeftPadding - 16, MAXFLOAT)];
     [textContainer setLineFragmentPadding:5.0];
     [layoutManager addTextContainer:textContainer];
     
@@ -161,7 +189,7 @@ const CGFloat kDetailCellTopPadding = 12;
     [layoutManager ensureLayoutForTextContainer:textContainer];
     
     CGRect frame = [layoutManager usedRectForTextContainer:textContainer];
-    return CGSizeMake(frame.size.width, frame.size.height);
+    return CGSizeMake(frame.size.width, frame.size.height + 20);
 }
 
 - (void)setPostDetailModel:(BUCPostDetailModel *)postDetailModel {
@@ -181,14 +209,45 @@ const CGFloat kDetailCellTopPadding = 12;
     
     _atttibutedString = [[NSMutableAttributedString alloc] init];
     _atttibutedString = [[BUCHtmlScraper sharedInstance] richTextFromHtml:content].copy;
-    NSLog(@"attribute:%@",_atttibutedString);
-
     _authorLabel.text = [self urldecode:_postDetailModel.author];
     _timeLabel.text = [self urldecode:_postDetailModel.dateline];
-    _contentLabel.attributedText = _atttibutedString;
+    
+    if (_postDetailModel.attachment) {
+        NSString *attachment = [NSString stringWithFormat:@"%@/%@", @"http://out.bitunion.org", [self urldecode:_postDetailModel.attachment]];
+        NSURL *attachmentUrl = [NSURL URLWithString:attachment];
+        [_attachmentImageView sd_setImageWithURL:attachmentUrl placeholderImage:nil];
+    }
+//    /////头像
+//    NSURL *avatarUrl = [self.htmlScraper avatarUrlFromHtml:[self urldecode:[dict objectForKey:@"avatar"]]];
+    
+    
+    
+    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:_atttibutedString];
+    [_atttibutedString enumerateAttributesInRange:NSMakeRange(0, _atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
+        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
+        if (attachment) {
+            UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.bounds =  attachment.bounds;
+            
+            [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
+                attachment.image = image;
+                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+                _contentTextView.attributedText = resultString;
+            }];
+        } else {
+           _contentTextView.attributedText = _atttibutedString;
+        }
+        
+    }];
+    
     _countLabel.text = [NSString stringWithFormat:@"#%ld",(long)_count];
     
     [self updateConstraints];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
+    return YES;
 }
 
 #pragma mark - Action
