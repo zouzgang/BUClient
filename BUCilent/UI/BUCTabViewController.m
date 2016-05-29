@@ -45,6 +45,12 @@
     
     UINavigationController *_homeNavigationController =
     [[UINavigationController alloc] initWithRootViewController:_homeVC];
+    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:17],
+                                  NSForegroundColorAttributeName: [UIColor blackColor]};
+    [_homeNavigationController.navigationBar setTitleTextAttributes:attributes];
+
+    
+    
     UINavigationController *_discoveryNavigationController =
     [[UINavigationController alloc] initWithRootViewController:_discoverVC];
     UINavigationController *_myProfileNavigationController =

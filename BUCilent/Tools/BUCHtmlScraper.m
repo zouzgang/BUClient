@@ -9,6 +9,7 @@
 #import "BUCHtmlScraper.h"
 #include "TFHpple.h"
 #import "BUCTextAttachment.h"
+#import "UIColor+BUC.h"
 
 #define kMessageTextFont   [UIFont systemFontOfSize:16]
 
@@ -160,8 +161,8 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
             if ([src containsString:@"gif"])
                 return;
             
+            //表情 todo
             BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
-            NSURL *uuu = [self parseImageUrl:src];
             attachment.url = [self parseImageUrl:src];
 //            attachment.url = [NSURL URLWithString:@"https://media.licdn.com/mpr/mprx/0_DjKFeM6BTIAbmxgI70_NeVbFidbWCxSI7xkZeV5bp7PMgRswTR8I6sAWDXFn3ZuF2OtJbgcumwNW"];
             attachment.bounds = CGRectMake(0, 0, 100, 100);
@@ -230,8 +231,8 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
         [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
     }
     
-    if ([tagName isEqualToString:@"blockquote"]) {
-        [attributes setObject:[UIColor redColor] forKey:NSBackgroundColorAttributeName];
+    if ([tagName isEqualToString:@"blockquote"] || [tagName isEqualToString:@"table"]) {
+        [attributes setObject:[UIColor colorWithHexString:@"#F3F3F3"] forKey:NSBackgroundColorAttributeName];
         [attributes setObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
         paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.lineSpacing = 10;

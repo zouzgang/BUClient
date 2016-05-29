@@ -11,6 +11,11 @@
 		490B39BA1CF9993700578E9E /* BUCTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39B91CF9993700578E9E /* BUCTextAttachment.m */; };
 		490B39BD1CF9D7D000578E9E /* CPEventFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39BC1CF9D7D000578E9E /* CPEventFilterView.m */; };
 		490B39C01CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39BF1CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m */; };
+		490B39C21CFAD45E00578E9E /* BITFavoriteList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 490B39C11CFAD45E00578E9E /* BITFavoriteList.plist */; };
+		490B39C51CFAD98200578E9E /* BUCBookTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39C41CFAD98200578E9E /* BUCBookTool.m */; };
+		490B39C81CFADCBE00578E9E /* BUCBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39C71CFADCBE00578E9E /* BUCBookModel.m */; };
+		490B39CB1CFAE4A200578E9E /* BUCMyBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39CA1CFAE4A200578E9E /* BUCMyBookViewController.m */; };
+		490B39CE1CFAE78800578E9E /* BUCStringTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39CD1CFAE78800578E9E /* BUCStringTool.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -76,6 +81,15 @@
 		490B39BC1CF9D7D000578E9E /* CPEventFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPEventFilterView.m; sourceTree = "<group>"; };
 		490B39BE1CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+BUCPullToRefresh.h"; path = "Category/UIScrollView+BUCPullToRefresh.h"; sourceTree = "<group>"; };
 		490B39BF1CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+BUCPullToRefresh.m"; path = "Category/UIScrollView+BUCPullToRefresh.m"; sourceTree = "<group>"; };
+		490B39C11CFAD45E00578E9E /* BITFavoriteList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BITFavoriteList.plist; sourceTree = "<group>"; };
+		490B39C31CFAD98200578E9E /* BUCBookTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCBookTool.h; path = Tools/BUCBookTool.h; sourceTree = "<group>"; };
+		490B39C41CFAD98200578E9E /* BUCBookTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBookTool.m; path = Tools/BUCBookTool.m; sourceTree = "<group>"; };
+		490B39C61CFADCBE00578E9E /* BUCBookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCBookModel.h; path = Model/BUCBookModel.h; sourceTree = "<group>"; };
+		490B39C71CFADCBE00578E9E /* BUCBookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBookModel.m; path = Model/BUCBookModel.m; sourceTree = "<group>"; };
+		490B39C91CFAE4A200578E9E /* BUCMyBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCMyBookViewController.h; path = UI/MyProfile/BUCMyBookViewController.h; sourceTree = "<group>"; };
+		490B39CA1CFAE4A200578E9E /* BUCMyBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCMyBookViewController.m; path = UI/MyProfile/BUCMyBookViewController.m; sourceTree = "<group>"; };
+		490B39CC1CFAE78800578E9E /* BUCStringTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCStringTool.h; path = Tools/BUCStringTool.h; sourceTree = "<group>"; };
+		490B39CD1CFAE78800578E9E /* BUCStringTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCStringTool.m; path = Tools/BUCStringTool.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -238,6 +252,7 @@
 		49DA90E61CDF8F5100B8787B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				490B39C11CFAD45E00578E9E /* BITFavoriteList.plist */,
 				49DA90E71CDF8F5100B8787B /* main.m */,
 				49DA91451CDFA0D300B8787B /* BUCilent_PrefixHeader.pch */,
 			);
@@ -287,6 +302,10 @@
 				49DA91521CDFADD100B8787B /* BUCUserManager.m */,
 				49DA916D1CE0881700B8787B /* BUCHtmlScraper.h */,
 				49DA916E1CE0881700B8787B /* BUCHtmlScraper.m */,
+				490B39C31CFAD98200578E9E /* BUCBookTool.h */,
+				490B39C41CFAD98200578E9E /* BUCBookTool.m */,
+				490B39CC1CFAE78800578E9E /* BUCStringTool.h */,
+				490B39CD1CFAE78800578E9E /* BUCStringTool.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -334,6 +353,8 @@
 			children = (
 				49DA91371CDF947200B8787B /* BUCMyProfileViewController.h */,
 				49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */,
+				490B39C91CFAE4A200578E9E /* BUCMyBookViewController.h */,
+				490B39CA1CFAE4A200578E9E /* BUCMyBookViewController.m */,
 			);
 			name = MyProfile;
 			sourceTree = "<group>";
@@ -392,6 +413,8 @@
 				49DA915F1CE06FD300B8787B /* BUCHomeLastReplyModel.m */,
 				49DA916A1CE086DD00B8787B /* BUCPostDetailModel.h */,
 				49DA916B1CE086DD00B8787B /* BUCPostDetailModel.m */,
+				490B39C61CFADCBE00578E9E /* BUCBookModel.h */,
+				490B39C71CFADCBE00578E9E /* BUCBookModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -525,6 +548,7 @@
 			files = (
 				49DA90F61CDF8F5100B8787B /* LaunchScreen.storyboard in Resources */,
 				49DA90F31CDF8F5100B8787B /* Assets.xcassets in Resources */,
+				490B39C21CFAD45E00578E9E /* BITFavoriteList.plist in Resources */,
 				49DA90F11CDF8F5100B8787B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,8 +614,10 @@
 				49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */,
 				49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
+				490B39C51CFAD98200578E9E /* BUCBookTool.m in Sources */,
 				49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */,
 				49DA91481CDFA26200B8787B /* BUCLoadingView.m in Sources */,
+				490B39CB1CFAE4A200578E9E /* BUCMyBookViewController.m in Sources */,
 				49DA91781CE0889A00B8787B /* TFHppleElement.m in Sources */,
 				49DA91561CDFAE3B00B8787B /* BUCBaseModel.m in Sources */,
 				49DA91691CE0807E00B8787B /* BUCPostDetailCell.m in Sources */,
@@ -608,6 +634,7 @@
 				49DA916F1CE0881700B8787B /* BUCHtmlScraper.m in Sources */,
 				490B39C01CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m in Sources */,
 				49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */,
+				490B39C81CFADCBE00578E9E /* BUCBookModel.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
 				49DA91841CE0F61800B8787B /* BUCReplyViewController.m in Sources */,
 				49DA916C1CE086DD00B8787B /* BUCPostDetailModel.m in Sources */,
@@ -617,6 +644,7 @@
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
 				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
 				49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */,
+				490B39CE1CFAE78800578E9E /* BUCStringTool.m in Sources */,
 				49DA91811CE0EF8C00B8787B /* BUCFooterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

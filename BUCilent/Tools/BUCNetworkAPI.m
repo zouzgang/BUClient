@@ -19,6 +19,7 @@ NSString *const kApiAccountDetail = @"/open_api/bu_profile.php";
 NSString *const kApiForumTag = @"/open_api/bu_forumtag.php";
 NSString *const kApiFidTidCount = @"/open_api/bu_logging.php";
 NSString *const kApiHome = @"/open_api/bu_home.php";
+NSString *const kApiTidOrFid = @"/open_api/bu_fid_tid.php";
 
 NSString *const kLPNetworkRequestShowEmptyPageWhenError = @"kLPNetworkRequestShowEmptyPageWhenError";
 

@@ -12,5 +12,5 @@
 
 @property (nonatomic, strong) NSNumber *tid;
 @property (nonatomic, strong) NSNumber *tidSum;
-
+@property (nonatomic, copy) NSString *postTitle;
 @end

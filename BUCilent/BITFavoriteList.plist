@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>灌水乐园</string>
+		<key>fid</key>
+		<string>14</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>职场生涯</string>
+		<key>fid</key>
+		<string>124</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>动漫天空</string>
+		<key>fid</key>
+		<string>27</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>体坛风云</string>
+		<key>fid</key>
+		<string>115</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>硬件与数码时尚</string>
+		<key>fid</key>
+		<string>80</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>生活会馆</string>
+		<key>fid</key>
+		<string>96</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>网络技术与信息</string>
+		<key>fid</key>
+		<string>10</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>叫卖场</string>
+		<key>fid</key>
+		<string>59</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>前程似锦</string>
+		<key>fid</key>
+		<string>83</string>
+	</dict>
+</array>
+</plist>

@@ -17,6 +17,7 @@
 #import "BUCReplyViewController.h"
 #import <Masonry.h>
 #import "CPEventFilterView.h"
+#import "BUCBookTool.h"
 
 const NSInteger kPageSize = 20;
 
@@ -39,6 +40,8 @@ const NSInteger kPageSize = 20;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _dataArray = [[BUCArray alloc] init];
+        _reverse = NO;
+        _pullUp = NO;
     }
     return self;
 }
@@ -88,7 +91,7 @@ const NSInteger kPageSize = 20;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BUCPostDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:[BUCPostDetailCell cellReuseIdentifier] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.count = !_reverse ? (indexPath.row + 1) : (_tidSum.integerValue - indexPath.row);
+    cell.count = !_reverse ? (indexPath.row + 1) : (_tidSum.integerValue - indexPath.row + 1);
     cell.indexPath = indexPath;
     cell.delegate = self;
     cell.postDetailModel = _dataArray[indexPath.row];
@@ -116,20 +119,19 @@ const NSInteger kPageSize = 20;
         _dataArray.pageSize = kPageSize;
     }
     
-    
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
     parameters[@"session"] = [BUCDataManager sharedInstance].session;
     parameters[@"action"] = @"post";
-    parameters[@"tid"] = self.tid;
-    parameters[@"action"] = @"post";
+    parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
 
     if (!_reverse) {
         parameters[@"from"] =[NSString stringWithFormat:@"%ld",_page * kPageSize];
         parameters[@"to"] = ((_page + 1) * kPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",(_page + 1) * kPageSize] : [NSString stringWithFormat:@"%ld", (long)_dataArray.totalSize];
     } else {
-        parameters[@"from"] =[NSString stringWithFormat:@"%ld",_dataArray.totalSize];
-        parameters[@"to"] = ((_page + 1) * kPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",_dataArray.totalSize - (_page + 1) * kPageSize] : [NSString stringWithFormat:@"%ld", (long)0];
+        parameters[@"from"] = ((_page + 1) * kPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",_dataArray.totalSize - (_page + 1) * kPageSize] : [NSString stringWithFormat:@"%ld", (long)0];
+        parameters[@"to"] = [NSString stringWithFormat:@"%ld",_dataArray.totalSize - _page * kPageSize];
     }
 
     
@@ -137,8 +139,16 @@ const NSInteger kPageSize = 20;
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"detail success");
+        self.navigationItem.rightBarButtonItem.enabled = YES;
         NSArray *array = [MTLJSONAdapter modelsOfClass:BUCPostDetailModel.class fromJSONArray:[result objectForKey:@"postlist"] error:Nil];
-        [_dataArray addObjectsFromArray:array];
+        if (_reverse) {
+            for (NSInteger i = array.count - 1; i >=0; i --) {
+                [_dataArray addObject:array[i]];
+            }
+        } else {
+            [_dataArray addObjectsFromArray:array];
+        }
+    
         _page += 1;
         _dataArray.page = _page;
         
@@ -173,7 +183,7 @@ const NSInteger kPageSize = 20;
 #pragma mark - Action
 - (void)didReplyButtonClicked {
     CPEventFilterView *filterView = [[CPEventFilterView alloc] init];
-    [filterView showInView:self.tabBarController.view titles:@[@"回复", @"倒序", @"收藏"] completehandler:^(NSInteger index) {
+    [filterView showInView:self.tabBarController.view titles:@[@"回复", @"倒序", [BUCBookTool hasItemFileID:self.tid] ? @"取消收藏": @"收藏"] completehandler:^(NSInteger index) {
         if (index == 0) {
             //reply atuhor
             BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
@@ -181,13 +191,14 @@ const NSInteger kPageSize = 20;
                 
             };
             reply.tid = self.tid;
-            [self.navigationController pushViewController:reply animated:YES];
+            [self.navigationController pushViewController:reply animated:NO];
         } else if (index == 1) {
-            _reverse = YES;
+            _reverse = !_reverse;
             [_dataArray removeAllObjects];
             [self loadData:YES];
         } else if (index == 2) {
             
+            [BUCBookTool bookPost:self.tid title:self.postTitle];
         }
     }];
     

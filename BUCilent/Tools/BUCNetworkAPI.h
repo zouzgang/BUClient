@@ -19,6 +19,9 @@ extern NSString *const kApiAccountDetail;/**<查看用户详情*/
 extern NSString *const kApiHome;/**<查询论坛最新帖子*/
 extern NSString *const kApiForumTag;/**<查询论坛分类*/
 extern NSString *const kApiFidTidCount;/**<登录*/
+extern NSString *const kApiTidOrFid;/**<楼层数*/
+
+
 
 + (NSString *)baseURL;
 

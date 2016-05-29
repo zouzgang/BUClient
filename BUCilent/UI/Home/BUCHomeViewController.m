@@ -108,6 +108,7 @@
     BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
     detail.tid = _dataArray[indexPath.row].tid;
     detail.tidSum = _dataArray[indexPath.row].tidSum;
+    detail.postTitle = _dataArray[indexPath.row].pname;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
