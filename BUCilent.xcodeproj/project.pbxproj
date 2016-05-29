@@ -16,6 +16,9 @@
 		490B39C81CFADCBE00578E9E /* BUCBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39C71CFADCBE00578E9E /* BUCBookModel.m */; };
 		490B39CB1CFAE4A200578E9E /* BUCMyBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39CA1CFAE4A200578E9E /* BUCMyBookViewController.m */; };
 		490B39CE1CFAE78800578E9E /* BUCStringTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39CD1CFAE78800578E9E /* BUCStringTool.m */; };
+		490B39D11CFB094C00578E9E /* BUCForumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39D01CFB094C00578E9E /* BUCForumCell.m */; };
+		490B39D51CFB099600578E9E /* BUCForumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39D41CFB099600578E9E /* BUCForumModel.m */; };
+		490B39D81CFB0B7300578E9E /* BUCForumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39D71CFB0B7300578E9E /* BUCForumListViewController.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -90,6 +93,12 @@
 		490B39CA1CFAE4A200578E9E /* BUCMyBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCMyBookViewController.m; path = UI/MyProfile/BUCMyBookViewController.m; sourceTree = "<group>"; };
 		490B39CC1CFAE78800578E9E /* BUCStringTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCStringTool.h; path = Tools/BUCStringTool.h; sourceTree = "<group>"; };
 		490B39CD1CFAE78800578E9E /* BUCStringTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCStringTool.m; path = Tools/BUCStringTool.m; sourceTree = "<group>"; };
+		490B39CF1CFB094C00578E9E /* BUCForumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCForumCell.h; path = UI/Discover/View/BUCForumCell.h; sourceTree = "<group>"; };
+		490B39D01CFB094C00578E9E /* BUCForumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCForumCell.m; path = UI/Discover/View/BUCForumCell.m; sourceTree = "<group>"; };
+		490B39D31CFB099600578E9E /* BUCForumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCForumModel.h; path = Model/BUCForumModel.h; sourceTree = "<group>"; };
+		490B39D41CFB099600578E9E /* BUCForumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCForumModel.m; path = Model/BUCForumModel.m; sourceTree = "<group>"; };
+		490B39D61CFB0B7300578E9E /* BUCForumListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCForumListViewController.h; path = UI/Discover/BUCForumListViewController.h; sourceTree = "<group>"; };
+		490B39D71CFB0B7300578E9E /* BUCForumListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCForumListViewController.m; path = UI/Discover/BUCForumListViewController.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -204,6 +213,15 @@
 				2D39087C48B1B4005FECCF72 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		490B39D21CFB094F00578E9E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				490B39CF1CFB094C00578E9E /* BUCForumCell.h */,
+				490B39D01CFB094C00578E9E /* BUCForumCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		49DA90DA1CDF8F5100B8787B = {
@@ -344,6 +362,9 @@
 			children = (
 				49DA91291CDF936700B8787B /* BUCDiscoverViewController.h */,
 				49DA912A1CDF936700B8787B /* BUCDiscoverViewController.m */,
+				490B39D61CFB0B7300578E9E /* BUCForumListViewController.h */,
+				490B39D71CFB0B7300578E9E /* BUCForumListViewController.m */,
+				490B39D21CFB094F00578E9E /* View */,
 			);
 			name = Discover;
 			sourceTree = "<group>";
@@ -415,6 +436,8 @@
 				49DA916B1CE086DD00B8787B /* BUCPostDetailModel.m */,
 				490B39C61CFADCBE00578E9E /* BUCBookModel.h */,
 				490B39C71CFADCBE00578E9E /* BUCBookModel.m */,
+				490B39D31CFB099600578E9E /* BUCForumModel.h */,
+				490B39D41CFB099600578E9E /* BUCForumModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -615,6 +638,7 @@
 				49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
 				490B39C51CFAD98200578E9E /* BUCBookTool.m in Sources */,
+				490B39D51CFB099600578E9E /* BUCForumModel.m in Sources */,
 				49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */,
 				49DA91481CDFA26200B8787B /* BUCLoadingView.m in Sources */,
 				490B39CB1CFAE4A200578E9E /* BUCMyBookViewController.m in Sources */,
@@ -637,12 +661,14 @@
 				490B39C81CFADCBE00578E9E /* BUCBookModel.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
 				49DA91841CE0F61800B8787B /* BUCReplyViewController.m in Sources */,
+				490B39D81CFB0B7300578E9E /* BUCForumListViewController.m in Sources */,
 				49DA916C1CE086DD00B8787B /* BUCPostDetailModel.m in Sources */,
 				490B39BA1CF9993700578E9E /* BUCTextAttachment.m in Sources */,
 				49DA91771CE0889A00B8787B /* TFHpple.m in Sources */,
 				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
 				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
+				490B39D11CFB094C00578E9E /* BUCForumCell.m in Sources */,
 				49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */,
 				490B39CE1CFAE78800578E9E /* BUCStringTool.m in Sources */,
 				49DA91811CE0EF8C00B8787B /* BUCFooterView.m in Sources */,

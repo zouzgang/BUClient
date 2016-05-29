@@ -25,7 +25,6 @@
 
 @implementation BUCHomeViewController {
     UITableView *_tableView;
-//    BUCFooterView *_headerView;
     NSArray <BUCHomeModel *> *_dataArray;
     
     BOOL _pullDown;

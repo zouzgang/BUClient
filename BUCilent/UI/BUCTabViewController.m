@@ -50,11 +50,13 @@
     [_homeNavigationController.navigationBar setTitleTextAttributes:attributes];
 
     
-    
     UINavigationController *_discoveryNavigationController =
     [[UINavigationController alloc] initWithRootViewController:_discoverVC];
+    [_discoveryNavigationController.navigationBar setTitleTextAttributes:attributes];
+    
     UINavigationController *_myProfileNavigationController =
     [[UINavigationController alloc] initWithRootViewController:_myProfileVC];
+    [_myProfileNavigationController.navigationBar setTitleTextAttributes:attributes];
     
     NSArray *controllers = @[_homeNavigationController,
                              _discoveryNavigationController,

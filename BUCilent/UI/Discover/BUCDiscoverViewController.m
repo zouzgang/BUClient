@@ -8,8 +8,8 @@
 
 #import "BUCDiscoverViewController.h"
 #import <Masonry.h>
-#import "BUCDataManager.h"
-#import "BUCNetworkAPI.h"
+
+#import "BUCForumListViewController.h"
 
 @interface BUCDiscoverViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -84,16 +84,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-//    [parameters setObject:@"login" forKey:@"tid"];
-//    [parameters setObject:[BUCDataManager sharedInstance].username forKey:@"username"];
-//
-//
-//    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiLogin] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
-//        
-//    } onSuccess:^(NSDictionary *result) {
-//        
-//    }];
+    BUCForumListViewController *foumList = [[BUCForumListViewController alloc] init];
+    foumList.fid = [_forumList[indexPath.row] objectForKey:@"fid"];
+    foumList.forumName = [_forumList[indexPath.row] objectForKey:@"name"];
+    foumList.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:foumList animated:YES];
     
     
 }

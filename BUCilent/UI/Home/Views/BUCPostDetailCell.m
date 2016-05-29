@@ -53,7 +53,6 @@ const CGFloat kDetailCellTopPadding = 12;
     [self.contentView addSubview:_backgroundView];
     
     _avatarImageView = [[UIImageView alloc] init];
-//    _avatarImageView.image = [UIImage imageNamed:@"Tabbar_MyProfile_Down"];
     _avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
     [_backgroundView addSubview:_avatarImageView];
 

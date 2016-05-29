@@ -156,7 +156,7 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     }
     //todo
         if ([tagName isEqualToString:@"img"]) {
-            NSLog(@"node img:%@",node);
+//            NSLog(@"node img:%@",node);
             NSString *src = [node objectForKey:@"src"];
             if ([src containsString:@"gif"])
                 return;
@@ -239,7 +239,6 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
         paragraphStyle.minimumLineHeight = size + 5;
         paragraphStyle.maximumLineHeight = size + 5;
         [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
-        NSLog(@"tempstring:%@",stringTemp);
     } else {
         if ([node objectForKey:@"style"]) {
             
