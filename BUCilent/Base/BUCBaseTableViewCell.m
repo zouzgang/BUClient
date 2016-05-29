@@ -90,5 +90,55 @@
     return [NSString stringWithUTF8String:(const char *)output];
 }
 
+///////分析日期
+- (NSString *)parseDateline:(NSString *)dateline {
+    if (!dateline || (id)dateline == [NSNull null] || dateline.length == 0) {
+        return nil;
+    }
+    
+    static NSDateFormatter *dateFormatter;
+    static NSDateFormatter *parsingFormatter;
+    static NSRegularExpression *regex;
+    static dispatch_once_t onceEnsure;
+    dispatch_once(&onceEnsure, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"zh_Hans_CN"];
+        parsingFormatter = [[NSDateFormatter alloc] init];
+        [parsingFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]+$" options:NSRegularExpressionCaseInsensitive error:NULL];
+    });
+    
+    NSString *output;
+    NSDate *date;
+    
+    if ([regex numberOfMatchesInString:dateline options:0 range:NSMakeRange(0, dateline.length)] == 0) {
+        date = [parsingFormatter dateFromString:dateline];
+    } else {
+        date = [NSDate dateWithTimeIntervalSince1970:dateline.doubleValue];
+    }
+    
+    NSTimeInterval timeInterval = abs(date.timeIntervalSinceNow);
+    if (timeInterval < 60) {
+        output = @"刚刚";
+    } else if (timeInterval < 60 * 60) {
+        output = [NSString stringWithFormat:@"%d 分钟前", (int)timeInterval / 60];
+    } else if (timeInterval < 60 * 60 * 24) {
+        output = [NSString stringWithFormat:@"%d 小时前", (int)timeInterval / (60 * 60)];
+    } else if (timeInterval < 60 * 60 * 24 * 30) {
+        output = [NSString stringWithFormat:@"%d 天前", (int)timeInterval / (60 * 60 * 24)];
+    } else if (timeInterval < 60 * 60 * 24 * 30 * 12) {
+        output = [NSString stringWithFormat:@"%d 个月前", (int)timeInterval / (60 * 60 * 24 * 30)];
+    } else {
+        output = [dateFormatter stringFromDate:date];
+    }
+    
+    
+    return output;
+}
+
+
+
 
 @end

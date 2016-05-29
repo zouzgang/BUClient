@@ -47,19 +47,19 @@
 - (void)updateConstraints {
     [_backgroudView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
-        make.center.equalTo(self);
+        make.left.right.equalTo(self);
         make.bottom.equalTo(self);
     }];
     
     [_nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_backgroudView.mas_top).offset(80);
-        make.left.equalTo(_backgroudView.mas_left);
+        make.centerX.equalTo(_backgroudView.mas_centerX);
         make.bottom.equalTo(_backgroudView.mas_bottom);
     }];
     
     [_indicatorView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_backgroudView.mas_centerY);
-        make.left.mas_equalTo(_nameLabel.mas_right).offset(8);
+        make.top.equalTo(_nameLabel.mas_bottom).offset(12);
+        make.centerX.equalTo(_backgroudView.mas_centerX);
         make.right.equalTo(_backgroudView.mas_right);
     }];
     

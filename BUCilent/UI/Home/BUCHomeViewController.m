@@ -66,6 +66,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"BIT LM";
     
     
     __weak BUCHomeViewController *weakSelf = self;

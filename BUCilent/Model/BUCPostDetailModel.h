@@ -33,6 +33,8 @@
 @property (nonatomic, strong) NSNumber *pstatus;
 //@property (nonatomic, strong) NSNumber *lastedit;'
 
+
+@property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *attachment;
 @property (nonatomic, copy) NSString *filesize;
 @property (nonatomic, copy) NSString *downloads;

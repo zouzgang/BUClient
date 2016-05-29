@@ -28,6 +28,8 @@ const CGFloat kDetailCellTopPadding = 12;
     UILabel *_authorLabel;
     UILabel *_timeLabel;
     UILabel *_countLabel;
+    UIView *_backgroundView;
+    
     UITextView *_contentTextView;
     UIButton *_replyButton;
     UIView *_separatorLine;
@@ -46,31 +48,36 @@ const CGFloat kDetailCellTopPadding = 12;
     [super setupViews];
     self.fd_enforceFrameLayout = YES;
     
+    _backgroundView = [[UIView alloc] init];
+    _backgroundView.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
+    [self.contentView addSubview:_backgroundView];
+    
     _avatarImageView = [[UIImageView alloc] init];
-    _avatarImageView.image = [UIImage imageNamed:@"Tabbar_MyProfile_Down"];
-    [self.contentView addSubview:_avatarImageView];
+//    _avatarImageView.image = [UIImage imageNamed:@"Tabbar_MyProfile_Down"];
+    _avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [_backgroundView addSubview:_avatarImageView];
 
     _authorLabel = [[UILabel alloc] init];
     _authorLabel.textColor = [UIColor blackColor];
     _authorLabel.font = [UIFont systemFontOfSize:13];
     _authorLabel.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:_authorLabel];
+    [_backgroundView addSubview:_authorLabel];
     
     _timeLabel = [[UILabel alloc] init];
     _timeLabel.textColor = [UIColor blackColor];
     _timeLabel.font = [UIFont systemFontOfSize:12];
     _timeLabel.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:_timeLabel];
+    [_backgroundView addSubview:_timeLabel];
     
     _countLabel = [[UILabel alloc] init];
     _countLabel.textColor = [UIColor blackColor];
     _countLabel.font = [UIFont systemFontOfSize:13];
     _countLabel.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:_countLabel];
+    [_backgroundView addSubview:_countLabel];
     
     _separatorLineTop = [[UIView alloc] init];
     _separatorLineTop.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
-    [self.contentView addSubview:_separatorLineTop];
+    [_backgroundView addSubview:_separatorLineTop];
     
     _contentTextView = [[UITextView alloc] init];
     _contentTextView.scrollEnabled = NO;
@@ -97,10 +104,15 @@ const CGFloat kDetailCellTopPadding = 12;
 }
 
 - (void)updateConstraints {
+    [_backgroundView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.contentView);
+    }];
+    
     [_avatarImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(kDetailCellTopPadding);
+        make.top.equalTo(_backgroundView.mas_top).offset(kDetailCellTopPadding);
         make.left.equalTo(self.contentView).offset(kDetailCellLeftPadding);
         make.size.mas_equalTo(CGSizeMake(50, 50));
+        make.bottom.equalTo(_backgroundView.mas_bottom).offset(-kDetailCellTopPadding / 2);
     }];
     
     [_authorLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -120,7 +132,7 @@ const CGFloat kDetailCellTopPadding = 12;
     }];
     
     [_separatorLineTop mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(_avatarImageView.mas_bottom).offset(kDetailCellLeftPadding / 2);
+        make.bottom.equalTo(_avatarImageView.mas_bottom).offset(kDetailCellTopPadding / 2);
         make.left.equalTo(_avatarImageView.mas_left);
         make.right.equalTo(self.contentView);
         make.height.mas_equalTo(0.5);
@@ -210,20 +222,19 @@ const CGFloat kDetailCellTopPadding = 12;
         [content appendString:body];
     }
     
+    //需要缓存todo
     _atttibutedString = [[NSMutableAttributedString alloc] init];
     _atttibutedString = [[BUCHtmlScraper sharedInstance] richTextFromHtml:content].copy;
     _authorLabel.text = [self urldecode:_postDetailModel.author];
-    _timeLabel.text = [self urldecode:_postDetailModel.dateline];
+    _timeLabel.text = [self parseDateline:_postDetailModel.dateline];
     
     if (_postDetailModel.attachment) {
         NSString *attachment = [NSString stringWithFormat:@"%@/%@", @"http://out.bitunion.org", [self urldecode:_postDetailModel.attachment]];
         NSURL *attachmentUrl = [NSURL URLWithString:attachment];
         [_attachmentImageView sd_setImageWithURL:attachmentUrl placeholderImage:nil];
     }
-//    /////头像
-//    NSURL *avatarUrl = [self.htmlScraper avatarUrlFromHtml:[self urldecode:[dict objectForKey:@"avatar"]]];
     
-    
+    [_avatarImageView sd_setImageWithURL:[[BUCHtmlScraper sharedInstance] avatarUrlFromHtml:[self urldecode:_postDetailModel.avatar]] placeholderImage:[UIImage imageNamed:@"avatar"]];
     
     NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:_atttibutedString];
     [_atttibutedString enumerateAttributesInRange:NSMakeRange(0, _atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {

@@ -35,7 +35,7 @@ const CGFloat kTopPadding = 12;
     [super setupViews];
     
     _avatarImageView = [[UIImageView alloc] init];
-    _avatarImageView.image = [UIImage imageNamed:@"Tabbar_MyProfile_Down"];
+    _avatarImageView.image = [UIImage imageNamed:@"avatar"];
     [self.contentView addSubview:_avatarImageView];
 
     _replyLabel = [[UILabel alloc] init];

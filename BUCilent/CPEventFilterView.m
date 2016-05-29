@@ -50,7 +50,6 @@ NSInteger const kFilterViewButtonTag= 203;
     imageView.image = image;
 
     imageView.alpha = 1;
-    //    imageView.image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 0, 10, 0)];
     [_backgroundView addSubview:imageView];
     
     for (NSInteger i = 0; i < _titles.count; i ++) {
