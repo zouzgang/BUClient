@@ -16,6 +16,7 @@
 #import "BUCFooterView.h"
 #import "BUCReplyViewController.h"
 #import <Masonry.h>
+#import "CPEventFilterView.h"
 
 const NSInteger kPageSize = 20;
 
@@ -123,8 +124,14 @@ const NSInteger kPageSize = 20;
     parameters[@"tid"] = self.tid;
     parameters[@"action"] = @"post";
 
-    parameters[@"from"] =[NSString stringWithFormat:@"%ld",_page * kPageSize];
-    parameters[@"to"] = ((_page + 1) * kPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",(_page + 1) * kPageSize] : [NSString stringWithFormat:@"%ld", (long)_dataArray.totalSize];
+    if (!_reverse) {
+        parameters[@"from"] =[NSString stringWithFormat:@"%ld",_page * kPageSize];
+        parameters[@"to"] = ((_page + 1) * kPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",(_page + 1) * kPageSize] : [NSString stringWithFormat:@"%ld", (long)_dataArray.totalSize];
+    } else {
+        parameters[@"from"] =[NSString stringWithFormat:@"%ld",_dataArray.totalSize];
+        parameters[@"to"] = ((_page + 1) * kPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",_dataArray.totalSize - (_page + 1) * kPageSize] : [NSString stringWithFormat:@"%ld", (long)0];
+    }
+
     
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
         
@@ -163,22 +170,29 @@ const NSInteger kPageSize = 20;
     //reply some
 }
 
-//"action":"newreply",
-//"username":"username",
-//"session":"session",
-//"tid":"tid",
-//"message":"message content",
-//"attachment":0 or 1 // 0: 无附件，1: 含附件
-
 #pragma mark - Action
 - (void)didReplyButtonClicked {
-    //reply atuhor
-    BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
-    reply.completBlock = ^(NSString *content, UIImage *attachment) {
+    CPEventFilterView *filterView = [[CPEventFilterView alloc] init];
+    [filterView showInView:self.tabBarController.view titles:@[@"回复", @"倒序", @"收藏"] completehandler:^(NSInteger index) {
+        if (index == 0) {
+            //reply atuhor
+            BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
+            reply.completBlock = ^(NSString *content, UIImage *attachment) {
+                
+            };
+            reply.tid = self.tid;
+            [self.navigationController pushViewController:reply animated:YES];
+        } else if (index == 1) {
+            _reverse = YES;
+            [_dataArray removeAllObjects];
+            [self loadData:YES];
+        } else if (index == 2) {
+            
+        }
+    }];
+    
+    
 
-    };
-    reply.tid = self.tid;
-    [self.navigationController pushViewController:reply animated:YES];
     
 }
 

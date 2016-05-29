@@ -80,6 +80,7 @@ fail:
     
     for (NSString *key in parameters) {
         [dataJSON setObject:[self urlencode:[parameters objectForKey:key]] forKey:key];
+//        [dataJSON setObject:[parameters objectForKey:key] forKey:key];
     }
     
     data = [NSJSONSerialization dataWithJSONObject:dataJSON options:0 error:error];

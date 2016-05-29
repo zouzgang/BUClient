@@ -157,7 +157,10 @@ const CGFloat kDetailCellTopPadding = 12;
         }
         
         if (_postDetailModel.attachment) {
+            _attachmentImageView.hidden = NO;
             make.bottom.equalTo(self.contentView).offset(-2 * kDetailCellTopPadding);
+        } else {
+            _attachmentImageView.hidden = YES;
         }
     }];
     

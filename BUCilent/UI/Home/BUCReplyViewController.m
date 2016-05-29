@@ -10,6 +10,7 @@
 #import <Masonry.h>
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
+#import "UIColor+BUC.h"
 
 @implementation BUCReplyViewController {
     UITextView *_textView;
@@ -31,9 +32,18 @@
     [super loadView];
     
     _textView = [[UITextView alloc] init];
+    _textView.layer.backgroundColor = [[UIColor clearColor] CGColor];
+    _textView.layer.borderColor = [[UIColor colorWithHexString:@"#F3F3F3"] CGColor];
+    _textView.layer.borderWidth = 3;
+    _textView.layer.cornerRadius = 8;
+    _textView.layer.masksToBounds = YES;
     [self.view addSubview:_textView];
     
     _button = [UIButton buttonWithType:UIButtonTypeCustom];
+    _button.layer.borderColor =  [[UIColor colorWithHexString:@"#F3F3F3"] CGColor];
+    _button.layer.borderWidth = 3;
+    _button.layer.cornerRadius = 8;
+    _button.layer.masksToBounds = YES;
     [_button setTitle:@"添加附件" forState:UIControlStateNormal];
     _button.titleLabel.font = [UIFont systemFontOfSize:14];
     [_button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -57,6 +67,7 @@
     [_button mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_textView.mas_bottom).offset(12);
         make.left.equalTo(self.view).offset(12);
+        make.size.mas_equalTo(CGSizeMake(100, 44));
     }];
     
     [_imageView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -89,7 +100,7 @@
         parameters[@"message"] = _textView.text;
         parameters[@"attachment"] = _attachmentImage ? @"1" : @"0";
         
-        [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:_attachmentImage onError:^(NSString *text) {
+        [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES onError:^(NSString *text) {
             NSLog(@"reply fail");
         } onSuccess:^(NSDictionary *result) {
             NSLog(@"reply success");

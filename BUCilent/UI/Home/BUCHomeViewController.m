@@ -16,6 +16,7 @@
 #import "BUCFooterView.h"
 
 #import "BUCPostDetailViewController.h"
+#import "UIScrollView+BUCPullToRefresh.h"
 
 
 @interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -66,12 +67,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    __weak BUCHomeViewController *weakSelf = self;
+    [_tableView addPullToRefreshActionHandler:^{
+        NSLog(@"pull to refresh");
+        [weakSelf loadData];
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self loadData];
+
 }
 
 #pragma mark - UITableViewDataSource
