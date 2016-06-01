@@ -96,6 +96,7 @@ const CGFloat kDetailCellTopPadding = 12;
     [self.contentView addSubview:_separatorLine];
     
     _attachmentImageView = [[UIImageView alloc] init];
+    _attachmentImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_attachmentImageView];
     
     [self updateConstraints];
@@ -235,24 +236,26 @@ const CGFloat kDetailCellTopPadding = 12;
     
     [_avatarImageView sd_setImageWithURL:[[BUCHtmlScraper sharedInstance] avatarUrlFromHtml:[self urldecode:_postDetailModel.avatar]] placeholderImage:[UIImage imageNamed:@"avatar"]];
     
-    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:_atttibutedString];
-    [_atttibutedString enumerateAttributesInRange:NSMakeRange(0, _atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
-        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
-        if (attachment) {
-            UIImageView *imageView = [[UIImageView alloc] init];
-            imageView.bounds =  attachment.bounds;
-            
-            [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
-                attachment.image = image;
-                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
-                _contentTextView.attributedText = resultString;
-            }];
-        } else {
-           _contentTextView.attributedText = _atttibutedString;
-        }
-        
-    }];
+    _contentTextView.attributedText = _atttibutedString;
+    
+//    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:_atttibutedString];
+//    [_atttibutedString enumerateAttributesInRange:NSMakeRange(0, _atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
+//        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
+//        if (attachment) {
+//            UIImageView *imageView = [[UIImageView alloc] init];
+//            imageView.bounds =  attachment.bounds;
+//            
+//            [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
+//                attachment.image = image;
+//                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+//                _contentTextView.attributedText = resultString;
+//            }];
+//        } else {
+//           _contentTextView.attributedText = _atttibutedString;
+//        }
+//        
+//    }];
     
     _countLabel.text = [NSString stringWithFormat:@"#%ld",(long)_count];
     

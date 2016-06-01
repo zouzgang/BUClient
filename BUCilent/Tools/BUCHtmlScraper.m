@@ -10,6 +10,7 @@
 #include "TFHpple.h"
 #import "BUCTextAttachment.h"
 #import "UIColor+BUC.h"
+#import "UIImage+BUCImage.h"
 
 #define kMessageTextFont   [UIFont systemFontOfSize:16]
 
@@ -156,19 +157,30 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     }
     //todo
         if ([tagName isEqualToString:@"img"]) {
-//            NSLog(@"node img:%@",node);
             NSString *src = [node objectForKey:@"src"];
-            if ([src containsString:@"gif"])
+             NSLog(@"src =      %@", src);
+            
+            if (!src || src.length == 0)
                 return;
             
-            //表情 todo
-            BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
-            attachment.url = [self parseImageUrl:src];
-//            attachment.url = [NSURL URLWithString:@"https://media.licdn.com/mpr/mprx/0_DjKFeM6BTIAbmxgI70_NeVbFidbWCxSI7xkZeV5bp7PMgRswTR8I6sAWDXFn3ZuF2OtJbgcumwNW"];
-            attachment.bounds = CGRectMake(0, 0, 100, 100);
+            NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+            NSString *path = [NSString stringWithFormat:@"%@/%@", resourcePath, [src lastPathComponent]/*[src substringFromIndex:3]*/];
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:path] size:CGSizeZero];
             
+            if (!image)
+                return;
+            
+            BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
+            if (image.size.width <= 20.0f) {
+                attachment.bounds = CGRectMake(0, 0, 25, 25);
+            } else {
+                attachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+            }
+            attachment.image = image;
             [output appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
-            [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+            
+            //url todo
 
             return;
         }
@@ -235,7 +247,7 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
         [attributes setObject:[UIColor colorWithHexString:@"#F3F3F3"] forKey:NSBackgroundColorAttributeName];
         [attributes setObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
         paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-        paragraphStyle.lineSpacing = 10;
+        paragraphStyle.lineSpacing = 5;
         paragraphStyle.minimumLineHeight = size + 5;
         paragraphStyle.maximumLineHeight = size + 5;
         [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];

@@ -57,7 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *path = [[NSBundle mainBundle]pathForResource:@"BITFavoriteList.plist" ofType:nil];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"BITFavoriteList.plist" ofType:nil];
     _forumList = [NSMutableArray arrayWithContentsOfFile:path];
 }
 

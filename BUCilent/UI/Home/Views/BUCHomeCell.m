@@ -139,6 +139,7 @@ const CGFloat kTopPadding = 12;
         _timeLabel.text = [self urldecode:homeModel.lastRelpyDict[@"when"]];
         _contentLabel.text = [self urldecode:homeModel.lastRelpyDict[@"what"]];
         _forumLabel.text = [self urldecode:homeModel.fname];
+        _authorLabel.text = [self urldecode:homeModel.author];
         [self updateConstraints];
     }
 }

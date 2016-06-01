@@ -100,21 +100,11 @@ const NSInteger kForumListPageSize = 20;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BUCForumModel *forumModel = ((BUCForumModel *)_dataArray[indexPath.row]);
     
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    [parameters setObject:forumModel.tid forKey:@"tid"];
-    [parameters setObject:[BUCDataManager sharedInstance].username forKey:@"username"];
-    parameters[@"session"] = [BUCDataManager sharedInstance].session;
-    
-    
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiTidOrFid] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
-        
-    } onSuccess:^(NSDictionary *result) {
-        BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
-        detail.tid = forumModel.tid;
-        detail.tidSum = result[@"tid_sum"];
-        detail.postTitle = forumModel.subject;
-        [self.navigationController pushViewController:detail animated:YES];
-    }];
+    BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
+    detail.tid = forumModel.tid;
+    detail.tidSum = @(forumModel.replies.integerValue);
+    detail.postTitle = forumModel.subject;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 #pragma mark - UIScroviewDelegate

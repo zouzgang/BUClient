@@ -183,7 +183,8 @@ const NSInteger kPageSize = 20;
 #pragma mark - Action
 - (void)didReplyButtonClicked {
     CPEventFilterView *filterView = [[CPEventFilterView alloc] init];
-    [filterView showInView:self.tabBarController.view titles:@[@"回复", @"倒序", [BUCBookTool hasItemFileID:self.tid] ? @"取消收藏": @"收藏"] completehandler:^(NSInteger index) {
+    NSLog(@"self.view:%@",self.view);
+    [filterView showInView:self.view titles:@[@"回复", @"倒序", @"todo"/*[BUCBookTool hasItemFileID:self.tid] ? @"取消收藏": @"收藏"*/] completehandler:^(NSInteger index) {
         if (index == 0) {
             //reply atuhor
             BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
