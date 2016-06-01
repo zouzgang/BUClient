@@ -140,7 +140,7 @@ const NSInteger kForumListPageSize = 20;
     
     
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiThread] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiThread] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"forum list success");

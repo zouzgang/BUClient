@@ -135,7 +135,7 @@ const NSInteger kPageSize = 20;
     }
 
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"detail success");

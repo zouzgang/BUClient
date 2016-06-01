@@ -28,7 +28,6 @@ NSString *const kLPNetworkRequestShowEmptyPageWhenError = @"kLPNetworkRequestSho
     return [NSString stringWithFormat:@"%@%@", [self baseURL], requestURL];
 }
 
-
 + (NSString *)baseURL {
     return @"http://out.bitunion.org";
 #ifdef DEBUG

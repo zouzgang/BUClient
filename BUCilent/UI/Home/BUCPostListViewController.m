@@ -125,17 +125,13 @@ const NSInteger kPostListPageSize = 20;
     parameters[@"to"] = ((_page + 1) * kPostListPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",(_page + 1) * kPostListPageSize] : [NSString stringWithFormat:@"%ld", (long)_dataArray.totalSize];
     
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"detail success");
         self.navigationItem.rightBarButtonItem.enabled = YES;
         NSArray *array = [MTLJSONAdapter modelsOfClass:BUCPostDetailModel.class fromJSONArray:[result objectForKey:@"postlist"] error:Nil];
-        
          [_dataArray addObjectsFromArray:array];
-        
-//        _page += 1;
-//        _dataArray.page = _page;
     
         _tableView.tableFooterView.hidden = YES;
         [_footerView stopAnimation];

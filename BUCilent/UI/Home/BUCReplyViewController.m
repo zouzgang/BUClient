@@ -100,7 +100,7 @@
         parameters[@"message"] = _textView.text;
         parameters[@"attachment"] = _attachmentImage ? @"1" : @"0";
         
-        [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES onError:^(NSString *text) {
+        [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES configure:nil onError:^(NSString *text) {
             NSLog(@"reply fail");
         } onSuccess:^(NSDictionary *result) {
             NSLog(@"reply success");

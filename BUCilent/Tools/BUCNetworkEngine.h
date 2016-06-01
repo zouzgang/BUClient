@@ -20,15 +20,6 @@ typedef void(^BUCVoidBlock)(void);
 
 @interface BUCNetworkEngine : NSObject
 
-- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
-
-
-//- (AFHTTPRequestOperation *)POST:(NSString *)URLString
-//                     parameters:(NSDictionary *)parameters
-//               startImmediately:(BOOL)startImmediately
-//           configurationHandler:(LPNetworkRequestConfigurationHandler)configurationHandler
-//              completionHandler:(LPNetworkRequestCompletionHandler)completionHandler {
-//    return [self requestOperationWithMethod:LPNetworkRequestMethodGet URLString:URLString parameters:parameters startImmediately:startImmediately constructingBodyWithBlock:nil configurationHandler:configurationHandler completionHandler:completionHandler];
-//}
+- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
 
 @end

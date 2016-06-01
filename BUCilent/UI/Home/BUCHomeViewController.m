@@ -124,7 +124,7 @@
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
     parameters[@"session"] = [BUCDataManager sharedInstance].session;
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiHome] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiHome] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         _pullDown = NO;
         
     } onSuccess:^(NSDictionary *result) {

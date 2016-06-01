@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BUCNetworkEngine.h"
+extern NSString *const kShowLoadingViewWhenNetwork;
 
 @interface BUCDataManager : NSObject
 
@@ -17,6 +18,6 @@
 
 + (BUCDataManager *)sharedInstance;
 
-- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
+- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
 
 @end

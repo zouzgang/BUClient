@@ -18,49 +18,33 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupDefault];
         [self setupViews];
     }
     return self;
-}
-
-- (void)setupDefault {
-    _loadingText = @"加载中......";
 }
 
 - (void)setupViews {
     self.hidden = YES;
     
     _backgroudView = [[UIView alloc] init];
-    _backgroudView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6];
+    _backgroudView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8];
+    _backgroudView.layer.cornerRadius = 4;
+    _backgroudView.layer.masksToBounds = YES;
     [self addSubview:_backgroudView];
-    
-    _nameLabel = [[UILabel alloc] init];
-    _nameLabel.text = _loadingText;
-    [_backgroudView addSubview:_nameLabel];
     
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [_backgroudView addSubview:_indicatorView];
-    
 }
 
 - (void)updateConstraints {
     [_backgroudView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self);
-        make.left.right.equalTo(self);
-        make.bottom.equalTo(self);
+        make.center.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(80, 80));
     }];
-    
-    [_nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_backgroudView.mas_top).offset(80);
-        make.centerX.equalTo(_backgroudView.mas_centerX);
-        make.bottom.equalTo(_backgroudView.mas_bottom);
-    }];
-    
     [_indicatorView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_nameLabel.mas_bottom).offset(12);
+        make.centerY.equalTo(_backgroudView.mas_centerY);
         make.centerX.equalTo(_backgroudView.mas_centerX);
-        make.right.equalTo(_backgroudView.mas_right);
+        make.size.mas_equalTo(CGSizeMake(60, 60));
     }];
     
     [super updateConstraints];
@@ -77,15 +61,6 @@
     self.hidden = YES;
 }
 
-
-#pragma mark - Accessor
-- (void)setLoadingText:(NSString *)loadingText {
-    _loadingText = loadingText;
-    if (_loadingText) {
-        _nameLabel.text = _loadingText;
-        [self updateConstraints];
-    }
-}
 
 
 

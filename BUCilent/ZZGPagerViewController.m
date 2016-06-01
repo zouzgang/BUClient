@@ -64,8 +64,6 @@
     [_pageBar reloadViews];
     [self.view addSubview:_pageBar];
     
-    NSLog(@"_pageBar %@",_pageBar);
-    
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(_pageBar.frame)) collectionViewLayout:_flowLayout];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
@@ -79,7 +77,6 @@
     _collectionView.contentSize = CGSizeMake(_titles.count * self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(_pageBar.frame) - 64/* - 60*/);
     [self.view addSubview:_collectionView];
     
-    NSLog(@"_collectionView %@",_collectionView);
 }
 
 - (void)viewDidLoad {

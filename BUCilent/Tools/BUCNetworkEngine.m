@@ -31,7 +31,7 @@
 
 
 #pragma mark - Public Methods
-- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
     NSError *error;
     NSURLRequest *request = [self requestWithAPI:URLString parameters:parameters attachment:attachment isForm:isForm error:&error];
     if (!request) {

@@ -93,7 +93,7 @@
     parameters[@"session"] = [BUCDataManager sharedInstance].session;
     
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiTidOrFid] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiTidOrFid] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];

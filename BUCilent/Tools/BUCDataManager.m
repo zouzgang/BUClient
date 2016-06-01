@@ -9,7 +9,9 @@
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
 #import "BUCUserManager.h"
+#import "BUCLoadingView.h"
 
+NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
 
 @implementation BUCDataManager {
     BUCNetworkEngine *_networkEngine;
@@ -35,8 +37,24 @@
 
 
 #pragma mark - Public Methods 
-- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
-    [self request:URLString parameters:parameters attachment:attachment isForm:isForm count:0 onError:errorBlcok onSuccess:result];
+- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+    [self request:URLString parameters:parameters attachment:attachment isForm:isForm count:0 configure:configInfo onError:errorBlcok onSuccess:result];
+    
+    if (configInfo) {
+        if (configInfo[kShowLoadingViewWhenNetwork]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+                BUCLoadingView *loadingView = [[BUCLoadingView alloc] initWithFrame:CGRectMake(0, 0, keyWindow.bounds.size.width, keyWindow.bounds.size.height)];
+                [loadingView startAnimation];
+                loadingView.tag = -999;
+                [keyWindow addSubview:loadingView];
+                [keyWindow bringSubviewToFront:loadingView];
+                
+                NSLog(@"in loadview%@", loadingView);
+            });
+
+        }
+    }
 }
 
 
@@ -52,7 +70,7 @@
     [json setObject:username forKey:@"username"];
     [json setObject:@"login" forKey:@"action"];
     
-    [self request:[BUCNetworkAPI requestURL:kApiLogin] parameters:json attachment:nil isForm:NO count:0 onError:errorBlock onSuccess:^(NSDictionary *result) {
+    [self request:[BUCNetworkAPI requestURL:kApiLogin] parameters:json attachment:nil isForm:NO count:0 configure:nil onError:errorBlock onSuccess:^(NSDictionary *result) {
         self.username = [result objectForKey:@"username"];
         self.session = [result objectForKey:@"session"];
         voidBlock();
@@ -60,14 +78,27 @@
 
 }
 
-- (void)request:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm count:(NSInteger)count onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
-    [_networkEngine POST:URLString parameters:parameters attachment:attachment isForm:isForm onError:errorBlcok onSuccess:^(NSDictionary *resultBlock) {
+- (void)request:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm count:(NSInteger)count configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+    [_networkEngine POST:URLString parameters:parameters attachment:attachment isForm:isForm configure:configInfo onError:errorBlcok onSuccess:^(NSDictionary *resultBlock) {
         if ([[resultBlock objectForKey:@"result"] isEqualToString:@"success"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([URLString isEqualToString:[BUCNetworkAPI requestURL:kApiLogin]]) {
                     self.username = [resultBlock objectForKey:@"username"];
                     self.session = [resultBlock objectForKey:@"session"];
                 }
+                
+                if (configInfo) {
+                    if (configInfo[kShowLoadingViewWhenNetwork]) {
+                        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+
+                        UIView *loadView = [keyWindow viewWithTag:-999];
+                        NSLog(@"back loadview%@", loadView);
+                        if (loadView) {
+                            [loadView removeFromSuperview];
+                        }
+                    }
+                }
+                
                 result(resultBlock);
             });
         } else if ([[resultBlock objectForKey:@"result"] isEqualToString:@"fail"]) {
@@ -76,7 +107,7 @@
             if ([msg isEqualToString:@"IP+logged"] && count <= 1) {
                 
                 [self updateSessionOnError:errorBlcok onSuccess:^{
-                    [self request:URLString parameters:parameters attachment:attachment isForm:isForm count:count + 1 onError:errorBlcok onSuccess:result];
+                    [self request:URLString parameters:parameters attachment:attachment isForm:isForm count:count + 1 configure:configInfo onError:errorBlcok onSuccess:result];
                 }];
                 
             } else if ([msg isEqualToString:@"thread_nopermission"]) {

@@ -42,8 +42,6 @@
 - (void)loadView {
     [super loadView];
     
-    NSLog(@"self.view %@",self.view);
-
     _pagerViewController = [[ZZGPagerViewController alloc] init];
     _pagerViewController.dataSource = self;
     _pagerViewController.delegate = self;

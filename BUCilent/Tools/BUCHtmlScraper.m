@@ -265,23 +265,6 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
 
 
 
-//- (void)appendCodeNode:(TFHppleElement *)codeNode output:(NSMutableAttributedString *)output superAttributes:(NSDictionary *)superAttributes {
-//    
-//    if (!codeNode.children || codeNode.children.count == 0) {
-//        return;
-//    }
-//    
-//    for (TFHppleElement *node in codeNode.children) {
-//        if ([node.tagName isEqualToString:@"br"] || [node.tagName isEqualToString:@"span"]) {
-//            continue;
-//        }
-//        
-//        [self appendNode:node output:output superAttributes:superAttributes];
-//        [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:superAttributes]];
-//    }
-//}
-
-
 
 
 

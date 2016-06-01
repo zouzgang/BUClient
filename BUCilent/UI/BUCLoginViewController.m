@@ -138,7 +138,7 @@
     [defaults setObject:password forKey:@"password"];
     [defaults synchronize];
 
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiLogin] parameters:parameters attachment:nil isForm:NO onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiLogin] parameters:parameters attachment:nil isForm:NO configure:nil  onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"login success");

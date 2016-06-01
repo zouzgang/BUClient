@@ -10,8 +10,6 @@
 
 @interface BUCLoadingView : UIView
 
-@property (nonatomic, copy) NSString *loadingText;
-
 - (void)startAnimation;
 - (void)stopAnimation;
 

@@ -162,10 +162,10 @@ const CGFloat kDetailCellTopPadding = 12;
     [_attachmentImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(_contentTextView.mas_bottom).offset(kDetailCellTopPadding / 2);
-        if (_attachmentImageView.image.size.height < 150) {
+        if (_attachmentImageView.image.size.height < 250) {
             make.size.mas_equalTo(_attachmentImageView.image.size);
         } else {
-            make.size.mas_equalTo(CGSizeMake(150, 150));
+            make.size.mas_equalTo(CGSizeMake(250, 250));
         }
         
         if (_postDetailModel.attachment) {
@@ -183,7 +183,7 @@ const CGFloat kDetailCellTopPadding = 12;
     [self layoutIfNeeded];
     CGFloat height;
     if (_postDetailModel.attachment) {
-        height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2 + kDetailCellTopPadding / 2 + ((_attachmentImageView.image.size.height < 150) ? _attachmentImageView.image.size.height : 150);
+        height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2 + kDetailCellTopPadding / 2 + ((_attachmentImageView.image.size.height < 250) ? _attachmentImageView.image.size.height : 250);
     } else {
         height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2;
     }
