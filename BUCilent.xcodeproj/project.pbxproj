@@ -588,6 +588,12 @@
 		4906ED721CFDF42F00B1D5AA /* tongue.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4906EB2F1CFDF42F00B1D5AA /* tongue.gif */; };
 		4906ED731CFDF42F00B1D5AA /* wink.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4906EB301CFDF42F00B1D5AA /* wink.gif */; };
 		4906ED7C1CFE99DE00B1D5AA /* UIImage+BUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906ED7B1CFE99DE00B1D5AA /* UIImage+BUCImage.m */; };
+		4906ED7F1CFEB80800B1D5AA /* ZZGTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906ED7E1CFEB80800B1D5AA /* ZZGTabBar.m */; };
+		4906ED881CFEB85100B1D5AA /* ZZGFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906ED821CFEB85100B1D5AA /* ZZGFlowLayout.m */; };
+		4906ED891CFEB85100B1D5AA /* ZZGPagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906ED841CFEB85100B1D5AA /* ZZGPagerViewController.m */; };
+		4906ED8A1CFEB85100B1D5AA /* ZZGCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906ED861CFEB85100B1D5AA /* ZZGCollectionViewCell.m */; };
+		4906ED901CFEB90300B1D5AA /* BUCPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906ED8F1CFEB90300B1D5AA /* BUCPostViewController.m */; };
+		4906ED931CFEBFAD00B1D5AA /* BUCPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906ED921CFEBFAD00B1D5AA /* BUCPostListViewController.m */; };
 		490B39BA1CF9993700578E9E /* BUCTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39B91CF9993700578E9E /* BUCTextAttachment.m */; };
 		490B39BD1CF9D7D000578E9E /* CPEventFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39BC1CF9D7D000578E9E /* CPEventFilterView.m */; };
 		490B39C01CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39BF1CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m */; };
@@ -1239,6 +1245,18 @@
 		4906EB301CFDF42F00B1D5AA /* wink.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = wink.gif; sourceTree = "<group>"; };
 		4906ED7A1CFE99DE00B1D5AA /* UIImage+BUCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BUCImage.h"; sourceTree = "<group>"; };
 		4906ED7B1CFE99DE00B1D5AA /* UIImage+BUCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BUCImage.m"; sourceTree = "<group>"; };
+		4906ED7D1CFEB80800B1D5AA /* ZZGTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZGTabBar.h; sourceTree = "<group>"; };
+		4906ED7E1CFEB80800B1D5AA /* ZZGTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZGTabBar.m; sourceTree = "<group>"; };
+		4906ED821CFEB85100B1D5AA /* ZZGFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZGFlowLayout.m; sourceTree = "<group>"; };
+		4906ED831CFEB85100B1D5AA /* ZZGPagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZGPagerViewController.h; sourceTree = "<group>"; };
+		4906ED841CFEB85100B1D5AA /* ZZGPagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZGPagerViewController.m; sourceTree = "<group>"; };
+		4906ED851CFEB85100B1D5AA /* ZZGCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZGCollectionViewCell.h; sourceTree = "<group>"; };
+		4906ED861CFEB85100B1D5AA /* ZZGCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZGCollectionViewCell.m; sourceTree = "<group>"; };
+		4906ED871CFEB85100B1D5AA /* ZZGFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZGFlowLayout.h; sourceTree = "<group>"; };
+		4906ED8E1CFEB90300B1D5AA /* BUCPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCPostViewController.h; path = UI/Home/BUCPostViewController.h; sourceTree = "<group>"; };
+		4906ED8F1CFEB90300B1D5AA /* BUCPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCPostViewController.m; path = UI/Home/BUCPostViewController.m; sourceTree = "<group>"; };
+		4906ED911CFEBFAD00B1D5AA /* BUCPostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCPostListViewController.h; path = UI/Home/BUCPostListViewController.h; sourceTree = "<group>"; };
+		4906ED921CFEBFAD00B1D5AA /* BUCPostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCPostListViewController.m; path = UI/Home/BUCPostListViewController.m; sourceTree = "<group>"; };
 		490B39B81CF9993700578E9E /* BUCTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCTextAttachment.h; sourceTree = "<group>"; };
 		490B39B91CF9993700578E9E /* BUCTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCTextAttachment.m; sourceTree = "<group>"; };
 		490B39BB1CF9D7D000578E9E /* CPEventFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEventFilterView.h; sourceTree = "<group>"; };
@@ -1978,6 +1996,29 @@
 			path = smilies;
 			sourceTree = "<group>";
 		};
+		4906ED801CFEB81100B1D5AA /* ZZG */ = {
+			isa = PBXGroup;
+			children = (
+				4906ED811CFEB83000B1D5AA /* ViewPager */,
+			);
+			name = ZZG;
+			sourceTree = "<group>";
+		};
+		4906ED811CFEB83000B1D5AA /* ViewPager */ = {
+			isa = PBXGroup;
+			children = (
+				4906ED831CFEB85100B1D5AA /* ZZGPagerViewController.h */,
+				4906ED841CFEB85100B1D5AA /* ZZGPagerViewController.m */,
+				4906ED851CFEB85100B1D5AA /* ZZGCollectionViewCell.h */,
+				4906ED861CFEB85100B1D5AA /* ZZGCollectionViewCell.m */,
+				4906ED871CFEB85100B1D5AA /* ZZGFlowLayout.h */,
+				4906ED821CFEB85100B1D5AA /* ZZGFlowLayout.m */,
+				4906ED7D1CFEB80800B1D5AA /* ZZGTabBar.h */,
+				4906ED7E1CFEB80800B1D5AA /* ZZGTabBar.m */,
+			);
+			name = ViewPager;
+			sourceTree = "<group>";
+		};
 		490B39D21CFB094F00578E9E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2016,6 +2057,7 @@
 				49DA90EA1CDF8F5100B8787B /* AppDelegate.m */,
 				49DA91201CDF91AA00B8787B /* Tools */,
 				49DA914D1CDFA41700B8787B /* Category */,
+				4906ED801CFEB81100B1D5AA /* ZZG */,
 				49DA911C1CDF915200B8787B /* Base */,
 				49DA91571CDFAE3F00B8787B /* Model */,
 				49DA91241CDF92C000B8787B /* UI */,
@@ -2116,6 +2158,10 @@
 				49DA91651CE0803800B8787B /* BUCPostDetailViewController.m */,
 				49DA91821CE0F61800B8787B /* BUCReplyViewController.h */,
 				49DA91831CE0F61800B8787B /* BUCReplyViewController.m */,
+				4906ED8E1CFEB90300B1D5AA /* BUCPostViewController.h */,
+				4906ED8F1CFEB90300B1D5AA /* BUCPostViewController.m */,
+				4906ED911CFEBFAD00B1D5AA /* BUCPostListViewController.h */,
+				4906ED921CFEBFAD00B1D5AA /* BUCPostListViewController.m */,
 				49DA913E1CDF94B100B8787B /* Views */,
 			);
 			name = Home;
@@ -2990,10 +3036,14 @@
 				49DA91781CE0889A00B8787B /* TFHppleElement.m in Sources */,
 				49DA91561CDFAE3B00B8787B /* BUCBaseModel.m in Sources */,
 				49DA91691CE0807E00B8787B /* BUCPostDetailCell.m in Sources */,
+				4906ED881CFEB85100B1D5AA /* ZZGFlowLayout.m in Sources */,
 				49DA914C1CDFA41300B8787B /* NSString+Tools.m in Sources */,
 				49DA915D1CE06D0200B8787B /* BUCHomeModel.m in Sources */,
+				4906ED7F1CFEB80800B1D5AA /* ZZGTabBar.m in Sources */,
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
+				4906ED891CFEB85100B1D5AA /* ZZGPagerViewController.m in Sources */,
 				49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */,
+				4906ED8A1CFEB85100B1D5AA /* ZZGCollectionViewCell.m in Sources */,
 				49DA91661CE0803800B8787B /* BUCPostDetailViewController.m in Sources */,
 				49DA917E1CE0E35E00B8787B /* BUCArray.m in Sources */,
 				49DA91791CE0889A00B8787B /* XPathQuery.m in Sources */,
@@ -3004,6 +3054,7 @@
 				490B39C01CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m in Sources */,
 				49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */,
 				490B39C81CFADCBE00578E9E /* BUCBookModel.m in Sources */,
+				4906ED901CFEB90300B1D5AA /* BUCPostViewController.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
 				49DA91841CE0F61800B8787B /* BUCReplyViewController.m in Sources */,
 				490B39D81CFB0B7300578E9E /* BUCForumListViewController.m in Sources */,
@@ -3016,6 +3067,7 @@
 				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
 				490B39D11CFB094C00578E9E /* BUCForumCell.m in Sources */,
 				49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */,
+				4906ED931CFEBFAD00B1D5AA /* BUCPostListViewController.m in Sources */,
 				490B39CE1CFAE78800578E9E /* BUCStringTool.m in Sources */,
 				49DA91811CE0EF8C00B8787B /* BUCFooterView.m in Sources */,
 			);

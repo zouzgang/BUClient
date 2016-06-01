@@ -158,7 +158,7 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     //todo
         if ([tagName isEqualToString:@"img"]) {
             NSString *src = [node objectForKey:@"src"];
-             NSLog(@"src =      %@", src);
+//             NSLog(@"src =      %@", src);
             
             if (!src || src.length == 0)
                 return;

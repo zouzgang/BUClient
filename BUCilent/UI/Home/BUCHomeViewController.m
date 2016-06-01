@@ -17,7 +17,7 @@
 
 #import "BUCPostDetailViewController.h"
 #import "UIScrollView+BUCPullToRefresh.h"
-
+#import "BUCPostViewController.h"
 
 @interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -104,10 +104,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    /*
     BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
     detail.tid = _dataArray[indexPath.row].tid;
     detail.tidSum = _dataArray[indexPath.row].tidSum;
     detail.postTitle = _dataArray[indexPath.row].pname;
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
+     */
+    
+    BUCPostViewController *detail = [[BUCPostViewController alloc] initWithPostTitle:_dataArray[indexPath.row].pname tid:_dataArray[indexPath.row].tid tidSum:_dataArray[indexPath.row].tidSum];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
