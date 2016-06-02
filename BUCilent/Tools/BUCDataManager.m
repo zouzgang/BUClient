@@ -9,7 +9,8 @@
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
 #import "BUCUserManager.h"
-#import "BUCLoadingView.h"
+//#import "BUCLoadingView.h"
+#import "BUCNetworkUIConfig.h"
 
 NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
 
@@ -42,17 +43,7 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
     
     if (configInfo) {
         if (configInfo[kShowLoadingViewWhenNetwork]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-                BUCLoadingView *loadingView = [[BUCLoadingView alloc] initWithFrame:CGRectMake(0, 0, keyWindow.bounds.size.width, keyWindow.bounds.size.height)];
-                [loadingView startAnimation];
-                loadingView.tag = -999;
-                [keyWindow addSubview:loadingView];
-                [keyWindow bringSubviewToFront:loadingView];
-                
-                NSLog(@"in loadview%@", loadingView);
-            });
-
+            [BUCNetworkUIConfig disPlayLoadingView];
         }
     }
 }
@@ -89,23 +80,18 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
                 
                 if (configInfo) {
                     if (configInfo[kShowLoadingViewWhenNetwork]) {
-                        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-
-                        UIView *loadView = [keyWindow viewWithTag:-999];
-                        NSLog(@"back loadview%@", loadView);
-                        if (loadView) {
-                            [loadView removeFromSuperview];
-                        }
+                        [BUCNetworkUIConfig disMissLoadingView];
                     }
                 }
                 
                 result(resultBlock);
             });
         } else if ([[resultBlock objectForKey:@"result"] isEqualToString:@"fail"]) {
+           [BUCNetworkUIConfig disMissLoadingView];
+            
             NSString *msg = [resultBlock objectForKey:@"msg"];
             NSLog(@"ERROR:%@ COUNT:%ld URL:%@", msg, (long)count, URLString);
             if ([msg isEqualToString:@"IP+logged"] && count <= 1) {
-                
                 [self updateSessionOnError:errorBlcok onSuccess:^{
                     [self request:URLString parameters:parameters attachment:attachment isForm:isForm count:count + 1 configure:configInfo onError:errorBlcok onSuccess:result];
                 }];

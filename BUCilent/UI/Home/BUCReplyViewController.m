@@ -12,6 +12,10 @@
 #import "BUCNetworkAPI.h"
 #import "UIColor+BUC.h"
 
+@interface BUCReplyViewController () <UITextViewDelegate>
+
+@end
+
 @implementation BUCReplyViewController {
     UITextView *_textView;
     UIButton *_button;
@@ -32,6 +36,8 @@
     [super loadView];
     
     _textView = [[UITextView alloc] init];
+    _textView.delegate = self;
+    _textView.font = [UIFont systemFontOfSize:16];
     _textView.layer.backgroundColor = [[UIColor clearColor] CGColor];
     _textView.layer.borderColor = [[UIColor colorWithHexString:@"#F3F3F3"] CGColor];
     _textView.layer.borderWidth = 3;
@@ -83,12 +89,23 @@
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didNaviRightButtonClick)];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+}
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidChange:(UITextView *)textView {
+    if (![textView.text isEqualToString:@""]) {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
 }
 
 
 #pragma mark - action
 - (void)didNaviRightButtonClick {
     // reply
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     if (_textView.text && ![_textView.text isEqualToString:@""]) {
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         
@@ -102,6 +119,7 @@
         
         [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES configure:nil onError:^(NSString *text) {
             NSLog(@"reply fail");
+            self.navigationItem.rightBarButtonItem.enabled = YES;
         } onSuccess:^(NSDictionary *result) {
             NSLog(@"reply success");
             if (self.completBlock) {

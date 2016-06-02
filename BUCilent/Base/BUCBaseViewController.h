@@ -10,4 +10,9 @@
 
 @interface BUCBaseViewController : UIViewController
 
+@property (nonatomic, strong) UIButton *networkButton;
+
+- (void)displayNetworkErrorButton;
+
+
 @end

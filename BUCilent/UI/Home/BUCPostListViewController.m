@@ -74,8 +74,7 @@ const NSInteger kPostListPageSize = 20;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"self.view %@",self.view);
+
     [self loadData];
 }
 
@@ -126,7 +125,8 @@ const NSInteger kPostListPageSize = 20;
     
     
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
-        
+        self.networkButton.hidden = NO;
+        [self.view bringSubviewToFront:self.networkButton];
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"detail success");
         self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -139,6 +139,12 @@ const NSInteger kPostListPageSize = 20;
         
     }];
 }
+
+#pragma mark - Override
+- (void)displayNetworkErrorButton {
+    NSLog(@"network error");
+}
+
 
 
 

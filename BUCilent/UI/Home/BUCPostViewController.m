@@ -9,7 +9,8 @@
 #import "BUCPostViewController.h"
 #import "ZZGPagerViewController.h"
 #import "BUCPostListViewController.h"
-
+#import "BUCReplyViewController.h"
+#import "BUCBookTool.h"
 
 @interface BUCPostViewController () <ZZGPagerViewControllerDataSource, ZZGPagerViewControllerDelegate>
 
@@ -56,11 +57,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *star;
+     star = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star"] style:UIBarButtonItemStylePlain target:self action:@selector(didBookmarkClick:)];
+//    if ([BUCBookTool hasItemFileID:self.tid]) {
+//        star = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filled_star"] style:UIBarButtonItemStylePlain target:self action:@selector(didBookmarkClick:)];
+//    } else {
+//        star = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star"] style:UIBarButtonItemStylePlain target:self action:@selector(didBookmarkClick:)];
+//    }
+    
+    UIBarButtonItem *reply = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(didReplyClick)];
+    
+    self.navigationItem.rightBarButtonItems = @[reply, star];
 }
 
 #pragma mark - ZZGPagerViewControllerDelegate
 - (void)pagerViewController:(ZZGPagerViewController *)pagerViewController didSelectTabAtIndex:(NSUInteger)index {
-    NSLog(@"didselect index :%d",index);
 }
 
 
@@ -82,6 +94,27 @@
     
     return postList;
 }
+
+#pragma mark - Action
+- (void)didBookmarkClick:(UIBarButtonItem *)star {
+//    if ([BUCBookTool hasItemFileID:self.tid]) {
+//        star.image = [UIImage imageNamed:@"filled_star"];
+//    } else {
+//        star.image = [UIImage imageNamed:@"star"];
+//    }
+//    [BUCBookTool bookPost:self.tid title:self.postTitle];
+}
+
+- (void)didReplyClick {
+    BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
+    reply.completBlock = ^(NSString *content, UIImage *attachment) {
+        
+    };
+    reply.tid = self.tid;
+    [self.navigationController pushViewController:reply animated:NO];
+
+}
+
 
 
 

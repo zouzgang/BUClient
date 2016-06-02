@@ -7,7 +7,6 @@
 //
 
 #import "BUCLoginViewController.h"
-#import "BUCLoadingView.h"
 #import <Masonry.h>
 #import "NSString+Tools.h"
 #import "BUCDataManager.h"
@@ -23,7 +22,6 @@
     UITextField *_usernameTextField;
     UITextField *_passwordTextField;
     UIButton *_loginButton;
-    BUCLoadingView *_loadingView;
 }
 
 #pragma mark - UIViewController
@@ -61,10 +59,6 @@
     [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
     [_loginButton addTarget:self action:@selector(didLoginButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_loginButton];
-    
-    
-    _loadingView = [[BUCLoadingView alloc] init];
-    [self.view addSubview:_loadingView];
 
     [self updateViewConstraints];
 }
@@ -91,11 +85,6 @@
         make.width.mas_equalTo(100);
     }];
     
-    [_loadingView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(self.view.frame.size.width, self.view.frame.size.height));
-    }];
-    
     [super updateViewConstraints];
 }
 
@@ -106,6 +95,8 @@
     NSString *username = [defaults stringForKey:@"username"];
     NSString *password = [defaults stringForKey:@"password"];
     if (username && password) {
+        _usernameTextField.text = username;
+        _passwordTextField.text = password;
         [self loginWithUsername:username password:password];
     }
     
@@ -126,7 +117,6 @@
 
 #pragma mark - API
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password {
-    [self displayLoginView];
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     [parameters setObject:@"login" forKey:@"action"];
@@ -138,7 +128,7 @@
     [defaults setObject:password forKey:@"password"];
     [defaults synchronize];
 
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiLogin] parameters:parameters attachment:nil isForm:NO configure:nil  onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiLogin] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES}  onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"login success");
@@ -147,19 +137,6 @@
         [delagte.window makeKeyAndVisible];
     }];
     
-}
-
-#pragma  mark - Private Methods
-- (void)displayLoginView {
-    _loadingView.hidden = NO;
-    [_loadingView startAnimation];
-    [self.view endEditing:YES];
-    [self.view bringSubviewToFront:_loadingView];
-}
-
-- (void)hideLoginView {
-    [_loadingView stopAnimation];
-    _loadingView.hidden = YES;
 }
 
 @end
