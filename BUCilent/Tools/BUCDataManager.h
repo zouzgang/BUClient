@@ -18,6 +18,6 @@ extern NSString *const kShowLoadingViewWhenNetwork;
 
 + (BUCDataManager *)sharedInstance;
 
-- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
+- (void)POST:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
 
 @end

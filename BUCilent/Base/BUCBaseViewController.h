@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UIButton *networkButton;
 
-- (void)displayNetworkErrorButton;
+- (void)dealNetworkError;
 
 
 @end

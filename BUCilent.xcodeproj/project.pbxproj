@@ -607,6 +607,7 @@
 		490B39D81CFB0B7300578E9E /* BUCForumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39D71CFB0B7300578E9E /* BUCForumListViewController.m */; };
 		49900A691CFFD9CE00911054 /* BUCNetworkUIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A681CFFD9CE00911054 /* BUCNetworkUIConfig.m */; };
 		49900A6C1CFFDD2900911054 /* BUCImageFullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */; };
+		49900A721CFFE44700911054 /* BUCEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A711CFFE44700911054 /* BUCEmptyView.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1284,6 +1285,8 @@
 		49900A681CFFD9CE00911054 /* BUCNetworkUIConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCNetworkUIConfig.m; sourceTree = "<group>"; };
 		49900A6A1CFFDD2900911054 /* BUCImageFullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCImageFullScreen.h; path = Tools/BUCImageFullScreen.h; sourceTree = "<group>"; };
 		49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCImageFullScreen.m; path = Tools/BUCImageFullScreen.m; sourceTree = "<group>"; };
+		49900A701CFFE44700911054 /* BUCEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCEmptyView.h; path = UI/Views/BUCEmptyView.h; sourceTree = "<group>"; };
+		49900A711CFFE44700911054 /* BUCEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCEmptyView.m; path = UI/Views/BUCEmptyView.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2222,6 +2225,8 @@
 			children = (
 				49DA91461CDFA26200B8787B /* BUCLoadingView.h */,
 				49DA91471CDFA26200B8787B /* BUCLoadingView.m */,
+				49900A701CFFE44700911054 /* BUCEmptyView.h */,
+				49900A711CFFE44700911054 /* BUCEmptyView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -3052,6 +3057,7 @@
 				49DA914C1CDFA41300B8787B /* NSString+Tools.m in Sources */,
 				49DA915D1CE06D0200B8787B /* BUCHomeModel.m in Sources */,
 				4906ED7F1CFEB80800B1D5AA /* ZZGTabBar.m in Sources */,
+				49900A721CFFE44700911054 /* BUCEmptyView.m in Sources */,
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
 				4906ED891CFEB85100B1D5AA /* ZZGPagerViewController.m in Sources */,
 				49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */,

@@ -141,10 +141,11 @@ const NSInteger kPostListPageSize = 20;
 }
 
 #pragma mark - Override
-- (void)displayNetworkErrorButton {
-    NSLog(@"network error");
+- (void)dealNetworkError {
+    [super dealNetworkError];
+    
+    [self loadData];
 }
-
 
 
 

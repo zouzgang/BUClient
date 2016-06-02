@@ -14,15 +14,19 @@
 @end
 
 @implementation BUCBaseViewController {
-//    UIButton *_networkButton;
+    UIButton *_networkButton;
 }
 
 - (void)loadView {
     [super loadView];
     
     _networkButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _networkButton.backgroundColor = [UIColor greenColor];
+    _networkButton.layer.cornerRadius = 4;
+    _networkButton.layer.masksToBounds = YES;
+    _networkButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_networkButton setTitle:@"重新加载" forState:UIControlStateNormal];
-    [_networkButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_networkButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [_networkButton addTarget:self action:@selector(didNetworkButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_networkButton];
     _networkButton.hidden = YES;
@@ -45,15 +49,13 @@
 
 #pragma mark - Action
 - (void)didNetworkButtonClick {
-    
+    [self dealNetworkError];
 }
-
-
 
 #pragma  mark - Public Methods
 
-- (void)displayNetworkErrorButton {
-    _networkButton.hidden = NO;
+- (void)dealNetworkError {
+    _networkButton.hidden = YES;
 }
 
 

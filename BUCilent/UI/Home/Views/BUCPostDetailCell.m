@@ -103,7 +103,7 @@ const CGFloat kDetailCellTopPadding = 12;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didAttachmentTap)];
     _attachmentImageView.userInteractionEnabled = YES;
     [_attachmentImageView addGestureRecognizer:tap];
-        
+    
     [self updateConstraints];
 
 }

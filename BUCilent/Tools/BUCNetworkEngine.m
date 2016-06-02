@@ -7,6 +7,7 @@
 //
 
 #import "BUCNetworkEngine.h"
+#import "BUCNetworkUIConfig.h"
 
 @implementation BUCNetworkEngine {
     NSURLSession *_session;
@@ -70,6 +71,8 @@
     return;
     
 fail:
+    //todo 逻辑混乱
+    [BUCNetworkUIConfig disMissLoadingView];
     errorBlock([self checkErr:error response:response]);
 }
 
