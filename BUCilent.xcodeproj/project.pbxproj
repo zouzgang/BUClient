@@ -606,6 +606,7 @@
 		490B39D51CFB099600578E9E /* BUCForumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39D41CFB099600578E9E /* BUCForumModel.m */; };
 		490B39D81CFB0B7300578E9E /* BUCForumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B39D71CFB0B7300578E9E /* BUCForumListViewController.m */; };
 		49900A691CFFD9CE00911054 /* BUCNetworkUIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A681CFFD9CE00911054 /* BUCNetworkUIConfig.m */; };
+		49900A6C1CFFDD2900911054 /* BUCImageFullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1281,6 +1282,8 @@
 		490B39D71CFB0B7300578E9E /* BUCForumListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCForumListViewController.m; path = UI/Discover/BUCForumListViewController.m; sourceTree = "<group>"; };
 		49900A671CFFD9CE00911054 /* BUCNetworkUIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCNetworkUIConfig.h; sourceTree = "<group>"; };
 		49900A681CFFD9CE00911054 /* BUCNetworkUIConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCNetworkUIConfig.m; sourceTree = "<group>"; };
+		49900A6A1CFFDD2900911054 /* BUCImageFullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCImageFullScreen.h; path = Tools/BUCImageFullScreen.h; sourceTree = "<group>"; };
+		49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCImageFullScreen.m; path = Tools/BUCImageFullScreen.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2135,6 +2138,8 @@
 				490B39CD1CFAE78800578E9E /* BUCStringTool.m */,
 				49900A671CFFD9CE00911054 /* BUCNetworkUIConfig.h */,
 				49900A681CFFD9CE00911054 /* BUCNetworkUIConfig.m */,
+				49900A6A1CFFDD2900911054 /* BUCImageFullScreen.h */,
+				49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -3032,6 +3037,7 @@
 				49900A691CFFD9CE00911054 /* BUCNetworkUIConfig.m in Sources */,
 				49DA911F1CDF91A500B8787B /* BUCNetworkAPI.m in Sources */,
 				49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */,
+				49900A6C1CFFDD2900911054 /* BUCImageFullScreen.m in Sources */,
 				49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
 				490B39C51CFAD98200578E9E /* BUCBookTool.m in Sources */,

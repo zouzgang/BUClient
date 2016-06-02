@@ -15,6 +15,7 @@
 #import "BUCTextAttachment.h"
 
 #import "UIImageView+WebCache.h"
+#import "BUCImageFullScreen.h"
 
 const CGFloat kDetailCellLeftPadding = 12;
 const CGFloat kDetailCellTopPadding = 12;
@@ -99,6 +100,10 @@ const CGFloat kDetailCellTopPadding = 12;
     _attachmentImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_attachmentImageView];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didAttachmentTap)];
+    _attachmentImageView.userInteractionEnabled = YES;
+    [_attachmentImageView addGestureRecognizer:tap];
+        
     [self updateConstraints];
 
 }
@@ -270,6 +275,12 @@ const CGFloat kDetailCellTopPadding = 12;
 - (void)didReplyButtonClicked {
     if (_delegate && [_delegate respondsToSelector:@selector(didClickReplyButtonAtIndexPath:)]) {
         [_delegate didClickReplyButtonAtIndexPath:_indexPath];
+    }
+}
+
+- (void)didAttachmentTap {
+    if (_attachmentImageView.image) {
+        [BUCImageFullScreen showImageFullScreen:_attachmentImageView];
     }
 }
 
