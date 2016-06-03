@@ -29,8 +29,6 @@ typedef NS_ENUM(NSUInteger, BUCNetworRequestType) {
 
 @interface BUCNetworkEngine : NSObject
 
-//- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
-
 - (void)request:(BUCNetworRequestType)type URL:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
 
 @end

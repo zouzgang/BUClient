@@ -32,23 +32,6 @@
 
 
 #pragma mark - Public Methods
-//- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
-//    NSError *error;
-//    NSURLRequest *request = [self requestWithAPI:URLString parameters:parameters attachment:attachment isForm:isForm error:&error];
-//    if (!request) {
-//        errorBlcok(@"未知错误");
-//        return;
-//    }
-//    
-//    void (^block)(NSData *, NSURLResponse *, NSError *);
-//    block = ^(NSData *data, NSURLResponse *response, NSError *error) {
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//            [self callbackWithData:data response:response error:error resultBlock:result errorBlock:errorBlcok];
-//        });
-//    };
-//    
-//    [[_session dataTaskWithRequest:request completionHandler:block] resume];
-//}
 
 - (void)request:(BUCNetworRequestType)type URL:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
     NSError *error;
