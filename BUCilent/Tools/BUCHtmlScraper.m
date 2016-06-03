@@ -250,6 +250,11 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
         paragraphStyle.lineSpacing = 5;
         paragraphStyle.minimumLineHeight = size + 5;
         paragraphStyle.maximumLineHeight = size + 5;
+        
+        paragraphStyle.alignment = NSTextAlignmentJustified;
+        paragraphStyle.paragraphSpacingBefore = 10.0;
+        paragraphStyle.hyphenationFactor = 1.0;
+        
         [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
     } else {
         if ([node objectForKey:@"style"]) {

@@ -19,7 +19,7 @@
 #import "CPEventFilterView.h"
 #import "BUCBookTool.h"
 
-const NSInteger kPostListPageSize = 20;
+const NSInteger kPostListPageSize = 10;
 
 
 @interface BUCPostListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, BUCPostDetailCellDelegate>

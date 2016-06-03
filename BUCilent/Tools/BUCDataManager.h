@@ -20,4 +20,10 @@ extern NSString *const kShowLoadingViewWhenNetwork;
 
 - (void)POST:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
 
+- (void)GET:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
+
+- (void)PUT:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
+
+- (void)DELETE:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result;
+
 @end

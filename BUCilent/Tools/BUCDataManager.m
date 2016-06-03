@@ -39,7 +39,37 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
 
 #pragma mark - Public Methods 
 - (void)POST:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
-    [self request:URLString parameters:parameters attachment:attachment isForm:isForm count:0 configure:configInfo onError:errorBlcok onSuccess:result];
+    [self request:URLString type:BUCNetworRequestTypePost parameters:parameters attachment:attachment isForm:isForm count:0 configure:configInfo onError:errorBlcok onSuccess:result];
+    
+    if (configInfo) {
+        if (configInfo[kShowLoadingViewWhenNetwork]) {
+            [BUCNetworkUIConfig disPlayLoadingView];
+        }
+    }
+}
+
+- (void)GET:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+    [self request:URLString type:BUCNetworRequestTypeGet parameters:parameters attachment:attachment isForm:isForm count:0 configure:configInfo onError:errorBlcok onSuccess:result];
+    
+    if (configInfo) {
+        if (configInfo[kShowLoadingViewWhenNetwork]) {
+            [BUCNetworkUIConfig disPlayLoadingView];
+        }
+    }
+}
+
+- (void)PUT:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+    [self request:URLString type:BUCNetworRequestTypePut parameters:parameters attachment:attachment isForm:isForm count:0 configure:configInfo onError:errorBlcok onSuccess:result];
+    
+    if (configInfo) {
+        if (configInfo[kShowLoadingViewWhenNetwork]) {
+            [BUCNetworkUIConfig disPlayLoadingView];
+        }
+    }
+}
+
+- (void)DELETE:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+    [self request:URLString type:BUCNetworRequestTypeDelete parameters:parameters attachment:attachment isForm:isForm count:0 configure:configInfo onError:errorBlcok onSuccess:result];
     
     if (configInfo) {
         if (configInfo[kShowLoadingViewWhenNetwork]) {
@@ -61,7 +91,7 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
     [json setObject:username forKey:@"username"];
     [json setObject:@"login" forKey:@"action"];
     
-    [self request:[BUCNetworkAPI requestURL:kApiLogin] parameters:json attachment:nil isForm:NO count:0 configure:nil onError:errorBlock onSuccess:^(NSDictionary *result) {
+    [self request:[BUCNetworkAPI requestURL:kApiLogin] type:BUCNetworRequestTypePost parameters:json attachment:nil isForm:NO count:0 configure:nil onError:errorBlock onSuccess:^(NSDictionary *result) {
         self.username = [result objectForKey:@"username"];
         self.session = [result objectForKey:@"session"];
         voidBlock();
@@ -69,11 +99,11 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
 
 }
 
-- (void)request:(NSString *)URLString parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm count:(NSInteger)count configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+- (void)request:(NSString *)URLString type:(BUCNetworRequestType)requestType parameters:(NSMutableDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm count:(NSInteger)count configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
     if (parameters[@"session"])
         parameters[@"session"] = self.session;
     
-    [_networkEngine POST:URLString parameters:parameters attachment:attachment isForm:isForm configure:configInfo onError:errorBlcok onSuccess:^(NSDictionary *resultBlock) {
+    [_networkEngine request:requestType URL:URLString parameters:parameters attachment:attachment isForm:isForm configure:configInfo onError:errorBlcok onSuccess:^(NSDictionary *resultBlock) {
         if ([[resultBlock objectForKey:@"result"] isEqualToString:@"success"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([URLString isEqualToString:[BUCNetworkAPI requestURL:kApiLogin]]) {
@@ -97,7 +127,7 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
             NSLog(@"ERROR:%@ COUNT:%ld URL:%@", msg, (long)count, URLString);
             if ([msg isEqualToString:@"IP+logged"] && count <= 1) {
                 [self updateSessionOnError:errorBlcok onSuccess:^{
-                    [self request:URLString parameters:parameters attachment:attachment isForm:isForm count:count + 1 configure:configInfo onError:errorBlcok onSuccess:result];
+                    [self request:URLString type:requestType parameters:parameters attachment:attachment isForm:isForm count:count + 1 configure:configInfo onError:errorBlcok onSuccess:result];
                 }];
                 
             } else if ([msg isEqualToString:@"thread_nopermission"]) {

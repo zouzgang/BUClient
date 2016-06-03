@@ -32,9 +32,27 @@
 
 
 #pragma mark - Public Methods
-- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+//- (void)POST:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
+//    NSError *error;
+//    NSURLRequest *request = [self requestWithAPI:URLString parameters:parameters attachment:attachment isForm:isForm error:&error];
+//    if (!request) {
+//        errorBlcok(@"未知错误");
+//        return;
+//    }
+//    
+//    void (^block)(NSData *, NSURLResponse *, NSError *);
+//    block = ^(NSData *data, NSURLResponse *response, NSError *error) {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//            [self callbackWithData:data response:response error:error resultBlock:result errorBlock:errorBlcok];
+//        });
+//    };
+//    
+//    [[_session dataTaskWithRequest:request completionHandler:block] resume];
+//}
+
+- (void)request:(BUCNetworRequestType)type URL:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm configure:(NSDictionary *)configInfo onError:(BUCStringBlock)errorBlcok onSuccess:(BUCResuletBlock)result {
     NSError *error;
-    NSURLRequest *request = [self requestWithAPI:URLString parameters:parameters attachment:attachment isForm:isForm error:&error];
+    NSURLRequest *request = [self requestWithAPI:URLString type:type parameters:parameters attachment:attachment isForm:isForm error:&error];
     if (!request) {
         errorBlcok(@"未知错误");
         return;
@@ -48,6 +66,7 @@
     };
     
     [[_session dataTaskWithRequest:request completionHandler:block] resume];
+
 }
 
 #pragma mark - Private Methods
@@ -76,14 +95,13 @@ fail:
     errorBlock([self checkErr:error response:response]);
 }
 
-- (NSURLRequest *)requestWithAPI:(NSString *)URLString parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm error:(NSError **)error {
+- (NSURLRequest *)requestWithAPI:(NSString *)URLString type:(BUCNetworRequestType)type parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm error:(NSError **)error {
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URLString]];
     NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
     NSData *data;
     
     for (NSString *key in parameters) {
         [dataJSON setObject:[self urlencode:[parameters objectForKey:key]] forKey:key];
-//        [dataJSON setObject:[parameters objectForKey:key] forKey:key];
     }
     
     data = [NSJSONSerialization dataWithJSONObject:dataJSON options:0 error:error];
@@ -97,7 +115,30 @@ fail:
         data = [self formDataWithData:data attachment:attachment boundary:boundary];
     }
     
-    req.HTTPMethod = @"POST";
+    switch (type) {
+        case BUCNetworRequestTypePost: {
+            req.HTTPMethod = @"POST";
+        }
+            break;
+            
+        case BUCNetworRequestTypeGet: {
+            req.HTTPMethod = @"GET";
+        }
+            break;
+            
+        case BUCNetworRequestTypePut: {
+            req.HTTPMethod = @"PUT";
+        }
+            break;
+            
+        case BUCNetworRequestTypeDelete: {
+            req.HTTPMethod = @"DELETE";
+        }
+            break;
+            
+        default:
+            break;
+    }
     req.HTTPBody = data;
     
     return req;
