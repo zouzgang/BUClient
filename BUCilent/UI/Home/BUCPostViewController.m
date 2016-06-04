@@ -11,6 +11,8 @@
 #import "BUCPostListViewController.h"
 #import "BUCReplyViewController.h"
 #import "BUCBookTool.h"
+#import "BUCDataManager.h"
+#import "BUCNetworkAPI.h"
 
 @interface BUCPostViewController () <ZZGPagerViewControllerDataSource, ZZGPagerViewControllerDelegate>
 
@@ -22,12 +24,13 @@
     NSArray *_dataArray;
 }
 
-- (instancetype)initWithPostTitle:(NSString *)postTitle tid:(NSNumber *)tid tidSum:(NSNumber *)tidSum {
+- (instancetype)initWithPostTitle:(NSString *)postTitle author:(NSString *)author tid:(NSNumber *)tid tidSum:(NSNumber *)tidSum {
     self = [super init];
     if (self) {
         _postTitle = postTitle;
         _tid = tid;
         _tidSum = tidSum;
+        _author = author;
         
         NSMutableArray *arrayM = [NSMutableArray array];
         for (NSInteger i = 0; i < tidSum.integerValue / kPostListPageSize + 1; i ++) {
@@ -97,12 +100,21 @@
 
 #pragma mark - Action
 - (void)didBookmarkClick:(UIBarButtonItem *)star {
-//    if ([BUCBookTool hasItemFileID:self.tid]) {
-//        star.image = [UIImage imageNamed:@"filled_star"];
-//    } else {
-//        star.image = [UIImage imageNamed:@"star"];
-//    }
-//    [BUCBookTool bookPost:self.tid title:self.postTitle];
+
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"username"] = [BUCDataManager sharedInstance].username;
+    parameters[@"subject"] = [BUCDataManager sharedInstance].session;
+    parameters[@"author"] = self.author;
+    parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
+    
+    
+    [[BUCDataManager sharedInstance] PUT:[BUCNetworkAPI requestURL:kApiFavorite] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
+        self.networkButton.hidden = NO;
+        [self.view bringSubviewToFront:self.networkButton];
+    } onSuccess:^(NSDictionary *result) {
+        NSLog(@"star success");
+    }];
+
 }
 
 - (void)didReplyClick {

@@ -18,6 +18,7 @@
 #import <Masonry.h>
 #import "CPEventFilterView.h"
 #import "BUCBookTool.h"
+#import "BUCToast.h"
 
 const NSInteger kPostListPageSize = 10;
 
@@ -125,6 +126,7 @@ const NSInteger kPostListPageSize = 10;
     
     
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
+        [BUCToast showToast:text];
         self.networkButton.hidden = NO;
         [self.view bringSubviewToFront:self.networkButton];
     } onSuccess:^(NSDictionary *result) {

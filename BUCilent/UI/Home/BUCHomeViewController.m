@@ -113,7 +113,7 @@
     [self.navigationController pushViewController:detail animated:YES];
      */
     
-    BUCPostViewController *detail = [[BUCPostViewController alloc] initWithPostTitle:_dataArray[indexPath.row].pname tid:_dataArray[indexPath.row].tid tidSum:_dataArray[indexPath.row].tidSum];
+    BUCPostViewController *detail = [[BUCPostViewController alloc] initWithPostTitle:_dataArray[indexPath.row].pname author:_dataArray[indexPath.row].author tid:_dataArray[indexPath.row].tid tidSum:_dataArray[indexPath.row].tidSum];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

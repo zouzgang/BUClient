@@ -608,6 +608,8 @@
 		49900A691CFFD9CE00911054 /* BUCNetworkUIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A681CFFD9CE00911054 /* BUCNetworkUIConfig.m */; };
 		49900A6C1CFFDD2900911054 /* BUCImageFullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */; };
 		49900A721CFFE44700911054 /* BUCEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49900A711CFFE44700911054 /* BUCEmptyView.m */; };
+		49C580B01D0279BC00C8E27F /* BUCToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580AF1D0279BC00C8E27F /* BUCToast.m */; };
+		49C580B41D027A3A00C8E27F /* BUCToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580B31D027A3A00C8E27F /* BUCToastView.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1287,6 +1289,10 @@
 		49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCImageFullScreen.m; path = Tools/BUCImageFullScreen.m; sourceTree = "<group>"; };
 		49900A701CFFE44700911054 /* BUCEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCEmptyView.h; path = UI/Views/BUCEmptyView.h; sourceTree = "<group>"; };
 		49900A711CFFE44700911054 /* BUCEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCEmptyView.m; path = UI/Views/BUCEmptyView.m; sourceTree = "<group>"; };
+		49C580AE1D0279BC00C8E27F /* BUCToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCToast.h; path = Tools/BUCToast.h; sourceTree = "<group>"; };
+		49C580AF1D0279BC00C8E27F /* BUCToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCToast.m; path = Tools/BUCToast.m; sourceTree = "<group>"; };
+		49C580B21D027A3A00C8E27F /* BUCToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCToastView.h; path = Tools/BUCToastView.h; sourceTree = "<group>"; };
+		49C580B31D027A3A00C8E27F /* BUCToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCToastView.m; path = Tools/BUCToastView.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2037,6 +2043,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		49C580B11D0279CB00C8E27F /* BUCToast */ = {
+			isa = PBXGroup;
+			children = (
+				49C580AE1D0279BC00C8E27F /* BUCToast.h */,
+				49C580AF1D0279BC00C8E27F /* BUCToast.m */,
+				49C580B21D027A3A00C8E27F /* BUCToastView.h */,
+				49C580B31D027A3A00C8E27F /* BUCToastView.m */,
+			);
+			name = BUCToast;
+			sourceTree = "<group>";
+		};
 		49DA90DA1CDF8F5100B8787B = {
 			isa = PBXGroup;
 			children = (
@@ -2143,6 +2160,7 @@
 				49900A681CFFD9CE00911054 /* BUCNetworkUIConfig.m */,
 				49900A6A1CFFDD2900911054 /* BUCImageFullScreen.h */,
 				49900A6B1CFFDD2900911054 /* BUCImageFullScreen.m */,
+				49C580B11D0279CB00C8E27F /* BUCToast */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -3039,12 +3057,14 @@
 				49DA91271CDF92E700B8787B /* BUCHomeViewController.m in Sources */,
 				49DA91391CDF947200B8787B /* BUCMyProfileViewController.m in Sources */,
 				490B39BD1CF9D7D000578E9E /* CPEventFilterView.m in Sources */,
+				49C580B41D027A3A00C8E27F /* BUCToastView.m in Sources */,
 				49900A691CFFD9CE00911054 /* BUCNetworkUIConfig.m in Sources */,
 				49DA911F1CDF91A500B8787B /* BUCNetworkAPI.m in Sources */,
 				49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */,
 				49900A6C1CFFDD2900911054 /* BUCImageFullScreen.m in Sources */,
 				49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
+				49C580B01D0279BC00C8E27F /* BUCToast.m in Sources */,
 				490B39C51CFAD98200578E9E /* BUCBookTool.m in Sources */,
 				490B39D51CFB099600578E9E /* BUCForumModel.m in Sources */,
 				49DA91331CDF93F300B8787B /* BUCBaseTableViewCell.m in Sources */,

@@ -13,6 +13,7 @@
 #import "BUCNetworkAPI.h"
 #import "BUCTabViewController.h"
 #import "AppDelegate.h"
+#import "BUCToast.h"
 
 @interface BUCLoginViewController ()
 
@@ -129,7 +130,7 @@
     [defaults synchronize];
 
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiLogin] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES}  onError:^(NSString *text) {
-        
+        [BUCToast showToast:text];
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"login success");
         AppDelegate *delagte = [UIApplication sharedApplication].delegate;

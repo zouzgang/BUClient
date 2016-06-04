@@ -13,7 +13,8 @@
 @property (nonatomic, strong) NSNumber *tid;
 @property (nonatomic, strong) NSNumber *tidSum;
 @property (nonatomic, copy) NSString *postTitle;
+@property (nonatomic, copy) NSString *author;
 
-- (instancetype)initWithPostTitle:(NSString *)postTitle tid:(NSNumber *)tid tidSum:(NSNumber *)tidSum;
+- (instancetype)initWithPostTitle:(NSString *)postTitle author:(NSString *)author tid:(NSNumber *)tid tidSum:(NSNumber *)tidSum;
 
 @end

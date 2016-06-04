@@ -10,6 +10,8 @@
 
 @implementation BUCNetworkAPI
 
+
+//BITOpenAPI  POST
 NSString *const kApiLogin = @"/open_api/bu_logging.php";
 NSString *const kApiForumList = @"/open_api/bu_forum.php";
 NSString *const kApiThread = @"/open_api/bu_thread.php";
@@ -21,10 +23,21 @@ NSString *const kApiFidTidCount = @"/open_api/bu_logging.php";
 NSString *const kApiHome = @"/open_api/bu_home.php";
 NSString *const kApiTidOrFid = @"/open_api/bu_fid_tid.php";
 
+
+//api form spider
+NSString *const kApiFavorite = @"/favorite"; //PUT
+NSString *const kApiFavoriteList = @"favorite/list"; //GET
+
+
 NSString *const kLPNetworkRequestShowEmptyPageWhenError = @"kLPNetworkRequestShowEmptyPageWhenError";
 
 + (NSString *)requestURL:(NSString *)requestURL {
-    NSURL *URL = [NSURL URLWithString:[self baseURL]];
+    NSURL *URL;
+    if ([self checkURLIsBITOpenAPI:requestURL]) {
+        URL = [NSURL URLWithString:[self baseURL]];
+    } else {
+        URL = [NSURL URLWithString:@"http://bu.ihainan.me:8080"];
+    }
     return [NSString stringWithFormat:@"%@%@", [self baseURL], requestURL];
 }
 
@@ -35,6 +48,20 @@ NSString *const kLPNetworkRequestShowEmptyPageWhenError = @"kLPNetworkRequestSho
 #else
     return @"http://ydsj.didaaa.com";
 #endif
+}
+
++ (BOOL)checkURLIsBITOpenAPI:(NSString *)requestURL{
+    __block BOOL isBITOpenAPI = NO;
+    NSArray *urlArray = @[kApiLogin, kApiForumList, kApiThread, kApiPostDetail, kApiNewPost, kApiAccountDetail, kApiForumTag, kApiFidTidCount, kApiHome, kApiTidOrFid];
+    
+    [urlArray enumerateObjectsUsingBlock:^(NSString *url, NSUInteger idx, BOOL *stop) {
+        if ([url isEqualToString:@""]) {
+            isBITOpenAPI = YES;
+            *stop = YES;
+        }
+    }];
+
+    return isBITOpenAPI;
 }
 
 @end

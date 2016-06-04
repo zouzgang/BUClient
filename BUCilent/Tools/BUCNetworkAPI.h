@@ -10,6 +10,7 @@
 
 @interface BUCNetworkAPI : NSObject
 
+//BITOpenAPI
 extern NSString *const kApiLogin;/**<登录*/
 extern NSString *const kApiForumList;/**<论坛列表*/
 extern NSString *const kApiThread;/**<查询论坛帖子*/
@@ -22,6 +23,9 @@ extern NSString *const kApiFidTidCount;/**<登录*/
 extern NSString *const kApiTidOrFid;/**<楼层数*/
 
 
+//api form spider
+extern NSString *const kApiFavorite;/**<收藏*/
+extern NSString *const kApiFavoriteList;/**<收藏列表*/
 
 + (NSString *)baseURL;
 
