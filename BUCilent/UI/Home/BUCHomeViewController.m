@@ -131,18 +131,10 @@
         NSLog(@"home success");
          _dataArray = [[MTLJSONAdapter modelsOfClass:BUCHomeModel.class fromJSONArray:[result objectForKey:@"newlist"] error:Nil] mutableCopy];
         _pullDown = NO;
+        [_tableView.pullToRefreshView stopAnimating];
         [_tableView reloadData];
 
     }];
-}
-
-#pragma mark - UIScroviewDelegate
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//    if (_pullDown == NO && scrollView.contentOffset.y < -20) {
-//        _pullDown = YES;
-//        [self loadData];
-//    }
-
 }
 
 

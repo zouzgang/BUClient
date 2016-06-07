@@ -9,7 +9,7 @@
 #import "UIScrollView+BUCPullToRefresh.h"
 
 
-static CGFloat const SVPullToRefreshViewHeight = 60;
+static CGFloat const SVPullToRefreshViewHeight = 30;
 
 @interface SVPullToRefreshArrow : UIView
 
@@ -115,18 +115,13 @@ static char UIScrollViewPullToRefreshView;
 @synthesize showsPullToRefresh = _showsPullToRefresh;
 @synthesize activityIndicatorView = _activityIndicatorView;
 
-@synthesize titleLabel = _titleLabel;
-
-
 - (id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
-        
         // default styling values
         self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
         self.textColor = [UIColor darkGrayColor];
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.state = BUCPullToRefreshStateStopped;
-
     }
     
     return self;
@@ -149,9 +144,6 @@ static char UIScrollViewPullToRefreshView;
 }
 
 - (void)layoutSubviews {
-    
-    self.titleLabel.hidden = NO;
-    
     switch (self.state) {
         case BUCPullToRefreshStateAll:
         case BUCPullToRefreshStateStopped:
@@ -166,39 +158,10 @@ static char UIScrollViewPullToRefreshView;
             break;
     }
     
-    CGFloat leftViewWidth = self.activityIndicatorView.bounds.size.width;
-    
-    CGFloat margin = 10;
-    CGFloat marginY = 2;
-    CGFloat labelMaxWidth = self.bounds.size.width - margin - leftViewWidth;
-    
-    self.titleLabel.text = @"refresh";
-    
-    
-    CGSize titleSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font
-                                        constrainedToSize:CGSizeMake(labelMaxWidth,self.titleLabel.font.lineHeight)
-                                            lineBreakMode:self.titleLabel.lineBreakMode];
-    
-    CGFloat maxLabelWidth = MAX(titleSize.width,100);
-    
-    CGFloat totalMaxWidth;
-    if (maxLabelWidth) {
-        totalMaxWidth = leftViewWidth + margin + maxLabelWidth;
-    } else {
-        totalMaxWidth = leftViewWidth + maxLabelWidth;
-    }
-    
-    CGFloat labelX = (self.bounds.size.width / 2) - (totalMaxWidth / 2) + leftViewWidth + margin;
-    
-    CGFloat totalHeight = titleSize.height;
-    CGFloat minY = (self.bounds.size.height / 2)  - (totalHeight / 2);
-    
-    CGFloat titleY = minY;
-    self.titleLabel.frame = CGRectIntegral(CGRectMake(labelX, titleY, titleSize.width, titleSize.height));
-    
+    CGFloat x = ([UIScreen mainScreen].bounds.size.width - 15) / 2;
+    CGFloat y = (SVPullToRefreshViewHeight - 15) / 2;
 
-    self.activityIndicatorView.center = self.center;
-    
+    self.activityIndicatorView.frame = CGRectMake(x, y, 15, 15);
 }
 
 #pragma mark - Scroll View
@@ -303,11 +266,6 @@ static char UIScrollViewPullToRefreshView;
 
 #pragma mark - Setters
 
-- (void)setTextColor:(UIColor *)newTextColor {
-    textColor = newTextColor;
-    self.titleLabel.textColor = newTextColor;
-}
-
 - (void)setActivityIndicatorViewColor:(UIColor *)color {
     self.activityIndicatorView.color = color;
 }
@@ -316,14 +274,7 @@ static char UIScrollViewPullToRefreshView;
     self.activityIndicatorView.activityIndicatorViewStyle = viewStyle;
 }
 
-
-
 #pragma mark -
-
-- (void)triggerRefresh {
-//    [self.scrollView triggerPullToRefresh];
-}
-
 - (void)startAnimating{
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -self.frame.size.height) animated:YES];
     self.state = BUCPullToRefreshStateLoading;
