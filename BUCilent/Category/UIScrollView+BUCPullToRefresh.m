@@ -215,7 +215,7 @@ static char UIScrollViewPullToRefreshView;
         else if(contentOffset.y >= scrollOffsetThreshold && self.state != BUCPullToRefreshStateStopped)
             self.state = BUCPullToRefreshStateStopped;
         else if(contentOffset.y > scrollOffsetThreshold && self.scrollView.isDragging && self.state == BUCPullToRefreshStateStopped)
-            self.state = BUCPullToRefreshStateTriggered;
+            self.state = BUCPullToRefreshStateStopped;
         else if(contentOffset.y <= scrollOffsetThreshold && self.state != BUCPullToRefreshStateStopped)
             self.state = BUCPullToRefreshStateStopped;
     } else {

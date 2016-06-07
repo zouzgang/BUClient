@@ -74,7 +74,7 @@
     
     self.navigationItem.rightBarButtonItems = @[reply, star];
     
-    [self loadData];
+//    [self loadData];
 }
 
 - (void)loadData {

@@ -18,6 +18,7 @@
 #import "BUCPostDetailViewController.h"
 #import "UIScrollView+BUCPullToRefresh.h"
 #import "BUCPostViewController.h"
+#import "BUCToast.h"
 
 @interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -67,18 +68,19 @@
     [super viewDidLoad];
     self.navigationItem.title = @"BIT LM";
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didRightBarClick)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(didLeftBarClick)];
     
     __weak BUCHomeViewController *weakSelf = self;
     [_tableView addPullToRefreshActionHandler:^{
         NSLog(@"pull to refresh");
         [weakSelf loadData];
     }];
-    
+    [self loadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadData];
 
 }
 
@@ -138,5 +140,13 @@
 }
 
 
+#pragma mark - Action
+- (void)didRightBarClick {
+    [BUCToast showToast:@"Todo"];
+}
+
+- (void)didLeftBarClick {
+    [BUCToast showToast:@"Todo"];
+}
 
 @end
