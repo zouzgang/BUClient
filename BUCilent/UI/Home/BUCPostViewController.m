@@ -13,6 +13,7 @@
 #import "BUCBookTool.h"
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
+#import "BUCToast.h"
 
 @interface BUCPostViewController () <ZZGPagerViewControllerDataSource, ZZGPagerViewControllerDelegate>
 
@@ -72,6 +73,22 @@
     UIBarButtonItem *reply = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(didReplyClick)];
     
     self.navigationItem.rightBarButtonItems = @[reply, star];
+    
+    [self loadData];
+}
+
+- (void)loadData {
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"username"] = [BUCDataManager sharedInstance].username;
+    parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@",[BUCNetworkAPI requestURL:kApiFavoriteStatus],[BUCDataManager sharedInstance].username, self.tid];
+    
+    [[BUCDataManager sharedInstance] GET:url parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        [BUCToast showToast:text];
+    } onSuccess:^(NSDictionary *result) {
+        [BUCToast showToast:@"取消收藏"];
+    }];
 }
 
 #pragma mark - ZZGPagerViewControllerDelegate
@@ -104,15 +121,14 @@
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
     parameters[@"subject"] = [BUCDataManager sharedInstance].session;
-    parameters[@"author"] = self.author;
+    parameters[@"author"] = @"addfa";
     parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
     
     
-    [[BUCDataManager sharedInstance] PUT:[BUCNetworkAPI requestURL:kApiFavorite] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
-        self.networkButton.hidden = NO;
-        [self.view bringSubviewToFront:self.networkButton];
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiFavorite] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        [BUCToast showToast:text];
     } onSuccess:^(NSDictionary *result) {
-        NSLog(@"star success");
+        [BUCToast showToast:@"已收藏"];
     }];
 
 }

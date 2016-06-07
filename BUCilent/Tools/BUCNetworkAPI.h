@@ -26,9 +26,12 @@ extern NSString *const kApiTidOrFid;/**<楼层数*/
 //api form spider
 extern NSString *const kApiFavorite;/**<收藏*/
 extern NSString *const kApiFavoriteList;/**<收藏列表*/
+extern NSString *const kApiFavoriteStatus;/**<收藏状态*/
 
 + (NSString *)baseURL;
 
 + (NSString *)requestURL:(NSString *)requestURL;
+
++ (BOOL)checkURLIsBITOpenAPI:(NSString *)requestURL;
 
 @end

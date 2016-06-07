@@ -1,4 +1,4 @@
-//
+ //
 //  BUCNetworkEngine.m
 //  BUCilent
 //
@@ -122,7 +122,19 @@ fail:
         default:
             break;
     }
-    req.HTTPBody = data;
+    
+    if (type == BUCNetworRequestTypePost) {
+        req.HTTPBody = data;
+    }
+    
+    //todo  config需要更多的配置选项，需要把config 放在外面一层
+    NSString *credit = [NSString stringWithFormat:@"%@:%@",@"bitunion_app", @"bitunion_api"];
+    NSString *auth = [NSString stringWithFormat:@"Basic %@",[[credit dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
+
+    [req addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+    [req addValue:auth forHTTPHeaderField:@"Authorization"];
+    
+    NSLog(@"request headers:%@",req.allHTTPHeaderFields);
     
     return req;
 }

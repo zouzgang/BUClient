@@ -110,7 +110,6 @@ const NSInteger kPostListPageSize = 10;
 
 #pragma mark - API
 - (void)loadData {
-
     _dataArray.totalSize = self.tidSum.integerValue + 1;
     _dataArray.pageSize = kPostListPageSize;
     
@@ -138,7 +137,6 @@ const NSInteger kPostListPageSize = 10;
         _tableView.tableFooterView.hidden = YES;
         [_footerView stopAnimation];
         [_tableView reloadData];
-        
     }];
 }
 

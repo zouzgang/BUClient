@@ -104,7 +104,7 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
         parameters[@"session"] = self.session;
     
     [_networkEngine request:requestType URL:URLString parameters:parameters attachment:attachment isForm:isForm configure:configInfo onError:errorBlcok onSuccess:^(NSDictionary *resultBlock) {
-        if ([[resultBlock objectForKey:@"result"] isEqualToString:@"success"]) {
+        if ([[resultBlock objectForKey:@"result"] isEqualToString:@"success"] || [[resultBlock objectForKey:@"message"] isEqualToString:@"success"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([URLString isEqualToString:[BUCNetworkAPI requestURL:kApiLogin]]) {
                     self.username = [resultBlock objectForKey:@"username"];

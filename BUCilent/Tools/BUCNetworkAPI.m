@@ -25,20 +25,21 @@ NSString *const kApiTidOrFid = @"/open_api/bu_fid_tid.php";
 
 
 //api form spider
-NSString *const kApiFavorite = @"/favorite"; //PUT
-NSString *const kApiFavoriteList = @"favorite/list"; //GET
+NSString *const kApiFavorite = @"/api/v2/favorite"; //POST  Delete
+NSString *const kApiFavoriteList = @"/api/v2/favorite/list"; //GET
+NSString *const kApiFavoriteStatus = @"/api/v2/favorite/status"; //GET
 
 
 NSString *const kLPNetworkRequestShowEmptyPageWhenError = @"kLPNetworkRequestShowEmptyPageWhenError";
 
 + (NSString *)requestURL:(NSString *)requestURL {
-    NSURL *URL;
+    NSString *URLString;
     if ([self checkURLIsBITOpenAPI:requestURL]) {
-        URL = [NSURL URLWithString:[self baseURL]];
+        URLString = [self baseURL];
     } else {
-        URL = [NSURL URLWithString:@"http://bu.ihainan.me:8080"];
+        URLString = @"http://bu.ihainan.me:8080";
     }
-    return [NSString stringWithFormat:@"%@%@", [self baseURL], requestURL];
+    return [NSString stringWithFormat:@"%@%@", URLString, requestURL];
 }
 
 + (NSString *)baseURL {
@@ -55,7 +56,7 @@ NSString *const kLPNetworkRequestShowEmptyPageWhenError = @"kLPNetworkRequestSho
     NSArray *urlArray = @[kApiLogin, kApiForumList, kApiThread, kApiPostDetail, kApiNewPost, kApiAccountDetail, kApiForumTag, kApiFidTidCount, kApiHome, kApiTidOrFid];
     
     [urlArray enumerateObjectsUsingBlock:^(NSString *url, NSUInteger idx, BOOL *stop) {
-        if ([url isEqualToString:@""]) {
+        if ([url isEqualToString:requestURL]) {
             isBITOpenAPI = YES;
             *stop = YES;
         }
