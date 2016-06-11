@@ -16,6 +16,7 @@
 #import <Masonry.h>
 #import "BUCFooterView.h"
 #import "BUCPostDetailViewController.h"
+#import "BUCPostViewController.h"
 
 const NSInteger kForumListPageSize = 20;
 
@@ -100,10 +101,7 @@ const NSInteger kForumListPageSize = 20;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BUCForumModel *forumModel = ((BUCForumModel *)_dataArray[indexPath.row]);
     
-    BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
-    detail.tid = forumModel.tid;
-    detail.tidSum = @(forumModel.replies.integerValue);
-    detail.postTitle = forumModel.subject;
+    BUCPostViewController *detail = [[BUCPostViewController alloc] initWithPostTitle:forumModel.subject author:forumModel.author tid:forumModel.tid tidSum:@(forumModel.replies.integerValue)];
     [self.navigationController pushViewController:detail animated:YES];
 }
 

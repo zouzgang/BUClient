@@ -15,6 +15,7 @@
 #import "BUCNetworkAPI.h"
 #import "BUCToast.h"
 #import "CPEventFilterView.h"
+#import "BUCStringTool.h"
 
 @interface BUCPostViewController () <ZZGPagerViewControllerDataSource, ZZGPagerViewControllerDelegate>
 
@@ -65,6 +66,7 @@
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(didNaviRightButtonClicked)];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     
     [self loadData];
 }
@@ -79,7 +81,7 @@
     [[BUCDataManager sharedInstance] GET:url parameters:nil attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         [BUCToast showToast:text];
     } onSuccess:^(NSDictionary *result) {
-      
+        self.navigationItem.rightBarButtonItem.enabled = YES;
         _isBook = !(((NSString *)result[@"data"]).integerValue == 0);
     }];
 }
@@ -113,8 +115,8 @@
 - (void)starPost {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
-    parameters[@"subject"] = [BUCDataManager sharedInstance].session;
-    parameters[@"author"] = @"addfa";
+    parameters[@"subject"] = [BUCStringTool urldecode:self.postTitle];
+    parameters[@"author"] = [BUCStringTool urldecode:self.author];
     parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
     
     

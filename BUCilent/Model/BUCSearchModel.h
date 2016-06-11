@@ -1,19 +1,18 @@
 //
-//  BUCPostDetailViewController.h
+//  BUCSearchModel.h
 //  BUCilent
 //
-//  Created by dito on 16/5/9.
+//  Created by dito on 16/6/11.
 //  Copyright © 2016年 zouzhigang. All rights reserved.
 //
 
-#import "BUCBaseViewController.h"
+#import "BUCBaseModel.h"
 
-@interface BUCPostDetailViewController : BUCBaseViewController
+@interface BUCSearchModel : BUCBaseModel
 
 @property (nonatomic, strong) NSNumber *tid;
 @property (nonatomic, strong) NSNumber *tidSum;
 @property (nonatomic, copy) NSString *postTitle;
 @property (nonatomic, copy) NSString *author;
-
 
 @end

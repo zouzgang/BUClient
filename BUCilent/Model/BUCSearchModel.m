@@ -1,14 +1,14 @@
 //
-//  BUCBookModel.m
+//  BUCSearchModel.m
 //  BUCilent
 //
-//  Created by dito on 16/5/29.
+//  Created by dito on 16/6/11.
 //  Copyright © 2016年 zouzhigang. All rights reserved.
 //
 
-#import "BUCBookModel.h"
+#import "BUCSearchModel.h"
 
-@implementation BUCBookModel
+@implementation BUCSearchModel
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
@@ -16,6 +16,5 @@
              @"tidSum"     : @"floor",
              };
 }
-
 
 @end

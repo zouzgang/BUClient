@@ -18,8 +18,8 @@ NSString *const kModelKey = @"/person.data";
     if ([self hasItemFileID:postTid]) {
         [self deleteItemFielID:postTid];
     } else {
-        BUCBookModel *bookModel = [[BUCBookModel alloc] initModelWithTid:postTid title:title];
-        [self addItem:bookModel];
+//        BUCBookModel *bookModel = [[BUCBookModel alloc] initModelWithTid:postTid title:title];
+//        [self addItem:bookModel];
     }
 }
 
@@ -33,10 +33,10 @@ NSString *const kModelKey = @"/person.data";
     __block BOOL hasItem = NO;
     if (models) {
         [models enumerateObjectsUsingBlock:^(BUCBookModel *model, NSUInteger idx, BOOL *stop) {
-            if ([model.tid isEqualToString:tid]) {
-                hasItem = YES;
-                *stop = YES;
-            }
+//            if ([model.tid isEqualToString:tid]) {
+//                hasItem = YES;
+//                *stop = YES;
+//            }
         }];
     }
     return hasItem;
@@ -65,10 +65,10 @@ NSString *const kModelKey = @"/person.data";
     __block NSMutableArray *models = [self getDataAtFilePath:kModelKey];
     if (models) {
         [models enumerateObjectsUsingBlock:^(BUCBookModel *model, NSUInteger idx, BOOL *stop) {
-            if ([model.tid isEqualToString:tid]) {
-                [models removeObject:model];
-                *stop = YES;
-            }
+//            if ([model.tid isEqualToString:tid]) {
+//                [models removeObject:model];
+//                *stop = YES;
+//            }
         }];
     }
     [self setData:models atFilePath:kModelKey];

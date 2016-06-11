@@ -22,6 +22,10 @@
 #import "BUCNewPostViewController.h"
 #import "PresentAntimator.h"
 #import "UIColor+BUC.h"
+#import "BUCSearchModel.h"
+#import "BUCArray.h"
+#import "BUCBookCell.h"
+#import "BUCBookModel.h"
 
 @interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -35,7 +39,7 @@
     
     UISearchBar *_searchBar;
     UISearchDisplayController *_searchDisplayController;
-    NSMutableArray *_searchResultList;
+    BUCArray *_searchResultList;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -71,19 +75,18 @@
     [self.view addSubview:_searchBar];
     
     _searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
-    _searchDisplayController.delegate = self;
+//    _searchDisplayController.delegate = self;
     _searchDisplayController.searchResultsDataSource = self;
     _searchDisplayController.searchResultsDelegate = self;
     _searchDisplayController.searchResultsTableView.backgroundColor = [UIColor whiteColor];
     _searchDisplayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _searchDisplayController.searchResultsTableView.tableFooterView = [UIView new];
-    [_searchDisplayController.searchResultsTableView registerClass:[BUCHomeCell class] forCellReuseIdentifier:[BUCHomeCell cellReuseIdentifier]];
+    [_searchDisplayController.searchResultsTableView registerClass:[BUCBookCell class] forCellReuseIdentifier:[BUCBookCell cellReuseIdentifier]];
     
     [self updateViewConstraints];
 }
 
 - (void)updateViewConstraints {
-    
     [_tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(45, 0, 0, 0));
     }];
@@ -132,8 +135,8 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == _searchDisplayController.searchResultsTableView) {
-        return [tableView fd_heightForCellWithIdentifier:[BUCHomeCell cellReuseIdentifier] configuration:^(BUCHomeCell *cell) {
-            cell.homeModel = _dataArray[indexPath.row];
+        return [tableView fd_heightForCellWithIdentifier:[BUCBookCell cellReuseIdentifier] configuration:^(BUCBookCell *cell) {
+            cell.searchModel = _searchResultList[indexPath.row];
         }];
     }
     return [tableView fd_heightForCellWithIdentifier:[BUCHomeCell cellReuseIdentifier] configuration:^(BUCHomeCell *cell) {
@@ -144,14 +147,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    /*
-    BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
-    detail.tid = _dataArray[indexPath.row].tid;
-    detail.tidSum = _dataArray[indexPath.row].tidSum;
-    detail.postTitle = _dataArray[indexPath.row].pname;
-    detail.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detail animated:YES];
-     */
+    if (tableView == _searchDisplayController.searchResultsTableView) {
+        BUCBookModel *bookModel = _searchResultList[indexPath.row];
+        BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
+        detail.tid = @(bookModel.tid.intValue);
+        detail.postTitle = bookModel.postTitle;
+        detail.author = ((BUCBookModel *)_dataArray[indexPath.row]).author;
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+        return;
+    }
     
     BUCPostViewController *detail = [[BUCPostViewController alloc] initWithPostTitle:_dataArray[indexPath.row].pname author:_dataArray[indexPath.row].author tid:_dataArray[indexPath.row].tid tidSum:_dataArray[indexPath.row].tidSum];
     detail.hidesBottomBarWhenPushed = YES;
@@ -206,33 +211,32 @@
 }
 
 - (UITableViewCell *)searchResultTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BUCHomeCell *homeCell = [tableView dequeueReusableCellWithIdentifier:[BUCHomeCell cellReuseIdentifier] forIndexPath:indexPath];
-    homeCell.homeModel = _dataArray[indexPath.row];
-    return homeCell;
+    BUCBookCell *searchCell = [tableView dequeueReusableCellWithIdentifier:[BUCBookCell cellReuseIdentifier] forIndexPath:indexPath];
+    searchCell.searchModel = _searchResultList[indexPath.row];
+    
+    return searchCell;
 }
 
 
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    _searchResultList = [NSMutableArray new];
-//    [_customList enumerateObjectsUsingBlock:^(CPConfCustomModel *custom, NSUInteger idx, BOOL *stop) {
-//        if ([custom matchSearchWithKeyword:searchText]) {
-//            [_searchResultList addObject:custom];
-//        }
-//    }];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarSearchButonClicked:(UISearchBar *)searchBar {
+    _searchResultList = [[BUCArray alloc] init];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"from"] = [NSString stringWithFormat:@"%@", @0];
     parameters[@"to"] = [NSString stringWithFormat:@"%@", @30];
     parameters[@"key"] = searchBar.text;
     
-    [[BUCDataManager sharedInstance] GET:[BUCNetworkAPI requestURL:kApiSearchThreads] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] GET:[BUCNetworkAPI requestURL:kApiSearchThreads] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
         _pullDown = NO;
         
     } onSuccess:^(NSDictionary *result) {
+        NSArray *array = [MTLJSONAdapter modelsOfClass:BUCSearchModel.class fromJSONArray:result[@"data"] error:Nil];
+        [_searchResultList addObjectsFromArray:array];
+        [_tableView reloadData];
         NSLog(@"search success");
     }];
 }

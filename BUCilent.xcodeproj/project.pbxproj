@@ -615,6 +615,8 @@
 		49C580BF1D0A9FC500C8E27F /* BUCNewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580BE1D0A9FC500C8E27F /* BUCNewPostViewController.m */; };
 		49C580C41D0BDD9500C8E27F /* PresentAntimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580C01D0BDD9500C8E27F /* PresentAntimator.m */; };
 		49C580C51D0BDD9500C8E27F /* Antimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580C21D0BDD9500C8E27F /* Antimator.m */; };
+		49C580C81D0C3E0000C8E27F /* BUCBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580C71D0C3E0000C8E27F /* BUCBookCell.m */; };
+		49C580CC1D0C3FAB00C8E27F /* BUCSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580CB1D0C3FAB00C8E27F /* BUCSearchModel.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1307,6 +1309,10 @@
 		49C580C11D0BDD9500C8E27F /* PresentAntimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentAntimator.h; sourceTree = "<group>"; };
 		49C580C21D0BDD9500C8E27F /* Antimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Antimator.m; sourceTree = "<group>"; };
 		49C580C31D0BDD9500C8E27F /* Antimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Antimator.h; sourceTree = "<group>"; };
+		49C580C61D0C3E0000C8E27F /* BUCBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCBookCell.h; path = UI/MyProfile/View/BUCBookCell.h; sourceTree = "<group>"; };
+		49C580C71D0C3E0000C8E27F /* BUCBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBookCell.m; path = UI/MyProfile/View/BUCBookCell.m; sourceTree = "<group>"; };
+		49C580CA1D0C3FAB00C8E27F /* BUCSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCSearchModel.h; path = Model/BUCSearchModel.h; sourceTree = "<group>"; };
+		49C580CB1D0C3FAB00C8E27F /* BUCSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCSearchModel.m; path = Model/BUCSearchModel.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2068,6 +2074,15 @@
 			name = BUCToast;
 			sourceTree = "<group>";
 		};
+		49C580C91D0C3E0400C8E27F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				49C580C61D0C3E0000C8E27F /* BUCBookCell.h */,
+				49C580C71D0C3E0000C8E27F /* BUCBookCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		49DA90DA1CDF8F5100B8787B = {
 			isa = PBXGroup;
 			children = (
@@ -2238,6 +2253,7 @@
 				49DA91381CDF947200B8787B /* BUCMyProfileViewController.m */,
 				490B39C91CFAE4A200578E9E /* BUCMyBookViewController.h */,
 				490B39CA1CFAE4A200578E9E /* BUCMyBookViewController.m */,
+				49C580C91D0C3E0400C8E27F /* View */,
 			);
 			name = MyProfile;
 			sourceTree = "<group>";
@@ -2306,6 +2322,8 @@
 				490B39C71CFADCBE00578E9E /* BUCBookModel.m */,
 				490B39D31CFB099600578E9E /* BUCForumModel.h */,
 				490B39D41CFB099600578E9E /* BUCForumModel.m */,
+				49C580CA1D0C3FAB00C8E27F /* BUCSearchModel.h */,
+				49C580CB1D0C3FAB00C8E27F /* BUCSearchModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3086,6 +3104,7 @@
 				49DA911F1CDF91A500B8787B /* BUCNetworkAPI.m in Sources */,
 				49DA91231CDF92BC00B8787B /* BUCTabViewController.m in Sources */,
 				49900A6C1CFFDD2900911054 /* BUCImageFullScreen.m in Sources */,
+				49C580CC1D0C3FAB00C8E27F /* BUCSearchModel.m in Sources */,
 				49DA91631CE07C8200B8787B /* UIColor+BUC.m in Sources */,
 				49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */,
 				49C580B01D0279BC00C8E27F /* BUCToast.m in Sources */,
@@ -3103,6 +3122,7 @@
 				4906ED7F1CFEB80800B1D5AA /* ZZGTabBar.m in Sources */,
 				49900A721CFFE44700911054 /* BUCEmptyView.m in Sources */,
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
+				49C580C81D0C3E0000C8E27F /* BUCBookCell.m in Sources */,
 				4906ED891CFEB85100B1D5AA /* ZZGPagerViewController.m in Sources */,
 				49DA91601CE06FD300B8787B /* BUCHomeLastReplyModel.m in Sources */,
 				4906ED8A1CFEB85100B1D5AA /* ZZGCollectionViewCell.m in Sources */,

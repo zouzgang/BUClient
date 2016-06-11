@@ -188,7 +188,8 @@ const CGFloat kDetailCellTopPadding = 12;
     [textContainer setLineFragmentPadding:5.0];
     [layoutManager addTextContainer:textContainer];
     
-    [textStorage setAttributedString:_atttibutedString];
+    if (_atttibutedString)
+        [textStorage setAttributedString:_atttibutedString];
     [layoutManager glyphRangeForTextContainer:textContainer];
     [layoutManager ensureLayoutForTextContainer:textContainer];
     
@@ -273,6 +274,11 @@ const CGFloat kDetailCellTopPadding = 12;
 
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    
     return YES;
 }
 

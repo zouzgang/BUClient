@@ -8,7 +8,6 @@
 
 #import "BUCMyBookViewController.h"
 #import <Masonry.h>
-#import "BUCBookModel.h"
 #import "BUCBookTool.h"
 #import "BUCStringTool.h"
 
@@ -16,18 +15,31 @@
 #import "BUCNetworkAPI.h"
 #import "BUCPostDetailViewController.h"
 
+#import "BUCSearchModel.h"
+#import "BUCArray.h"
+#import "BUCBookCell.h"
+#import "UITableView+FDTemplateLayoutCell.h"
+#import "BUCBookModel.h"
+
+const NSInteger kBookPageSize = 20;
+
 @interface BUCMyBookViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
 @implementation BUCMyBookViewController {
     UITableView *_tableView;
-    NSArray<BUCBookModel *> *_dataArray;
+    BUCArray *_dataArray;
+    
+    NSInteger _page;
+    BOOL _reverse;
+    BOOL _pullUp;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        _dataArray = [[BUCArray alloc] init];
     }
     return self;
 }
@@ -35,13 +47,13 @@
 - (void)loadView {
     [super loadView];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.rowHeight = 60;
     _tableView.estimatedRowHeight = 44;
     _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [_tableView registerClass:[BUCBookCell class] forCellReuseIdentifier:[BUCBookCell cellReuseIdentifier]];
     [self.view addSubview:_tableView];
     
     [self updateViewConstraints];
@@ -55,13 +67,10 @@
     [super updateViewConstraints];
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _dataArray = [BUCBookTool bookList];
-    
+    [self loadData:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -70,39 +79,61 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ID = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+    BUCBookCell *bookCell = [tableView dequeueReusableCellWithIdentifier:[BUCBookCell cellReuseIdentifier] forIndexPath:indexPath];
+    bookCell.bookModel = _dataArray[indexPath.row];
     
-    cell.textLabel.text = [BUCStringTool urldecode:_dataArray[indexPath.row].title];
-    cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    
-    return cell;
+    return bookCell;
 }
 
 #pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [tableView fd_heightForCellWithIdentifier:[BUCBookCell cellReuseIdentifier] configuration:^(BUCBookCell *cell) {
+        cell.bookModel = _dataArray[indexPath.row];
+    }];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
+    detail.tid = @(((BUCBookModel *)_dataArray[indexPath.row]).tid.intValue);
+    detail.postTitle = ((BUCBookModel *)_dataArray[indexPath.row]).postTitle;
+    detail.author = ((BUCBookModel *)_dataArray[indexPath.row]).author;
+    [self.navigationController pushViewController:detail animated:YES];
+}
+
+#pragma mark - API
+- (void)loadData:(BOOL)isFirst {
+    if (isFirst) {
+        _page = 0;
+//        _dataArray.totalSize = self.tidSum.integerValue + 1;
+        _dataArray.totalSize = 20;
+        _dataArray.pageSize = kBookPageSize;
+    }
+    
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    [parameters setObject:_dataArray[indexPath.row].tid forKey:@"tid"];
-    [parameters setObject:[BUCDataManager sharedInstance].username forKey:@"username"];
-    parameters[@"session"] = [BUCDataManager sharedInstance].session;
+    NSString *url = [NSString stringWithFormat:@"%@/%@",[BUCNetworkAPI requestURL:kApiFavoriteList],[BUCDataManager sharedInstance].username];
     
+    parameters[@"from"] =[NSString stringWithFormat:@"%ld",_page * kBookPageSize];
+     parameters[@"to"] = [NSString stringWithFormat:@"%@", @30];
+//    parameters[@"to"] = ((_page + 1) * kBookPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",(_page + 1) * kBookPageSize] : [NSString stringWithFormat:@"%ld", (long)_dataArray.totalSize];
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiTidOrFid] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] GET:url parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
-        BUCPostDetailViewController *detail = [[BUCPostDetailViewController alloc] init];
-        detail.tid = @(_dataArray[indexPath.row].tid.intValue);
-        detail.tidSum = result[@"tid_sum"];
-        detail.postTitle = _dataArray[indexPath.row].title;
-        [self.navigationController pushViewController:detail animated:YES];
+        NSLog(@"booklist success");
+        NSArray *array = [MTLJSONAdapter modelsOfClass:BUCBookModel.class fromJSONArray:[result objectForKey:@"data"] error:Nil];
+        [_dataArray addObjectsFromArray:array];
+        _page += 1;
+        _dataArray.page = _page;
+        
+        _pullUp = NO;
+        _tableView.tableFooterView.hidden = YES;
+//        [_footerView stopAnimation];
+        [_tableView reloadData];
+        
     }];
-
 }
 
 @end

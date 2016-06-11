@@ -6,14 +6,19 @@
 //  Copyright © 2016年 zouzhigang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BUCBaseModel.h"
 
-@interface BUCBookModel : NSObject
+@interface BUCBookModel : BUCBaseModel
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *tid;
+//@property (nonatomic, copy) NSString *title;
+//@property (nonatomic, copy) NSString *tid;
+//
+//- (instancetype)initModelWithTid:(NSString *)tid title:(NSString *)title;
 
-- (instancetype)initModelWithTid:(NSString *)tid title:(NSString *)title;
+@property (nonatomic, strong) NSNumber *tid;
+@property (nonatomic, strong) NSNumber *tidSum;
+@property (nonatomic, copy) NSString *postTitle;
+@property (nonatomic, copy) NSString *author;
 
 
 @end

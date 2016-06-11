@@ -17,7 +17,8 @@
 #import "BUCReplyViewController.h"
 #import <Masonry.h>
 #import "CPEventFilterView.h"
-#import "BUCBookTool.h"
+#import "BUCStringTool.h"
+#import "BUCToast.h"
 
 const NSInteger kPageSize = 20;
 
@@ -33,7 +34,8 @@ const NSInteger kPageSize = 20;
     NSInteger _page;
     BOOL _reverse;
     BOOL _pullUp;
-
+    
+    BOOL _isBook;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -78,9 +80,13 @@ const NSInteger kPageSize = 20;
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(didReplyButtonClicked)];
+    [self loadData];
     
-    
-    [self loadData:YES];
+    if (self.tidSum) {
+        [self loadData:YES];
+    } else {
+        [self checkoutTidSum];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -134,7 +140,7 @@ const NSInteger kPageSize = 20;
     }
 
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO configure:isFirst ? @{kShowLoadingViewWhenNetwork : @YES} : nil onError:^(NSString *text) {
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"detail success");
@@ -156,6 +162,34 @@ const NSInteger kPageSize = 20;
         [_footerView stopAnimation];
         [_tableView reloadData];
         
+    }];
+}
+
+- (void)checkoutTidSum {
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.tid] forKey:@"tid"];
+    [parameters setObject:[BUCDataManager sharedInstance].username forKey:@"username"];
+    parameters[@"session"] = [BUCDataManager sharedInstance].session;
+    
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiTidOrFid] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        
+    } onSuccess:^(NSDictionary *result) {
+        self.tidSum = result[@"tid_sum"];
+        [self loadData:YES];
+    }];
+}
+- (void)loadData {
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"username"] = [BUCDataManager sharedInstance].username;
+    parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@",[BUCNetworkAPI requestURL:kApiFavoriteStatus],[BUCDataManager sharedInstance].username, self.tid];
+    
+    [[BUCDataManager sharedInstance] GET:url parameters:nil attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        [BUCToast showToast:text];
+    } onSuccess:^(NSDictionary *result) {
+        
+        _isBook = !(((NSString *)result[@"data"]).integerValue == 0);
     }];
 }
 
@@ -183,7 +217,7 @@ const NSInteger kPageSize = 20;
 - (void)didReplyButtonClicked {
     CPEventFilterView *filterView = [[CPEventFilterView alloc] init];
     NSLog(@"self.view:%@",self.view);
-    [filterView showInView:self.view titles:@[@"回复", @"倒序", @"todo"/*[BUCBookTool hasItemFileID:self.tid] ? @"取消收藏": @"收藏"*/] completehandler:^(NSInteger index) {
+    [filterView showInView:self.view titles:@[@"回复", @"倒序", _isBook ? @"取消收藏": @"收藏"] completehandler:^(NSInteger index) {
         if (index == 0) {
             //reply atuhor
             BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
@@ -197,11 +231,41 @@ const NSInteger kPageSize = 20;
             [_dataArray removeAllObjects];
             [self loadData:YES];
         } else if (index == 2) {
-            
-            [BUCBookTool bookPost:self.tid title:self.postTitle];
+            if (_isBook) {
+                [self deleteBookMark];
+            } else {
+                [self starPost];
+            }
+
         }
     }];
     
+}
+
+- (void)starPost {
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"username"] = [BUCDataManager sharedInstance].username;
+    parameters[@"subject"] = [BUCStringTool urldecode:self.postTitle];
+    parameters[@"author"] = self.author;
+    parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
+    
+    
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiFavorite] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        [BUCToast showToast:text];
+    } onSuccess:^(NSDictionary *result) {
+        [BUCToast showToast:@"已收藏"];
+        _isBook = YES;
+    }];
+}
+
+- (void)deleteBookMark {
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@",[BUCNetworkAPI requestURL:kApiFavorite],[BUCDataManager sharedInstance].username, self.tid];
+    [[BUCDataManager sharedInstance] DELETE:url parameters:nil attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        [BUCToast showToast:text];
+    } onSuccess:^(NSDictionary *result) {
+        [BUCToast showToast:@"取消收藏"];
+        _isBook = NO;
+    }];
 }
 
 
