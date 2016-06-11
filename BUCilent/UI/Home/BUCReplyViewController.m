@@ -11,6 +11,7 @@
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
 #import "UIColor+BUC.h"
+#import "BUCToast.h"
 
 @interface BUCReplyViewController () <UITextViewDelegate>
 
@@ -89,32 +90,31 @@
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didNaviRightButtonClick)];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
-    if (![textView.text isEqualToString:@""]) {
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-    } else {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-    }
 }
 
 
 #pragma mark - action
 - (void)didNaviRightButtonClick {
     // reply
-    self.navigationItem.rightBarButtonItem.enabled = NO;
-    if (_textView.text && ![_textView.text isEqualToString:@""]) {
+    if ((_textView.text && ![_textView.text isEqualToString:@""]) || _quoteContent) {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-        
         parameters[@"action"] = @"newreply";
         parameters[@"username"] = [BUCDataManager sharedInstance].username;
         parameters[@"session"] = [BUCDataManager sharedInstance].session;
         parameters[@"tid"] = self.tid;
-        
-        parameters[@"message"] = _textView.text;
+        NSString *message;
+        if (_quoteContent) {
+            message = [NSString stringWithFormat:@"%@%@",_quoteContent,_textView.text];
+        } else {
+            message = _textView.text;
+        }
+        parameters[@"message"] = message;
         parameters[@"attachment"] = _attachmentImage ? @"1" : @"0";
         
         [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES configure:nil onError:^(NSString *text) {
@@ -128,6 +128,8 @@
             [self.navigationController popViewControllerAnimated:YES];
 
         }];
+    } else {
+        [BUCToast showToast:@"回复内容不能为空"];
     }
 }
 

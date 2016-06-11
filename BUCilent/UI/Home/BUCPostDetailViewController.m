@@ -21,7 +21,7 @@
 
 const NSInteger kPageSize = 20;
 
-@interface BUCPostDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, BUCPostDetailCellDelegate>
+@interface BUCPostDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @end
 
@@ -93,7 +93,6 @@ const NSInteger kPageSize = 20;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.count = !_reverse ? (indexPath.row + 1) : (_tidSum.integerValue - indexPath.row + 1);
     cell.indexPath = indexPath;
-    cell.delegate = self;
     cell.postDetailModel = _dataArray[indexPath.row];
     return cell;
 }

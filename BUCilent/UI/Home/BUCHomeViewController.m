@@ -19,6 +19,9 @@
 #import "UIScrollView+BUCPullToRefresh.h"
 #import "BUCPostViewController.h"
 #import "BUCToast.h"
+#import "BUCNewPostViewController.h"
+#import "PresentAntimator.h"
+#import "UIColor+BUC.h"
 
 @interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -29,6 +32,10 @@
     NSArray <BUCHomeModel *> *_dataArray;
     
     BOOL _pullDown;
+    
+    UISearchBar *_searchBar;
+    UISearchDisplayController *_searchDisplayController;
+    NSMutableArray *_searchResultList;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -52,13 +59,33 @@
     [_tableView registerClass:[BUCHomeCell class] forCellReuseIdentifier:[BUCHomeCell cellReuseIdentifier]];
     [self.view addSubview:_tableView];
     
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    _searchBar.placeholder = @"搜索";
+    _searchBar.delegate = self;
+    _searchBar.backgroundColor = [UIColor whiteColor];
+    _searchBar.searchBarStyle = UISearchBarStyleProminent;
+    _searchBar.tintColor = [UIColor blueColor];
+    _searchBar.barTintColor = [UIColor colorWithHexString:@"#F3F3F3"];
+    _searchBar.layer.borderWidth = 0.3;
+    _searchBar.layer.borderColor = [UIColor colorWithHexString:@"#F3F3F3"].CGColor;
+    [self.view addSubview:_searchBar];
+    
+    _searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
+    _searchDisplayController.delegate = self;
+    _searchDisplayController.searchResultsDataSource = self;
+    _searchDisplayController.searchResultsDelegate = self;
+    _searchDisplayController.searchResultsTableView.backgroundColor = [UIColor whiteColor];
+    _searchDisplayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _searchDisplayController.searchResultsTableView.tableFooterView = [UIView new];
+    [_searchDisplayController.searchResultsTableView registerClass:[BUCHomeCell class] forCellReuseIdentifier:[BUCHomeCell cellReuseIdentifier]];
+    
     [self updateViewConstraints];
 }
 
 - (void)updateViewConstraints {
     
     [_tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(45, 0, 0, 0));
     }];
     
     [super updateViewConstraints];
@@ -76,20 +103,26 @@
         NSLog(@"pull to refresh");
         [weakSelf loadData];
     }];
-    [self loadData];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    [self loadData];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == _searchDisplayController.searchResultsTableView) {
+        return [self searchResultTableView:tableView numberOfRowsInSection:section];
+    }
     return _dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == _searchDisplayController.searchResultsTableView) {
+        return [self searchResultTableView:tableView cellForRowAtIndexPath:indexPath];
+    }
     BUCHomeCell *homeCell = [tableView dequeueReusableCellWithIdentifier:[BUCHomeCell cellReuseIdentifier] forIndexPath:indexPath];
     homeCell.homeModel = _dataArray[indexPath.row];
     return homeCell;
@@ -98,6 +131,11 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == _searchDisplayController.searchResultsTableView) {
+        return [tableView fd_heightForCellWithIdentifier:[BUCHomeCell cellReuseIdentifier] configuration:^(BUCHomeCell *cell) {
+            cell.homeModel = _dataArray[indexPath.row];
+        }];
+    }
     return [tableView fd_heightForCellWithIdentifier:[BUCHomeCell cellReuseIdentifier] configuration:^(BUCHomeCell *cell) {
         cell.homeModel = _dataArray[indexPath.row];
     }];
@@ -133,7 +171,9 @@
         NSLog(@"home success");
          _dataArray = [[MTLJSONAdapter modelsOfClass:BUCHomeModel.class fromJSONArray:[result objectForKey:@"newlist"] error:Nil] mutableCopy];
         _pullDown = NO;
-        [_tableView.pullToRefreshView stopAnimating];
+        if (_tableView.pullToRefreshView.state == BUCPullToRefreshStateLoading) {
+            [_tableView.pullToRefreshView stopAnimating];
+        }
         [_tableView reloadData];
 
     }];
@@ -142,11 +182,67 @@
 
 #pragma mark - Action
 - (void)didRightBarClick {
-    [BUCToast showToast:@"Todo"];
+    BUCNewPostViewController *newPost = [[BUCNewPostViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:newPost];
+    newPost.modalPresentationStyle = UIModalPresentationPageSheet;
+    
+    PresentAntimator *animator = [[PresentAntimator alloc] initWithModalViewController:newPost];
+    animator.bounces = NO;
+    animator.behindViewAlpha = 0.9f;
+    animator.behindViewScale = 0.8f;
+    animator.transitionDuration = 1;
+    
+    nav.transitioningDelegate = animator;
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didLeftBarClick {
     [BUCToast showToast:@"Todo"];
+}
+
+#pragma mark - UISearchDisplayController UITableViewDataSource
+- (NSInteger)searchResultTableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _searchResultList.count;
+}
+
+- (UITableViewCell *)searchResultTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUCHomeCell *homeCell = [tableView dequeueReusableCellWithIdentifier:[BUCHomeCell cellReuseIdentifier] forIndexPath:indexPath];
+    homeCell.homeModel = _dataArray[indexPath.row];
+    return homeCell;
+}
+
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    _searchResultList = [NSMutableArray new];
+//    [_customList enumerateObjectsUsingBlock:^(CPConfCustomModel *custom, NSUInteger idx, BOOL *stop) {
+//        if ([custom matchSearchWithKeyword:searchText]) {
+//            [_searchResultList addObject:custom];
+//        }
+//    }];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"from"] = [NSString stringWithFormat:@"%@", @0];
+    parameters[@"to"] = [NSString stringWithFormat:@"%@", @30];
+    parameters[@"key"] = searchBar.text;
+    
+    [[BUCDataManager sharedInstance] GET:[BUCNetworkAPI requestURL:kApiSearchThreads] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        _pullDown = NO;
+        
+    } onSuccess:^(NSDictionary *result) {
+        NSLog(@"search success");
+    }];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 @end

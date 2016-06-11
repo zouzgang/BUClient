@@ -186,7 +186,7 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
         }
     
     if ([tagName isEqualToString:@"br"]) {
-        [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+//        [output appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
         return;
     }
     
@@ -199,9 +199,13 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
     }
     
     //新一行
-    if ([tagName isEqualToString:@"blockquote"] ||
-        [tagName isEqualToString:@"table"] ||
-        [tagName isEqualToString:@"tr"]) {
+//    if ([tagName isEqualToString:@"blockquote"] ||
+//        [tagName isEqualToString:@"table"] ||
+//        [tagName isEqualToString:@"tr"]) {
+//        [stringTemp appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+//    }
+    
+    if ( [tagName isEqualToString:@"table"]) {
         [stringTemp appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
     }
     

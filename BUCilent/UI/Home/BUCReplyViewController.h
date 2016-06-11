@@ -14,6 +14,7 @@ typedef void(^BUCReplyCompleteBlock)(NSString *content, UIImage *attachment);
 
 @property (nonatomic, copy) BUCReplyCompleteBlock completBlock;
 @property (nonatomic, strong) NSNumber *tid;
+@property (nonatomic, copy) NSString *quoteContent;
 
 
 @end

@@ -27,6 +27,7 @@ extern NSString *const kApiTidOrFid;/**<楼层数*/
 extern NSString *const kApiFavorite;/**<收藏*/
 extern NSString *const kApiFavoriteList;/**<收藏列表*/
 extern NSString *const kApiFavoriteStatus;/**<收藏状态*/
+extern NSString *const kApiSearchThreads;/**<主题搜索*/
 
 + (NSString *)baseURL;
 

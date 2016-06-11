@@ -79,18 +79,42 @@ fail:
 }
 
 - (NSURLRequest *)requestWithAPI:(NSString *)URLString type:(BUCNetworRequestType)type parameters:(NSDictionary *)parameters attachment:(UIImage *)attachment isForm:(BOOL)isForm error:(NSError **)error {
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URLString]];
+    NSMutableString *url = [[NSMutableString alloc] initWithString:URLString];
+    
+    if (type == BUCNetworRequestTypeGet || type == BUCNetworRequestTypeDelete) {
+        [url appendString:@"?"];
+        for (NSInteger i = 0; i < parameters.allKeys.count; i ++) {
+            NSString *key = parameters.allKeys[i];
+            NSString *par = [NSString stringWithFormat:@"%@=%@", key,[self urlencode:[parameters objectForKey:key]]];
+            [url appendString:par];
+            if (i != parameters.allKeys.count - 1) {
+                [url appendString:@"&"];
+            }
+        }
+    }
+    
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
     NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
     NSData *data;
-    
-    for (NSString *key in parameters) {
-        [dataJSON setObject:[self urlencode:[parameters objectForKey:key]] forKey:key];
+    if (type == BUCNetworRequestTypePost || type == BUCNetworRequestTypePut) {
+        for (NSString *key in parameters) {
+            [dataJSON setObject:[self urlencode:[parameters objectForKey:key]] forKey:key];
+        }
+        data = [NSJSONSerialization dataWithJSONObject:dataJSON options:0 error:error];
+        if (!data) {
+            return nil;
+        }
     }
+//    for (NSString *key in parameters) {
+//        [dataJSON setObject:[self urlencode:[parameters objectForKey:key]] forKey:key];
+//    }
     
-    data = [NSJSONSerialization dataWithJSONObject:dataJSON options:0 error:error];
-    if (!data) {
-        return nil;
-    }
+//    data = [NSJSONSerialization dataWithJSONObject:dataJSON options:0 error:error];
+//    if (!data) {
+//        return nil;
+//    }
+
     
     static NSString * const boundary = @"0Xbooooooooooooooooundary0Xyeah!";
     if (isForm) {
@@ -123,7 +147,7 @@ fail:
             break;
     }
     
-    if (type == BUCNetworRequestTypePost) {
+    if (type == BUCNetworRequestTypePost || type == BUCNetworRequestTypePut) {
         req.HTTPBody = data;
     }
     
@@ -131,10 +155,12 @@ fail:
     NSString *credit = [NSString stringWithFormat:@"%@:%@",@"bitunion_app", @"bitunion_api"];
     NSString *auth = [NSString stringWithFormat:@"Basic %@",[[credit dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
 
-    [req addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
-    [req addValue:auth forHTTPHeaderField:@"Authorization"];
+    if (type == BUCNetworRequestTypePost) {
+        [req addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+    }
     
-    NSLog(@"request headers:%@",req.allHTTPHeaderFields);
+    
+    [req addValue:auth forHTTPHeaderField:@"Authorization"];
     
     return req;
 }

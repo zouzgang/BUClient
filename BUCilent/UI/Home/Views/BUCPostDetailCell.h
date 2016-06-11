@@ -9,18 +9,10 @@
 #import "BUCBaseTableViewCell.h"
 @class BUCPostDetailModel;
 
-@protocol BUCPostDetailCellDelegate <NSObject>
-
-@required
-- (void)didClickReplyButtonAtIndexPath:(NSIndexPath *)indexPath;
-
-@end
-
 @interface BUCPostDetailCell : BUCBaseTableViewCell
 
 @property (nonatomic, strong) BUCPostDetailModel *postDetailModel;
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, strong) NSIndexPath *indexPath;
-@property (nonatomic, weak) id<BUCPostDetailCellDelegate>delegate;
 
 @end

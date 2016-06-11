@@ -14,6 +14,7 @@
 #import "BUCDataManager.h"
 #import "BUCNetworkAPI.h"
 #import "BUCToast.h"
+#import "CPEventFilterView.h"
 
 @interface BUCPostViewController () <ZZGPagerViewControllerDataSource, ZZGPagerViewControllerDelegate>
 
@@ -23,6 +24,7 @@
      ZZGPagerViewController *_pagerViewController;
     
     NSArray *_dataArray;
+    BOOL _isBook;
 }
 
 - (instancetype)initWithPostTitle:(NSString *)postTitle author:(NSString *)author tid:(NSNumber *)tid tidSum:(NSNumber *)tidSum {
@@ -62,19 +64,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *star;
-     star = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star"] style:UIBarButtonItemStylePlain target:self action:@selector(didBookmarkClick:)];
-//    if ([BUCBookTool hasItemFileID:self.tid]) {
-//        star = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filled_star"] style:UIBarButtonItemStylePlain target:self action:@selector(didBookmarkClick:)];
-//    } else {
-//        star = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star"] style:UIBarButtonItemStylePlain target:self action:@selector(didBookmarkClick:)];
-//    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(didNaviRightButtonClicked)];
     
-    UIBarButtonItem *reply = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(didReplyClick)];
-    
-    self.navigationItem.rightBarButtonItems = @[reply, star];
-    
-//    [self loadData];
+    [self loadData];
 }
 
 - (void)loadData {
@@ -84,10 +76,11 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/%@/%@",[BUCNetworkAPI requestURL:kApiFavoriteStatus],[BUCDataManager sharedInstance].username, self.tid];
     
-    [[BUCDataManager sharedInstance] GET:url parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] GET:url parameters:nil attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         [BUCToast showToast:text];
     } onSuccess:^(NSDictionary *result) {
-        [BUCToast showToast:@"取消收藏"];
+      
+        _isBook = !(((NSString *)result[@"data"]).integerValue == 0);
     }];
 }
 
@@ -116,8 +109,8 @@
 }
 
 #pragma mark - Action
-- (void)didBookmarkClick:(UIBarButtonItem *)star {
 
+- (void)starPost {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
     parameters[@"subject"] = [BUCDataManager sharedInstance].session;
@@ -129,8 +122,18 @@
         [BUCToast showToast:text];
     } onSuccess:^(NSDictionary *result) {
         [BUCToast showToast:@"已收藏"];
+        _isBook = YES;
     }];
+}
 
+- (void)deleteBookMark {
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@",[BUCNetworkAPI requestURL:kApiFavorite],[BUCDataManager sharedInstance].username, self.tid];
+    [[BUCDataManager sharedInstance] DELETE:url parameters:nil attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+        [BUCToast showToast:text];
+    } onSuccess:^(NSDictionary *result) {
+        [BUCToast showToast:@"取消收藏"];
+        _isBook = NO;
+    }];
 }
 
 - (void)didReplyClick {
@@ -141,6 +144,29 @@
     reply.tid = self.tid;
     [self.navigationController pushViewController:reply animated:NO];
 
+}
+
+- (void)didNaviRightButtonClicked {
+    CPEventFilterView *filterView = [[CPEventFilterView alloc] init];
+    NSLog(@"self.view:%@",self.view);
+    [filterView showInView:self.view titles:@[@"回复", _isBook ? @"取消收藏": @"收藏"] completehandler:^(NSInteger index) {
+        if (index == 0) {
+            //reply atuhor
+            BUCReplyViewController *reply = [[BUCReplyViewController alloc] init];
+            reply.completBlock = ^(NSString *content, UIImage *attachment) {
+                
+            };
+            reply.tid = self.tid;
+            [self.navigationController pushViewController:reply animated:NO];
+        } else if (index == 1) {
+
+            if (_isBook) {
+                [self deleteBookMark];
+            } else {
+                [self starPost];
+            }
+        }
+    }];
 }
 
 

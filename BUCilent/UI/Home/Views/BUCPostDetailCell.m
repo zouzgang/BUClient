@@ -16,6 +16,7 @@
 
 #import "UIImageView+WebCache.h"
 #import "BUCImageFullScreen.h"
+#import "BUCPostDetailCell+Reply.h"
 
 const CGFloat kDetailCellLeftPadding = 12;
 const CGFloat kDetailCellTopPadding = 12;
@@ -277,9 +278,7 @@ const CGFloat kDetailCellTopPadding = 12;
 
 #pragma mark - Action
 - (void)didReplyButtonClicked {
-    if (_delegate && [_delegate respondsToSelector:@selector(didClickReplyButtonAtIndexPath:)]) {
-        [_delegate didClickReplyButtonAtIndexPath:_indexPath];
-    }
+    [self replyWithPostDetail:_postDetailModel];
 }
 
 - (void)didAttachmentTap {

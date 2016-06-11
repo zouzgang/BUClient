@@ -23,7 +23,7 @@
 const NSInteger kPostListPageSize = 10;
 
 
-@interface BUCPostListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, BUCPostDetailCellDelegate>
+@interface BUCPostListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @end
 
@@ -89,7 +89,6 @@ const NSInteger kPostListPageSize = 10;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.count = (indexPath.row + 1) + _page * kPostListPageSize;
     cell.indexPath = indexPath;
-    cell.delegate = self;
     cell.postDetailModel = _dataArray[indexPath.row];
     
     return cell;

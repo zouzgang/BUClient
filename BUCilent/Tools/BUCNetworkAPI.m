@@ -28,6 +28,7 @@ NSString *const kApiTidOrFid = @"/open_api/bu_fid_tid.php";
 NSString *const kApiFavorite = @"/api/v2/favorite"; //POST  Delete
 NSString *const kApiFavoriteList = @"/api/v2/favorite/list"; //GET
 NSString *const kApiFavoriteStatus = @"/api/v2/favorite/status"; //GET
+NSString *const kApiSearchThreads = @"/api/v2/search/threads"; //GET
 
 
 NSString *const kLPNetworkRequestShowEmptyPageWhenError = @"kLPNetworkRequestShowEmptyPageWhenError";
