@@ -623,6 +623,7 @@
 		49C580D81D0DB6BC00C8E27F /* CPTakePhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */; };
 		49C580DB1D0E64E600C8E27F /* CPMailCompose.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580DA1D0E64E600C8E27F /* CPMailCompose.m */; };
 		49C580E41D0E98F000C8E27F /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580E31D0E98F000C8E27F /* NSString+Date.m */; };
+		49C580E71D0EF1A500C8E27F /* BUCPostDetailModelDealer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580E61D0EF1A500C8E27F /* BUCPostDetailModelDealer.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1331,6 +1332,8 @@
 		49C580DA1D0E64E600C8E27F /* CPMailCompose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMailCompose.m; sourceTree = "<group>"; };
 		49C580E21D0E98F000C8E27F /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Date.h"; path = "Category/NSString+Date.h"; sourceTree = "<group>"; };
 		49C580E31D0E98F000C8E27F /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Date.m"; path = "Category/NSString+Date.m"; sourceTree = "<group>"; };
+		49C580E51D0EF1A500C8E27F /* BUCPostDetailModelDealer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCPostDetailModelDealer.h; path = UI/Home/Views/BUCPostDetailModelDealer.h; sourceTree = "<group>"; };
+		49C580E61D0EF1A500C8E27F /* BUCPostDetailModelDealer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCPostDetailModelDealer.m; path = UI/Home/Views/BUCPostDetailModelDealer.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2301,6 +2304,8 @@
 				49C580D11D0D360A00C8E27F /* BUCNewPostField.m */,
 				49C580D31D0D9D4100C8E27F /* LPPickerView.h */,
 				49C580D41D0D9D4100C8E27F /* LPPickerView.m */,
+				49C580E51D0EF1A500C8E27F /* BUCPostDetailModelDealer.h */,
+				49C580E61D0EF1A500C8E27F /* BUCPostDetailModelDealer.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -3168,6 +3173,7 @@
 				490B39C01CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m in Sources */,
 				49DA91531CDFADD100B8787B /* BUCUserManager.m in Sources */,
 				490B39C81CFADCBE00578E9E /* BUCBookModel.m in Sources */,
+				49C580E71D0EF1A500C8E27F /* BUCPostDetailModelDealer.m in Sources */,
 				4906ED901CFEB90300B1D5AA /* BUCPostViewController.m in Sources */,
 				49C580C51D0BDD9500C8E27F /* Antimator.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
@@ -3336,8 +3342,8 @@
 			baseConfigurationReference = AF7E450261B0582219AD711F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dito Zou (9XE33GM5SH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dito Zou (9XE33GM5SH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = BUCilent/Info.plist;
@@ -3353,7 +3359,7 @@
 			baseConfigurationReference = 2D39087C48B1B4005FECCF72 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dito Zou (9XE33GM5SH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = "${SDKROOT}/usr/include/libxml2";

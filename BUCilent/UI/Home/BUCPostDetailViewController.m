@@ -19,6 +19,7 @@
 #import "CPEventFilterView.h"
 #import "BUCStringTool.h"
 #import "BUCToast.h"
+#import "BUCPostDetailModelDealer.h"
 
 const NSInteger kPageSize = 20;
 
@@ -31,6 +32,8 @@ const NSInteger kPageSize = 20;
     BUCFooterView *_footerView;
     BUCArray *_dataArray;
     
+    NSMutableDictionary *_cacheDict;
+    
     NSInteger _page;
     BOOL _reverse;
     BOOL _pullUp;
@@ -42,6 +45,7 @@ const NSInteger kPageSize = 20;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _dataArray = [[BUCArray alloc] init];
+        _cacheDict = [NSMutableDictionary dictionary];
         _reverse = NO;
         _pullUp = NO;
     }
@@ -96,10 +100,12 @@ const NSInteger kPageSize = 20;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BUCPostDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:[BUCPostDetailCell cellReuseIdentifier] forIndexPath:indexPath];
+    BUCPostDetailModel *postDetail = _dataArray[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.count = !_reverse ? (indexPath.row + 1) : (_tidSum.integerValue - indexPath.row + 1);
     cell.indexPath = indexPath;
-    cell.postDetailModel = _dataArray[indexPath.row];
+    cell.postDetailModel = postDetail;
+    cell.attributedString = _cacheDict[postDetail.pid][@"attributedString"];
     
     return cell;
 }
@@ -107,10 +113,8 @@ const NSInteger kPageSize = 20;
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat height = [tableView fd_heightForCellWithIdentifier:[BUCPostDetailCell cellReuseIdentifier] configuration:^(BUCPostDetailCell *cell) {
-        cell.postDetailModel = _dataArray[indexPath.row];
-    }];
-    return height;
+    BUCPostDetailModel *postDetail = _dataArray[indexPath.row];
+    return ((NSNumber *)_cacheDict[postDetail.pid][@"height"]).floatValue;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -161,7 +165,13 @@ const NSInteger kPageSize = 20;
         _pullUp = NO;
         _tableView.tableFooterView.hidden = YES;
         [_footerView stopAnimation];
-        [_tableView reloadData];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [BUCPostDetailModelDealer cacheArray:_dataArray cacheMap:_cacheDict];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tableView reloadData];
+            });
+        });
         
     }];
 }

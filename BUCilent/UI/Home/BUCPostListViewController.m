@@ -19,6 +19,7 @@
 #import "CPEventFilterView.h"
 #import "BUCBookTool.h"
 #import "BUCToast.h"
+#import "BUCPostDetailModelDealer.h"
 
 const NSInteger kPostListPageSize = 10;
 
@@ -32,6 +33,8 @@ const NSInteger kPostListPageSize = 10;
     BUCFooterView *_footerView;
     BUCArray *_dataArray;
     
+    NSMutableDictionary *_cacheDict;
+    
     NSInteger _page;
 }
 
@@ -39,6 +42,7 @@ const NSInteger kPostListPageSize = 10;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _dataArray = [[BUCArray alloc] init];
+        _cacheDict = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -86,10 +90,12 @@ const NSInteger kPostListPageSize = 10;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BUCPostDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:[BUCPostDetailCell cellReuseIdentifier] forIndexPath:indexPath];
+    BUCPostDetailModel *postDetail = _dataArray[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.count = (indexPath.row + 1) + _page * kPostListPageSize;
     cell.indexPath = indexPath;
-    cell.postDetailModel = _dataArray[indexPath.row];
+    cell.postDetailModel = postDetail;
+    cell.attributedString = _cacheDict[postDetail.pid][@"attributedString"];
     
     return cell;
 }
@@ -97,10 +103,8 @@ const NSInteger kPostListPageSize = 10;
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat height = [tableView fd_heightForCellWithIdentifier:[BUCPostDetailCell cellReuseIdentifier] configuration:^(BUCPostDetailCell *cell) {
-        cell.postDetailModel = _dataArray[indexPath.row];
-    }];
-    return height;
+    BUCPostDetailModel *postDetail = _dataArray[indexPath.row];
+    return ((NSNumber *)_cacheDict[postDetail.pid][@"height"]).floatValue;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,7 +139,14 @@ const NSInteger kPostListPageSize = 10;
     
         _tableView.tableFooterView.hidden = YES;
         [_footerView stopAnimation];
-        [_tableView reloadData];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [BUCPostDetailModelDealer cacheArray:_dataArray cacheMap:_cacheDict];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tableView reloadData];
+            });
+        });
+        
     }];
 }
 

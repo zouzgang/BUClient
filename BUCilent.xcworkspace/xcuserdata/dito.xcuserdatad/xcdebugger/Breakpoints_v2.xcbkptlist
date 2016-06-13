@@ -153,38 +153,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BUCilent/UI/Home/Views/BUCPostDetailCell.m"
-            timestampString = "486986581.456123"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "-sizeThatFits:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BUCilent/UI/Home/Views/BUCPostDetailCell.m"
-            timestampString = "486986581.456123"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "-sizeThatFits:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BUCilent/UI/Home/BUCHomeViewController.m"
             timestampString = "487481617.645808"
             startingColumnNumber = "9223372036854775807"
@@ -618,12 +586,12 @@
                   moduleName = "BUCilent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCReplyViewController.m"
-                  timestampString = "487496563.173163"
+                  timestampString = "487521003.582551"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "144"
                   endingLineNumber = "144"
-                  offsetFromSymbolStart = "1544">
+                  offsetFromSymbolStart = "1407">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -633,12 +601,12 @@
                   moduleName = "BUCilent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCReplyViewController.m"
-                  timestampString = "487496563.173382"
+                  timestampString = "487521003.582655"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "144"
                   endingLineNumber = "144"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -794,11 +762,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BUCilent/UI/Home/Views/BUCPostDetailCell.m"
-            timestampString = "487443845.109918"
+            timestampString = "487521735.745355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "-setPostDetailModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1082,11 +1050,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BUCilent/UI/Home/BUCPostListViewController.m"
-            timestampString = "486986666.974142"
+            timestampString = "487521735.745355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
@@ -1130,11 +1098,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BUCilent/UI/Home/BUCPostListViewController.m"
-            timestampString = "486986666.974142"
+            timestampString = "487521735.745355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "-dealNetworkError"
             landmarkType = "5">
          </BreakpointContent>
@@ -1146,11 +1114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BUCilent/UI/Home/BUCPostListViewController.m"
-            timestampString = "486986666.974142"
+            timestampString = "487521735.745355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "-dealNetworkError"
             landmarkType = "5">
          </BreakpointContent>
@@ -1232,70 +1200,6 @@
             startingLineNumber = "113"
             endingLineNumber = "113"
             landmarkName = "-requestWithAPI:type:parameters:attachment:isForm:error:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BUCilent/UI/Home/BUCPostViewController.m"
-            timestampString = "487350750.148644"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-loadData"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[BUCPostViewController loadData]"
-                  moduleName = "BUCilent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostViewController.m"
-                  timestampString = "487496563.178087"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
-                  offsetFromSymbolStart = "740">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__33-[BUCPostViewController loadData]_block_invoke"
-                  moduleName = "BUCilent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostViewController.m"
-                  timestampString = "487496563.178221"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BUCilent/UI/Home/BUCPostViewController.m"
-            timestampString = "487350750.148644"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1446,101 +1350,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BUCilent/UI/Home/BUCPostViewController.m"
-            timestampString = "487350750.148644"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-loadData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BUCilent/UI/Home/BUCPostViewController.m"
-            timestampString = "487350750.148644"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-loadData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BUCilent/UI/Home/BUCPostViewController.m"
-            timestampString = "487350750.148644"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-loadData"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__33-[BUCPostViewController loadData]_block_invoke_2"
-                  moduleName = "BUCilent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostViewController.m"
-                  timestampString = "487496563.181482"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "312">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_"
-                  moduleName = "BUCilent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostViewController.m"
-                  timestampString = "487496563.1816"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_"
-                  moduleName = "BUCilent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostViewController.m"
-                  timestampString = "487496563.181699"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1561,12 +1370,12 @@
                   moduleName = "BUCilent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostViewController.m"
-                  timestampString = "487496563.183976"
+                  timestampString = "487521003.587509"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "133"
                   endingLineNumber = "133"
-                  offsetFromSymbolStart = "340">
+                  offsetFromSymbolStart = "270">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1576,12 +1385,12 @@
                   moduleName = "BUCilent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostViewController.m"
-                  timestampString = "487496563.184104"
+                  timestampString = "487521003.58761"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "134"
                   endingLineNumber = "134"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1651,11 +1460,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BUCilent/UI/Home/Views/BUCPostDetailCell.m"
-            timestampString = "487480759.19172"
+            timestampString = "487521735.745355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-textView:shouldInteractWithURL:inRange:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1683,12 +1492,12 @@
                   moduleName = "BUCilent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCNewPostViewController.m"
-                  timestampString = "487496563.187482"
+                  timestampString = "487521003.590871"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "226"
                   endingLineNumber = "226"
-                  offsetFromSymbolStart = "1856">
+                  offsetFromSymbolStart = "1707">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1698,12 +1507,12 @@
                   moduleName = "BUCilent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCNewPostViewController.m"
-                  timestampString = "487496563.187592"
+                  timestampString = "487521003.590979"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "226"
                   endingLineNumber = "226"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1785,6 +1594,86 @@
             startingLineNumber = "22"
             endingLineNumber = "22"
             landmarkName = "-parseDateString"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BUCilent/UI/Home/BUCPostListViewController.m"
+            timestampString = "487521735.745355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "-loadData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BUCilent/UI/Home/BUCPostListViewController.m"
+            timestampString = "487521735.745355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-loadData"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__37-[BUCPostListViewController loadData]_block_invoke_2"
+                  moduleName = "BUCilent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostListViewController.m"
+                  timestampString = "487521003.594923"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "113">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__37-[BUCPostListViewController loadData]_block_invoke_3"
+                  moduleName = "BUCilent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dito/Documents/Developer/Demo/BUCilent/BUCilent/UI/Home/BUCPostListViewController.m"
+                  timestampString = "487521003.59502"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BUCilent/UI/Home/BUCPostListViewController.m"
+            timestampString = "487521735.745355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

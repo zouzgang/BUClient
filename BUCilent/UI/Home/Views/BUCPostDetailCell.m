@@ -48,7 +48,6 @@ const CGFloat kDetailCellTopPadding = 12;
 
 - (void)setupViews {
     [super setupViews];
-    self.fd_enforceFrameLayout = YES;
     
     _backgroundView = [[UIView alloc] init];
     _backgroundView.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
@@ -105,11 +104,11 @@ const CGFloat kDetailCellTopPadding = 12;
     _attachmentImageView.userInteractionEnabled = YES;
     [_attachmentImageView addGestureRecognizer:tap];
     
-    [self updateConstraints];
+    [self setupConstraints];
 
 }
 
-- (void)updateConstraints {
+- (void)setupConstraints {
     [_backgroundView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
     }];
@@ -164,102 +163,45 @@ const CGFloat kDetailCellTopPadding = 12;
         make.bottom.equalTo(self.contentView);
         make.height.mas_equalTo(0.5);
     }];
-    
-    [super updateConstraints];
 }
 
-- (CGSize)sizeThatFits:(CGSize)size {
-    [self layoutIfNeeded];
-    CGFloat height;
-    if (_postDetailModel.attachment) {
-        height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2 + kDetailCellTopPadding / 2 + ((_attachmentImageView.image.size.height < 250) ? _attachmentImageView.image.size.height : 250);
-    } else {
-        height = kDetailCellTopPadding + 50 + kDetailCellTopPadding + [self heightOfContent].height + kDetailCellTopPadding * 2;
-    }
-    return CGSizeMake([UIScreen mainScreen].bounds.size.width, height);
-}
-
-- (CGSize)heightOfContent {
-    NSTextStorage *textStorage = [[NSTextStorage alloc] init];
-    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
-    [textStorage addLayoutManager:layoutManager];
-    
-    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 2 * kDetailCellLeftPadding - 16, MAXFLOAT)];
-    [textContainer setLineFragmentPadding:5.0];
-    [layoutManager addTextContainer:textContainer];
-    
-    if (_atttibutedString)
-        [textStorage setAttributedString:_atttibutedString];
-    [layoutManager glyphRangeForTextContainer:textContainer];
-    [layoutManager ensureLayoutForTextContainer:textContainer];
-    
-    CGRect frame = [layoutManager usedRectForTextContainer:textContainer];
-    return CGSizeMake(frame.size.width, frame.size.height + 20);
-}
 
 - (void)setPostDetailModel:(BUCPostDetailModel *)postDetailModel {
     _postDetailModel = postDetailModel;
-    
-    NSMutableString *content = [[NSMutableString alloc] init];
-    NSString *title = [self urldecode:_postDetailModel.subject];
-    if (title) {
-        title = [NSString stringWithFormat:@"<b>%@</b>\n\n", title];
-        [content appendString:title];
-    }
-    //////message
-    NSString *body = [self urldecode:_postDetailModel.message];
-    if (body != nil) {
-        [content appendString:body];
-    }
-    
-    //需要缓存todo
-    _atttibutedString = [[NSMutableAttributedString alloc] init];
-    _atttibutedString = [[BUCHtmlScraper sharedInstance] richTextFromHtml:content].copy;
 
-    
     _authorLabel.text = [self urldecode:_postDetailModel.author];
     _timeLabel.text = [self parseDateline:_postDetailModel.dateline];
     
     if (_postDetailModel.attachment) {
         NSString *attachment = [NSString stringWithFormat:@"%@/%@", @"http://out.bitunion.org", [self urldecode:_postDetailModel.attachment]];
         NSURL *attachmentUrl = [NSURL URLWithString:attachment];
-        [_attachmentImageView sd_setImageWithURL:attachmentUrl placeholderImage:nil];
+        [_attachmentImageView sd_setImageWithURL:attachmentUrl placeholderImage:[UIImage imageNamed:@"loading"]];
     }
     
     [_avatarImageView sd_setImageWithURL:[[BUCHtmlScraper sharedInstance] avatarUrlFromHtml:[self urldecode:_postDetailModel.avatar]] placeholderImage:[UIImage imageNamed:@"avatar"]];
     _countLabel.text = [NSString stringWithFormat:@"#%ld",(long)_count];
     
-    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:_atttibutedString];
-    [_atttibutedString enumerateAttributesInRange:NSMakeRange(0, _atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
-        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
-        if (attachment && attachment.url) {
-            UIImageView *imageView = [[UIImageView alloc] init];
-            imageView.bounds =  attachment.bounds;
-            
-             [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                BUCTextAttachment *newAttachment = [[BUCTextAttachment alloc] init];
-                newAttachment.image = image;
-                 //todo attachment 尺寸
-//                 if (image.size.width > attachment.bounds.size.width || image.size.height > attachment.bounds.size.height) {
-//                     CGFloat scale = image.size.width * attachment.bounds.size.width / [UIScreen mainScreen].bounds.size.width;
-//                     newAttachment.bounds = CGRectMake(0, 0, image.size.width * scale, image.size.height * scale);
-//                 } else {
-//                    newAttachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
-//                 }
-                 
-                 newAttachment.bounds = attachment.bounds;
-  
-                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:newAttachment]];
-            }];
-        }
-    }];
-    _contentTextView.attributedText = resultString;
-    
-    [self setupConstraints];
+    [self updateConstraints];
 }
 
-- (void)setupConstraints {
-    [_attachmentImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+- (void)setAttributedString:(NSAttributedString *)attributedString {
+    _attributedString = attributedString;
+    if (_attributedString) {
+        _contentTextView.attributedText = attributedString;
+    }
+}
+
+- (void)updateConstraints {
+    [_contentTextView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_avatarImageView.mas_bottom).offset(kDetailCellTopPadding);
+        make.left.equalTo(self.contentView).offset(kDetailCellLeftPadding);
+        make.right.equalTo(self.contentView).offset(-kDetailCellLeftPadding);
+        if (!_postDetailModel.attachment) {
+            make.bottom.equalTo(self.contentView).offset(-2 * kDetailCellTopPadding);
+        }
+    }];
+    
+    [_attachmentImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(_contentTextView.mas_bottom).offset(kDetailCellTopPadding / 2);
         if (_attachmentImageView.image.size.height < 250) {
@@ -275,9 +217,9 @@ const CGFloat kDetailCellTopPadding = 12;
             _attachmentImageView.hidden = YES;
         }
     }];
-
+    
+    [super updateConstraints];
 }
-
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
     UIImageView *imageView = [[UIImageView alloc] init];
