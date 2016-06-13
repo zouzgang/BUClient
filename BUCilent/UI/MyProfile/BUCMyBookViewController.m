@@ -20,20 +20,22 @@
 #import "BUCBookCell.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "BUCBookModel.h"
+#import "BUCFooterView.h"
 
 
 const NSInteger kBookPageSize = 20;
 
-@interface BUCMyBookViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface BUCMyBookViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @end
 
 @implementation BUCMyBookViewController {
     UITableView *_tableView;
     BUCArray *_dataArray;
-    
+    BUCFooterView *_footerView;
+
     NSInteger _page;
-    BOOL _reverse;
+    BOOL _noMore;
     BOOL _pullUp;
 }
 
@@ -57,6 +59,10 @@ const NSInteger kBookPageSize = 20;
     _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [_tableView registerClass:[BUCBookCell class] forCellReuseIdentifier:[BUCBookCell cellReuseIdentifier]];
     [self.view addSubview:_tableView];
+    
+    _footerView = [[BUCFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    _tableView.tableFooterView = _footerView;
+    _tableView.tableFooterView.hidden = YES;
     
     [self updateViewConstraints];
 }
@@ -108,11 +114,24 @@ const NSInteger kBookPageSize = 20;
     return CGFLOAT_MIN;
 }
 
+#pragma mark - UIScroviewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (_pullUp == NO && scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.size.height + 50) && !_noMore) {
+        
+        _tableView.tableFooterView.hidden = NO;
+        if ([_dataArray hasMore]) {
+            [_footerView startAnimation];
+            [self loadData:NO];
+        } else {
+            [_footerView showText];
+        }
+    }
+}
+
 #pragma mark - API
 - (void)loadData:(BOOL)isFirst {
     if (isFirst) {
         _page = 0;
-//        _dataArray.totalSize = self.tidSum.integerValue + 1;
         _dataArray.totalSize = 20;
         _dataArray.pageSize = kBookPageSize;
     }
@@ -122,8 +141,7 @@ const NSInteger kBookPageSize = 20;
     NSString *url = [NSString stringWithFormat:@"%@/%@",[BUCNetworkAPI requestURL:kApiFavoriteList],[BUCDataManager sharedInstance].username];
     
     parameters[@"from"] =[NSString stringWithFormat:@"%ld",_page * kBookPageSize];
-     parameters[@"to"] = [NSString stringWithFormat:@"%@", @30];
-//    parameters[@"to"] = ((_page + 1) * kBookPageSize < _dataArray.totalSize) ? [NSString stringWithFormat:@"%ld",(_page + 1) * kBookPageSize] : [NSString stringWithFormat:@"%ld", (long)_dataArray.totalSize];
+     parameters[@"to"] = [NSString stringWithFormat:@"%ld",(_page + 1) * kBookPageSize];
     
     [[BUCDataManager sharedInstance] GET:url parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
         
@@ -131,12 +149,15 @@ const NSInteger kBookPageSize = 20;
         NSLog(@"booklist success");
         NSArray *array = [MTLJSONAdapter modelsOfClass:BUCBookModel.class fromJSONArray:[result objectForKey:@"data"] error:Nil];
         [_dataArray addObjectsFromArray:array];
+        if (array.count < kBookPageSize)
+            _noMore = YES;
+        
         _page += 1;
         _dataArray.page = _page;
         
         _pullUp = NO;
         _tableView.tableFooterView.hidden = YES;
-//        [_footerView stopAnimation];
+        [_footerView stopAnimation];
         [_tableView reloadData];
         
     }];

@@ -11,7 +11,7 @@
 #import "UIColor+BUC.h"
 #import "BUCSearchModel.h"
 #import "BUCBookModel.h"
-
+#import "NSString+Date.h"
 
 @implementation BUCBookCell {
     UILabel *_titleLabel;
@@ -96,6 +96,7 @@
     if (_bookModel) {
         _titleLabel.text = [self urldecode:bookModel.postTitle];
         _authorLabel.text = [self urldecode:bookModel.author];
+        _timeLabel.text = [bookModel.create parseDateString];
         [self updateConstraints];
     }
 }

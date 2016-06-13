@@ -106,14 +106,6 @@ fail:
             return nil;
         }
     }
-//    for (NSString *key in parameters) {
-//        [dataJSON setObject:[self urlencode:[parameters objectForKey:key]] forKey:key];
-//    }
-    
-//    data = [NSJSONSerialization dataWithJSONObject:dataJSON options:0 error:error];
-//    if (!data) {
-//        return nil;
-//    }
 
     
     static NSString * const boundary = @"0Xbooooooooooooooooundary0Xyeah!";
@@ -179,7 +171,7 @@ fail:
         [body appendData:[@"Content-Type:image/png\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[@"Content-Transfer-Encoding:binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:UIImagePNGRepresentation(attachment)];
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary]dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
     return body;

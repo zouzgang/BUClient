@@ -44,12 +44,12 @@ const CGFloat kForumCellTopPadding = 12;
     
     _scanCountLabel = [[UILabel alloc] init];
     _scanCountLabel.textColor = [UIColor colorWithHexString:@"#727272"];
-    _scanCountLabel.font = [UIFont systemFontOfSize:15];
+    _scanCountLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_scanCountLabel];
     
     _dateLabel = [[UILabel alloc] init];
     _dateLabel.textColor = [UIColor colorWithHexString:@"#727272"];
-    _dateLabel.font = [UIFont systemFontOfSize:15];
+    _dateLabel.font = [UIFont systemFontOfSize:12];
     _dateLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:_dateLabel];
     
@@ -70,20 +70,20 @@ const CGFloat kForumCellTopPadding = 12;
     [_authorLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_titleLabel.mas_bottom).offset(kForumCellTopPadding);
         make.left.equalTo(_titleLabel.mas_left);
-        make.width.mas_equalTo(120);
+        make.width.mas_equalTo(115);
         make.bottom.equalTo(self.contentView).offset(- kForumCellTopPadding);
     }];
     
     [_scanCountLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_authorLabel.mas_top);
         make.left.equalTo(_authorLabel.mas_right).offset(2 * kForumCellLeftPadding);
-        make.width.mas_equalTo(80);
+        make.width.mas_equalTo(65);
     }];
     
     [_dateLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_authorLabel.mas_top);
-        make.right.equalTo(self.contentView).offset(-kForumCellLeftPadding);
-        make.left.equalTo(_scanCountLabel.mas_right).offset(kForumCellLeftPadding);
+        make.right.equalTo(self.contentView).offset(-kForumCellLeftPadding / 2);
+        make.left.equalTo(_scanCountLabel.mas_right).offset(kForumCellLeftPadding / 2);
     }];
     
     [_separatorLine mas_updateConstraints:^(MASConstraintMaker *make) {

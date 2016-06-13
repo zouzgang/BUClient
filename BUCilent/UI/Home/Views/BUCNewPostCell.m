@@ -10,6 +10,7 @@
 #import <Masonry.h>
 #import "UIColor+BUC.h"
 #import "BUCNewPostField.h"
+#import "BUCToast.h"
 
 @interface BUCNewPostCell () <UITextFieldDelegate>
 
@@ -75,6 +76,11 @@
 
 #pragma mark - Action
 - (void)didTextchange:(UITextField *)textField {
+    if (textField.text.length > 20) {
+        [textField resignFirstResponder];
+        [BUCToast showToast:@"字数不能大于20"];
+        return;
+    }
     if (textField.text) {
         if (self.inputBlock) {
             self.inputBlock(textField.text);

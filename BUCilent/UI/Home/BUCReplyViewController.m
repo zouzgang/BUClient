@@ -12,8 +12,9 @@
 #import "BUCNetworkAPI.h"
 #import "UIColor+BUC.h"
 #import "BUCToast.h"
+#import "CPTakePhotoTool.h"
 
-@interface BUCReplyViewController () <UITextViewDelegate>
+@interface BUCReplyViewController () <UITextViewDelegate, UIScrollViewDelegate>
 
 @end
 
@@ -21,6 +22,7 @@
     UITextView *_textView;
     UIButton *_button;
     UIImageView *_imageView;
+    UILabel *_attachLabel;
     
     UIImage *_attachmentImage;
 }
@@ -44,6 +46,7 @@
     _textView.layer.borderWidth = 3;
     _textView.layer.cornerRadius = 8;
     _textView.layer.masksToBounds = YES;
+    _textView.scrollEnabled = YES;
     [self.view addSubview:_textView];
     
     _button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -56,6 +59,13 @@
     [_button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [_button addTarget:self action:@selector(didButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_button];
+    
+    _attachLabel = [[UILabel alloc] init];
+    _attachLabel.textColor = [UIColor colorWithHexString:@"#727272"];
+    _attachLabel.font = [UIFont systemFontOfSize:16];
+    _attachLabel.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:_attachLabel];
+    _attachLabel.text = @"未选择";
 
     _imageView = [[UIImageView alloc] init];
     [self.view addSubview:_imageView];
@@ -68,12 +78,18 @@
     [_textView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(160);
     }];
     
     [_button mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_textView.mas_bottom).offset(12);
         make.left.equalTo(self.view).offset(12);
+        make.size.mas_equalTo(CGSizeMake(100, 44));
+    }];
+    
+    [_attachLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(_button.mas_centerY);
+        make.left.equalTo(_button.mas_right).offset(12);
         make.size.mas_equalTo(CGSizeMake(100, 44));
     }];
     
@@ -94,12 +110,20 @@
 
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length > 150) {
+        [BUCToast showToast:@"字数不能大于150"];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
 
 
 #pragma mark - action
 - (void)didNaviRightButtonClick {
     // reply
+    [self.view endEditing:YES];
     if ((_textView.text && ![_textView.text isEqualToString:@""]) || _quoteContent) {
         self.navigationItem.rightBarButtonItem.enabled = NO;
 
@@ -107,7 +131,7 @@
         parameters[@"action"] = @"newreply";
         parameters[@"username"] = [BUCDataManager sharedInstance].username;
         parameters[@"session"] = [BUCDataManager sharedInstance].session;
-        parameters[@"tid"] = self.tid;
+        parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
         NSString *message;
         if (_quoteContent) {
             message = [NSString stringWithFormat:@"%@%@",_quoteContent,_textView.text];
@@ -135,6 +159,17 @@
 
 - (void)didButtonClicked {
     //add attachment
+    [self.view endEditing:YES];
+    [CPTakePhotoTool didClickGetPhotos:self completionBlock:^(UIImage *image) {
+        NSData *data = UIImageJPEGRepresentation(image, 1);
+        float length = [data length] / 1024;
+        if (length > 1024) {
+            [BUCToast showToast:@"附件不能大于1M"];
+        } else {
+            _attachmentImage = image;
+            _attachLabel.text = @"已选择";
+        }
+    }];
 }
 
 @end

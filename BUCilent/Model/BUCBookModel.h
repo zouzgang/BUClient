@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSNumber *tidSum;
 @property (nonatomic, copy) NSString *postTitle;
 @property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *create;
 
 
 @end

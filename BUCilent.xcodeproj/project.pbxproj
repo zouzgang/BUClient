@@ -622,6 +622,7 @@
 		49C580D51D0D9D4100C8E27F /* LPPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D41D0D9D4100C8E27F /* LPPickerView.m */; };
 		49C580D81D0DB6BC00C8E27F /* CPTakePhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */; };
 		49C580DB1D0E64E600C8E27F /* CPMailCompose.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580DA1D0E64E600C8E27F /* CPMailCompose.m */; };
+		49C580E41D0E98F000C8E27F /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580E31D0E98F000C8E27F /* NSString+Date.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1328,6 +1329,8 @@
 		49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTakePhotoTool.m; sourceTree = "<group>"; };
 		49C580D91D0E64E600C8E27F /* CPMailCompose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMailCompose.h; sourceTree = "<group>"; };
 		49C580DA1D0E64E600C8E27F /* CPMailCompose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMailCompose.m; sourceTree = "<group>"; };
+		49C580E21D0E98F000C8E27F /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Date.h"; path = "Category/NSString+Date.h"; sourceTree = "<group>"; };
+		49C580E31D0E98F000C8E27F /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Date.m"; path = "Category/NSString+Date.m"; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2326,6 +2329,8 @@
 				490B39BF1CFA8F2800578E9E /* UIScrollView+BUCPullToRefresh.m */,
 				4906ED7A1CFE99DE00B1D5AA /* UIImage+BUCImage.h */,
 				4906ED7B1CFE99DE00B1D5AA /* UIImage+BUCImage.m */,
+				49C580E21D0E98F000C8E27F /* NSString+Date.h */,
+				49C580E31D0E98F000C8E27F /* NSString+Date.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -3147,6 +3152,7 @@
 				49DA915D1CE06D0200B8787B /* BUCHomeModel.m in Sources */,
 				4906ED7F1CFEB80800B1D5AA /* ZZGTabBar.m in Sources */,
 				49900A721CFFE44700911054 /* BUCEmptyView.m in Sources */,
+				49C580E41D0E98F000C8E27F /* NSString+Date.m in Sources */,
 				49DA913D1CDF94AC00B8787B /* BUCHomeCell.m in Sources */,
 				49C580C81D0C3E0000C8E27F /* BUCBookCell.m in Sources */,
 				4906ED891CFEB85100B1D5AA /* ZZGPagerViewController.m in Sources */,

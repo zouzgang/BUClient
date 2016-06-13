@@ -167,6 +167,8 @@
                 [BUCToast showToast:@"附件不能大于1M"];
             } else {
                 _attachmentImage = image;
+                _dataArray[indexPath.row].content = @"已选择附件";
+                [_tableView reloadData];
             }
         }];
     }
@@ -184,6 +186,13 @@
         [_scrollView scrollsToTop];
         _scrollView.contentOffset = CGPointMake(0, 0);
     }];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length > 150) {
+        [textView resignFirstResponder];
+        [BUCToast showToast:@"字数不能大于150"];
+    }
 }
 
 #pragma mark - Action
