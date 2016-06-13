@@ -21,6 +21,7 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "BUCBookModel.h"
 
+
 const NSInteger kBookPageSize = 20;
 
 @interface BUCMyBookViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -39,6 +40,7 @@ const NSInteger kBookPageSize = 20;
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.navigationItem.title = @"我的收藏";
         _dataArray = [[BUCArray alloc] init];
     }
     return self;

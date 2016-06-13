@@ -14,6 +14,8 @@
 #import "BUCTabViewController.h"
 #import "AppDelegate.h"
 #import "BUCToast.h"
+#import "NSString+Tools.h"
+
 
 @interface BUCLoginViewController ()
 
@@ -30,7 +32,7 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.navigationItem.title = @"登陆";
+        self.title = @"登陆";
     }
     return self;
 }
@@ -66,7 +68,7 @@
 
 - (void)updateViewConstraints {
     [_usernameTextField mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(160);
+        make.top.equalTo(self.view).offset(60);
         make.left.equalTo(self.view).offset(24);
         make.right.equalTo(self.view).offset(-24);
         make.height.mas_equalTo(32);
@@ -95,7 +97,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults stringForKey:@"username"];
     NSString *password = [defaults stringForKey:@"password"];
-    if (username && password) {
+    if (![NSString isEmptyString:username] && ![NSString isEmptyString:password]) {
         _usernameTextField.text = username;
         _passwordTextField.text = password;
         [self loginWithUsername:username password:password];
@@ -118,6 +120,7 @@
 
 #pragma mark - API
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password {
+    [self.view endEditing:YES];
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     [parameters setObject:@"login" forKey:@"action"];

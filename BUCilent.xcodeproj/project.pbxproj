@@ -621,6 +621,7 @@
 		49C580D21D0D360A00C8E27F /* BUCNewPostField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D11D0D360A00C8E27F /* BUCNewPostField.m */; };
 		49C580D51D0D9D4100C8E27F /* LPPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D41D0D9D4100C8E27F /* LPPickerView.m */; };
 		49C580D81D0DB6BC00C8E27F /* CPTakePhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */; };
+		49C580DB1D0E64E600C8E27F /* CPMailCompose.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580DA1D0E64E600C8E27F /* CPMailCompose.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1325,6 +1326,8 @@
 		49C580D41D0D9D4100C8E27F /* LPPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPickerView.m; sourceTree = "<group>"; };
 		49C580D61D0DB6BC00C8E27F /* CPTakePhotoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTakePhotoTool.h; sourceTree = "<group>"; };
 		49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTakePhotoTool.m; sourceTree = "<group>"; };
+		49C580D91D0E64E600C8E27F /* CPMailCompose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMailCompose.h; sourceTree = "<group>"; };
+		49C580DA1D0E64E600C8E27F /* CPMailCompose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMailCompose.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2046,6 +2049,8 @@
 		4906ED801CFEB81100B1D5AA /* ZZG */ = {
 			isa = PBXGroup;
 			children = (
+				49C580D91D0E64E600C8E27F /* CPMailCompose.h */,
+				49C580DA1D0E64E600C8E27F /* CPMailCompose.m */,
 				49C580D61D0DB6BC00C8E27F /* CPTakePhotoTool.h */,
 				49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */,
 				4906ED811CFEB83000B1D5AA /* ViewPager */,
@@ -3170,6 +3175,7 @@
 				49C580D51D0D9D4100C8E27F /* LPPickerView.m in Sources */,
 				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
+				49C580DB1D0E64E600C8E27F /* CPMailCompose.m in Sources */,
 				49C580C41D0BDD9500C8E27F /* PresentAntimator.m in Sources */,
 				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
 				490B39D11CFB094C00578E9E /* BUCForumCell.m in Sources */,
