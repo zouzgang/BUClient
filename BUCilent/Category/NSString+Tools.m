@@ -10,7 +10,7 @@
 
 @implementation NSString (Tools)
 
-- (BOOL)isEmptyString:(NSString *)string {
++ (BOOL)isEmptyString:(NSString *)string {
     if (!string)
         return YES;
     if ([string isEqualToString:@""])

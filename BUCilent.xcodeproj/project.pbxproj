@@ -617,6 +617,10 @@
 		49C580C51D0BDD9500C8E27F /* Antimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580C21D0BDD9500C8E27F /* Antimator.m */; };
 		49C580C81D0C3E0000C8E27F /* BUCBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580C71D0C3E0000C8E27F /* BUCBookCell.m */; };
 		49C580CC1D0C3FAB00C8E27F /* BUCSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580CB1D0C3FAB00C8E27F /* BUCSearchModel.m */; };
+		49C580CF1D0D0D2300C8E27F /* BUCNewPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580CE1D0D0D2300C8E27F /* BUCNewPostCell.m */; };
+		49C580D21D0D360A00C8E27F /* BUCNewPostField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D11D0D360A00C8E27F /* BUCNewPostField.m */; };
+		49C580D51D0D9D4100C8E27F /* LPPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D41D0D9D4100C8E27F /* LPPickerView.m */; };
+		49C580D81D0DB6BC00C8E27F /* CPTakePhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */; };
 		49DA90E81CDF8F5100B8787B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90E71CDF8F5100B8787B /* main.m */; };
 		49DA90EB1CDF8F5100B8787B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90EA1CDF8F5100B8787B /* AppDelegate.m */; };
 		49DA90EE1CDF8F5100B8787B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DA90ED1CDF8F5100B8787B /* ViewController.m */; };
@@ -1313,6 +1317,14 @@
 		49C580C71D0C3E0000C8E27F /* BUCBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCBookCell.m; path = UI/MyProfile/View/BUCBookCell.m; sourceTree = "<group>"; };
 		49C580CA1D0C3FAB00C8E27F /* BUCSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCSearchModel.h; path = Model/BUCSearchModel.h; sourceTree = "<group>"; };
 		49C580CB1D0C3FAB00C8E27F /* BUCSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCSearchModel.m; path = Model/BUCSearchModel.m; sourceTree = "<group>"; };
+		49C580CD1D0D0D2300C8E27F /* BUCNewPostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCNewPostCell.h; path = UI/Home/Views/BUCNewPostCell.h; sourceTree = "<group>"; };
+		49C580CE1D0D0D2300C8E27F /* BUCNewPostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCNewPostCell.m; path = UI/Home/Views/BUCNewPostCell.m; sourceTree = "<group>"; };
+		49C580D01D0D360A00C8E27F /* BUCNewPostField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUCNewPostField.h; path = UI/Home/Views/BUCNewPostField.h; sourceTree = "<group>"; };
+		49C580D11D0D360A00C8E27F /* BUCNewPostField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUCNewPostField.m; path = UI/Home/Views/BUCNewPostField.m; sourceTree = "<group>"; };
+		49C580D31D0D9D4100C8E27F /* LPPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPickerView.h; sourceTree = "<group>"; };
+		49C580D41D0D9D4100C8E27F /* LPPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPickerView.m; sourceTree = "<group>"; };
+		49C580D61D0DB6BC00C8E27F /* CPTakePhotoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTakePhotoTool.h; sourceTree = "<group>"; };
+		49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTakePhotoTool.m; sourceTree = "<group>"; };
 		49DA90E31CDF8F5100B8787B /* BUCilent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUCilent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA90E71CDF8F5100B8787B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49DA90E91CDF8F5100B8787B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2034,6 +2046,8 @@
 		4906ED801CFEB81100B1D5AA /* ZZG */ = {
 			isa = PBXGroup;
 			children = (
+				49C580D61D0DB6BC00C8E27F /* CPTakePhotoTool.h */,
+				49C580D71D0DB6BC00C8E27F /* CPTakePhotoTool.m */,
 				4906ED811CFEB83000B1D5AA /* ViewPager */,
 			);
 			name = ZZG;
@@ -2273,6 +2287,12 @@
 				490B39B91CF9993700578E9E /* BUCTextAttachment.m */,
 				49C580B51D06D1B600C8E27F /* BUCPostDetailCell+Reply.h */,
 				49C580B61D06D1B600C8E27F /* BUCPostDetailCell+Reply.m */,
+				49C580CD1D0D0D2300C8E27F /* BUCNewPostCell.h */,
+				49C580CE1D0D0D2300C8E27F /* BUCNewPostCell.m */,
+				49C580D01D0D360A00C8E27F /* BUCNewPostField.h */,
+				49C580D11D0D360A00C8E27F /* BUCNewPostField.m */,
+				49C580D31D0D9D4100C8E27F /* LPPickerView.h */,
+				49C580D41D0D9D4100C8E27F /* LPPickerView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2419,6 +2439,7 @@
 				TargetAttributes = {
 					49DA90E21CDF8F5100B8787B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = VS86A5N9W7;
 					};
 					49DA90FB1CDF8F5100B8787B = {
 						CreatedOnToolsVersion = 7.3;
@@ -3140,17 +3161,21 @@
 				49C580C51D0BDD9500C8E27F /* Antimator.m in Sources */,
 				49DA911B1CDF914C00B8787B /* BUCBaseViewController.m in Sources */,
 				49DA91841CE0F61800B8787B /* BUCReplyViewController.m in Sources */,
+				49C580D81D0DB6BC00C8E27F /* CPTakePhotoTool.m in Sources */,
 				490B39D81CFB0B7300578E9E /* BUCForumListViewController.m in Sources */,
 				49DA916C1CE086DD00B8787B /* BUCPostDetailModel.m in Sources */,
 				490B39BA1CF9993700578E9E /* BUCTextAttachment.m in Sources */,
 				49DA91771CE0889A00B8787B /* TFHpple.m in Sources */,
 				4906ED7C1CFE99DE00B1D5AA /* UIImage+BUCImage.m in Sources */,
+				49C580D51D0D9D4100C8E27F /* LPPickerView.m in Sources */,
 				49DA912B1CDF936700B8787B /* BUCDiscoverViewController.m in Sources */,
 				49DA90E81CDF8F5100B8787B /* main.m in Sources */,
 				49C580C41D0BDD9500C8E27F /* PresentAntimator.m in Sources */,
 				49DA91441CDF9F6700B8787B /* BUCLoginViewController.m in Sources */,
 				490B39D11CFB094C00578E9E /* BUCForumCell.m in Sources */,
 				49DA91411CDF95C400B8787B /* BUCNetworkEngine.m in Sources */,
+				49C580CF1D0D0D2300C8E27F /* BUCNewPostCell.m in Sources */,
+				49C580D21D0D360A00C8E27F /* BUCNewPostField.m in Sources */,
 				4906ED931CFEBFAD00B1D5AA /* BUCPostListViewController.m in Sources */,
 				49C580B71D06D1B600C8E27F /* BUCPostDetailCell+Reply.m in Sources */,
 				490B39CE1CFAE78800578E9E /* BUCStringTool.m in Sources */,
@@ -3228,7 +3253,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dito Zou (9XE33GM5SH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dito Zou (9XE33GM5SH)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3247,7 +3273,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -3272,6 +3298,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3285,7 +3312,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -3297,12 +3324,15 @@
 			baseConfigurationReference = AF7E450261B0582219AD711F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dito Zou (9XE33GM5SH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dito Zou (9XE33GM5SH)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = BUCilent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MySuperCompany.BUCilent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -3311,12 +3341,15 @@
 			baseConfigurationReference = 2D39087C48B1B4005FECCF72 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dito Zou (9XE33GM5SH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = BUCilent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MySuperCompany.BUCilent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

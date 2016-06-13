@@ -56,5 +56,11 @@
 		<key>fid</key>
 		<string>83</string>
 	</dict>
+	<dict>
+		<key>name</key>
+		<string>测试专用子版</string>
+		<key>fid</key>
+		<string>177</string>
+	</dict>
 </array>
 </plist>

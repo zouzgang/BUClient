@@ -7,6 +7,7 @@
 //
 
 #import "BUCImageFullScreen.h"
+#import "BUCToast.h"
 
 static CGRect oldFrame;
 //static CGFloat fullScreenImageX;
@@ -44,6 +45,10 @@ static CGFloat newFrameRelateToPinPointH;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideImage:)];
         [backgroundView addGestureRecognizer:tap];
         
+        //长安保存
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(saveImage:)];
+        [backgroundView addGestureRecognizer:longPress];
+        
         //双指缩放
         UIPinchGestureRecognizer *scalePin = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleImage:)];
         [backgroundView addGestureRecognizer:scalePin];
@@ -73,6 +78,17 @@ static CGFloat newFrameRelateToPinPointH;
 
 + (void)swipeImage:(UISwipeGestureRecognizer *)swipe {
     
+}
+
++ (void)saveImage:(UILongPressGestureRecognizer *)longPress {
+    UIImageView *imageView = (UIImageView *)[longPress.view viewWithTag:1000];
+    UIImageWriteToSavedPhotosAlbum(imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+                                   
++ (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (!error) {
+        [BUCToast showToast:@"保存图片成功"];
+    }
 }
 
 + (void)rotateImage:(UIRotationGestureRecognizer *)rotation {

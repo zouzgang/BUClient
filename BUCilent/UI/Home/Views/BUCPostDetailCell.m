@@ -215,6 +215,8 @@ const CGFloat kDetailCellTopPadding = 12;
     //需要缓存todo
     _atttibutedString = [[NSMutableAttributedString alloc] init];
     _atttibutedString = [[BUCHtmlScraper sharedInstance] richTextFromHtml:content].copy;
+
+    
     _authorLabel.text = [self urldecode:_postDetailModel.author];
     _timeLabel.text = [self parseDateline:_postDetailModel.dateline];
     
@@ -225,29 +227,33 @@ const CGFloat kDetailCellTopPadding = 12;
     }
     
     [_avatarImageView sd_setImageWithURL:[[BUCHtmlScraper sharedInstance] avatarUrlFromHtml:[self urldecode:_postDetailModel.avatar]] placeholderImage:[UIImage imageNamed:@"avatar"]];
-    
-    _contentTextView.attributedText = _atttibutedString;
-    
-//    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:_atttibutedString];
-//    [_atttibutedString enumerateAttributesInRange:NSMakeRange(0, _atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
-//        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
-//        if (attachment) {
-//            UIImageView *imageView = [[UIImageView alloc] init];
-//            imageView.bounds =  attachment.bounds;
-//            
-//            [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
-//                attachment.image = image;
-//                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
-//                _contentTextView.attributedText = resultString;
-//            }];
-//        } else {
-//           _contentTextView.attributedText = _atttibutedString;
-//        }
-//        
-//    }];
-    
     _countLabel.text = [NSString stringWithFormat:@"#%ld",(long)_count];
+    
+    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:_atttibutedString];
+    [_atttibutedString enumerateAttributesInRange:NSMakeRange(0, _atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
+        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
+        if (attachment && attachment.url) {
+            UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.bounds =  attachment.bounds;
+            
+             [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                BUCTextAttachment *newAttachment = [[BUCTextAttachment alloc] init];
+                newAttachment.image = image;
+                 //todo attachment 尺寸
+//                 if (image.size.width > attachment.bounds.size.width || image.size.height > attachment.bounds.size.height) {
+//                     CGFloat scale = image.size.width * attachment.bounds.size.width / [UIScreen mainScreen].bounds.size.width;
+//                     newAttachment.bounds = CGRectMake(0, 0, image.size.width * scale, image.size.height * scale);
+//                 } else {
+//                    newAttachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+//                 }
+                 
+                 newAttachment.bounds = attachment.bounds;
+  
+                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:newAttachment]];
+            }];
+        }
+    }];
+    _contentTextView.attributedText = resultString;
     
     [self setupConstraints];
 }
@@ -274,11 +280,14 @@ const CGFloat kDetailCellTopPadding = 12;
 
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = textAttachment.image;
+    [BUCImageFullScreen showImageFullScreen:imageView];
+    
     return YES;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
-    
     return YES;
 }
 

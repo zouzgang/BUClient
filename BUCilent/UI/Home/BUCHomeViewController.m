@@ -26,6 +26,7 @@
 #import "BUCArray.h"
 #import "BUCBookCell.h"
 #import "BUCBookModel.h"
+#import "NSString+Tools.h"
 
 @interface BUCHomeViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -99,7 +100,6 @@
     self.navigationItem.title = @"BIT LM";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didRightBarClick)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(didLeftBarClick)];
     
     __weak BUCHomeViewController *weakSelf = self;
     [_tableView addPullToRefreshActionHandler:^{
@@ -201,10 +201,6 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)didLeftBarClick {
-    [BUCToast showToast:@"Todo"];
-}
-
 #pragma mark - UISearchDisplayController UITableViewDataSource
 - (NSInteger)searchResultTableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _searchResultList.count;
@@ -221,7 +217,31 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
 }
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if ([NSString isEmptyString:searchBar.text]) {
+        return;
+    }
+    
+    _searchResultList = [[BUCArray alloc] init];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"from"] = [NSString stringWithFormat:@"%@", @0];
+    parameters[@"to"] = [NSString stringWithFormat:@"%@", @30];
+    parameters[@"key"] = searchBar.text;
+    
+    [[BUCDataManager sharedInstance] GET:[BUCNetworkAPI requestURL:kApiSearchThreads] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
+        _pullDown = NO;
+        
+    } onSuccess:^(NSDictionary *result) {
+        NSArray *array = [MTLJSONAdapter modelsOfClass:BUCSearchModel.class fromJSONArray:result[@"data"] error:Nil];
+        [_searchResultList addObjectsFromArray:array];
+        _searchBar.text = [NSString stringWithFormat:@"%@", searchBar.text];
+        NSLog(@"search success");
+    }];
+}
+
 
 - (void)searchBarSearchButonClicked:(UISearchBar *)searchBar {
     _searchResultList = [[BUCArray alloc] init];
@@ -237,16 +257,10 @@
         NSArray *array = [MTLJSONAdapter modelsOfClass:BUCSearchModel.class fromJSONArray:result[@"data"] error:Nil];
         [_searchResultList addObjectsFromArray:array];
         [_tableView reloadData];
+        NSLog(@"search result:%@", _searchResultList);
         NSLog(@"search success");
     }];
 }
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-}
 
 @end

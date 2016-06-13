@@ -79,7 +79,7 @@ const NSInteger kPageSize = 20;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(didReplyButtonClicked)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(didReplyButtonClicked)];
     [self loadData];
     
     if (self.tidSum) {
@@ -100,6 +100,7 @@ const NSInteger kPageSize = 20;
     cell.count = !_reverse ? (indexPath.row + 1) : (_tidSum.integerValue - indexPath.row + 1);
     cell.indexPath = indexPath;
     cell.postDetailModel = _dataArray[indexPath.row];
+    
     return cell;
 }
 

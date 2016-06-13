@@ -47,7 +47,7 @@ const NSInteger kBookPageSize = 20;
 - (void)loadView {
     [super loadView];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -100,6 +100,10 @@ const NSInteger kBookPageSize = 20;
     detail.postTitle = ((BUCBookModel *)_dataArray[indexPath.row]).postTitle;
     detail.author = ((BUCBookModel *)_dataArray[indexPath.row]).author;
     [self.navigationController pushViewController:detail animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
 }
 
 #pragma mark - API

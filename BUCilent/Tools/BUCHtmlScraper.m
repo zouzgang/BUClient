@@ -163,24 +163,31 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
             if (!src || src.length == 0)
                 return;
             
-            NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-            NSString *path = [NSString stringWithFormat:@"%@/%@", resourcePath, [src lastPathComponent]/*[src substringFromIndex:3]*/];
-            NSData *data = [NSData dataWithContentsOfFile:path];
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:path] size:CGSizeZero];
-            
-            if (!image)
-                return;
-            
-            BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
-            if (image.size.width <= 20.0f) {
-                attachment.bounds = CGRectMake(0, 0, 25, 25);
+            if ([src containsString:@"gif"]) {
+                //gif
+                NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+                NSString *path = [NSString stringWithFormat:@"%@/%@", resourcePath, [src lastPathComponent]];
+                NSData *data = [NSData dataWithContentsOfFile:path];
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:path] size:CGSizeZero];
+                
+                if (!image)
+                    return;
+                
+                BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
+                if (image.size.width <= 20.0f) {
+                    attachment.bounds = CGRectMake(0, 0, 25, 25);
+                } else {
+                    attachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+                }
+                attachment.image = image;
+                [output appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
             } else {
-                attachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+                //url
+                BUCTextAttachment *attachment = [[BUCTextAttachment alloc] init];
+                attachment.bounds = CGRectMake(0, 0, 200, 200);
+                attachment.url = [self parseImageUrl:src];
+                [output appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
             }
-            attachment.image = image;
-            [output appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
-            
-            //url todo
 
             return;
         }
@@ -197,13 +204,6 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
             [self appendNode:e output:stringTemp superAttributes:superAttributes];
         }
     }
-    
-    //新一行
-//    if ([tagName isEqualToString:@"blockquote"] ||
-//        [tagName isEqualToString:@"table"] ||
-//        [tagName isEqualToString:@"tr"]) {
-//        [stringTemp appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-//    }
     
     if ( [tagName isEqualToString:@"table"]) {
         [stringTemp appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
