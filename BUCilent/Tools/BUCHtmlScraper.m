@@ -252,12 +252,11 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
         [attributes setObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
         paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.lineSpacing = 5;
-//        paragraphStyle.minimumLineHeight = size + 5;
-//        paragraphStyle.maximumLineHeight = size + 5;
         
         paragraphStyle.alignment = NSTextAlignmentJustified;
         paragraphStyle.paragraphSpacingBefore = 10.0;
         paragraphStyle.hyphenationFactor = 1.0;
+        paragraphStyle.paragraphSpacing = 5;
         
         [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
     } else {

@@ -107,9 +107,8 @@ fail:
         }
     }
 
-    
-    static NSString * const boundary = @"0Xbooooooooooooooooundary0Xyeah!";
     if (isForm) {
+        NSString *boundary = [NSString stringWithFormat:@"%@", [[NSUUID UUID] UUIDString]];
         [req setValue:[NSString stringWithFormat:@"multipart/form-data;boundary=%@",boundary] forHTTPHeaderField:@"Content-type"];
         data = [self formDataWithData:data attachment:attachment boundary:boundary];
     }
@@ -143,16 +142,17 @@ fail:
         req.HTTPBody = data;
     }
     
-    //todo  config需要更多的配置选项，需要把config 放在外面一层
-    NSString *credit = [NSString stringWithFormat:@"%@:%@",@"bitunion_app", @"bitunion_api"];
-    NSString *auth = [NSString stringWithFormat:@"Basic %@",[[credit dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
+    if (!isForm) {
+        //todo  config需要更多的配置选项，需要把config 放在外面一层
+        NSString *credit = [NSString stringWithFormat:@"%@:%@",@"bitunion_app", @"bitunion_api"];
+        NSString *auth = [NSString stringWithFormat:@"Basic %@",[[credit dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
+        [req addValue:auth forHTTPHeaderField:@"Authorization"];
+    }
 
-    if (type == BUCNetworRequestTypePost) {
+
+    if (type == BUCNetworRequestTypePost && !isForm) {
         [req addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
     }
-    
-    
-    [req addValue:auth forHTTPHeaderField:@"Authorization"];
     
     return req;
 }
@@ -164,15 +164,17 @@ fail:
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"Content-Disposition:form-data; name=\"json\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:data];
-    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
     if (attachment) {
-        [body appendData:[@"Content-Disposition:form-data; name=\"attach\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Type:image/png\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition:form-data; name=\"attach\"; filename=\"%@\"\r\n", @"abcdef.jpg"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type:image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[@"Content-Transfer-Encoding:binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:UIImagePNGRepresentation(attachment)];
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:UIImageJPEGRepresentation(attachment, 0.5)];
     }
+    
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+
     
     return body;
 }

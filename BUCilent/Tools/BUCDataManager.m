@@ -32,6 +32,9 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
     self = [super init];
     if (self) {
         _networkEngine = [[BUCNetworkEngine alloc] init];
+        _session = @"W8xE4Ygk";
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        _username = [defaults stringForKey:@"username"];;
     }
     return self;
 }

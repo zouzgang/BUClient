@@ -104,14 +104,13 @@
     __weak BUCHomeViewController *weakSelf = self;
     [_tableView addPullToRefreshActionHandler:^{
         NSLog(@"pull to refresh");
-        [weakSelf loadData];
+        [weakSelf loadData:NO];
     }];
-    
+    [self loadData:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -164,12 +163,12 @@
 }
 
 #pragma mark - API
-- (void)loadData {
+- (void)loadData:(BOOL)isFirst {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
     parameters[@"session"] = [BUCDataManager sharedInstance].session;
     
-    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiHome] parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
+    [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiHome] parameters:parameters attachment:nil isForm:NO configure:isFirst ? @{kShowLoadingViewWhenNetwork : @YES} : nil onError:^(NSString *text) {
         _pullDown = NO;
         
     } onSuccess:^(NSDictionary *result) {
@@ -252,6 +251,9 @@
     
     [[BUCDataManager sharedInstance] GET:[BUCNetworkAPI requestURL:kApiSearchThreads] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
         _pullDown = NO;
+        [BUCToast showToast:text];
+        self.networkButton.hidden = NO;
+        [self.view bringSubviewToFront:self.networkButton];
         
     } onSuccess:^(NSDictionary *result) {
         NSArray *array = [MTLJSONAdapter modelsOfClass:BUCSearchModel.class fromJSONArray:result[@"data"] error:Nil];
@@ -260,6 +262,13 @@
         NSLog(@"search result:%@", _searchResultList);
         NSLog(@"search success");
     }];
+}
+
+#pragma mark - Override
+- (void)dealNetworkError {
+    [super dealNetworkError];
+    
+    [self loadData:YES];
 }
 
 

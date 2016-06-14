@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "BUCLoginViewController.h"
+#import "NSString+Tools.h"
+#import "BUCTabViewController.h"
 
 @interface AppDelegate ()
 
@@ -34,10 +36,18 @@
     [[UINavigationBar appearance] setTitleTextAttributes:attributes];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -64) forBarMetrics:UIBarMetricsDefault];
     
-    BUCLoginViewController *login = [[BUCLoginViewController alloc] init];
-    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:login];
     
-    self.window.rootViewController = navigation;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults stringForKey:@"username"];
+    NSString *password = [defaults stringForKey:@"password"];
+    if (![NSString isEmptyString:username] && ![NSString isEmptyString:password]) {
+        self.window.rootViewController = [[BUCTabViewController alloc] init];
+    } else {
+        BUCLoginViewController *login = [[BUCLoginViewController alloc] init];
+        UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController = navigation;
+    }
+    
     [self.window makeKeyAndVisible];
 }
 

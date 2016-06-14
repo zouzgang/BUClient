@@ -39,7 +39,6 @@ const CGFloat kDetailCellTopPadding = 12;
     UIImageView *_attachmentImageView;
     
     NSAttributedString *_atttibutedString;
-    
 }
 
 + (NSString *)cellReuseIdentifier {
@@ -204,11 +203,7 @@ const CGFloat kDetailCellTopPadding = 12;
     [_attachmentImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(_contentTextView.mas_bottom).offset(kDetailCellTopPadding / 2);
-        if (_attachmentImageView.image.size.height < 250) {
-            make.size.mas_equalTo(_attachmentImageView.image.size);
-        } else {
-            make.size.mas_equalTo(CGSizeMake(250, 250));
-        }
+        make.size.mas_equalTo(CGSizeMake(250, 250));
         
         if (_postDetailModel.attachment) {
             _attachmentImageView.hidden = NO;

@@ -141,7 +141,7 @@
         parameters[@"message"] = message;
         parameters[@"attachment"] = _attachmentImage ? @"1" : @"0";
         
-        [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES configure:nil onError:^(NSString *text) {
+        [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
             NSLog(@"reply fail");
             self.navigationItem.rightBarButtonItem.enabled = YES;
         } onSuccess:^(NSDictionary *result) {

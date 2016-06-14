@@ -44,10 +44,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = YES;
-
+    [self suitIOS7];
     self.navigationController.navigationBar.translucent = NO;
+}
+
+- (void)suitIOS7 {
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = YES;
+    }
 }
 
 #pragma mark - Action
@@ -60,8 +65,6 @@
 - (void)dealNetworkError {
     _networkButton.hidden = YES;
 }
-
-
 
 
 @end
