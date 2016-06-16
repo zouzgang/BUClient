@@ -146,7 +146,8 @@ const NSInteger kPageSize = 20;
 
     
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiPostDetail] parameters:parameters attachment:nil isForm:NO configure:isFirst ? @{kShowLoadingViewWhenNetwork : @YES} : nil onError:^(NSString *text) {
-        
+         self.navigationItem.rightBarButtonItem.enabled = YES;
+        [BUCToast showToast:text];
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"detail success");
         self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -257,7 +258,7 @@ const NSInteger kPageSize = 20;
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"username"] = [BUCDataManager sharedInstance].username;
     parameters[@"subject"] = [BUCStringTool urldecode:self.postTitle];
-    parameters[@"author"] = self.author;
+    parameters[@"author"] = [BUCStringTool urldecode:self.author];
     parameters[@"tid"] = [NSString stringWithFormat:@"%@", self.tid];
     
     

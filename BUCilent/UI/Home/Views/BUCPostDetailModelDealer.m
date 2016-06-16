@@ -14,6 +14,8 @@
 #import "BUCTextAttachment.h"
 #import "UIImageView+WebCache.h"
 
+NSString *const kAttributedStringChangedNotification = @"kAttributedStringChangedNotification";/**<通过推送消息启动*/
+
 @implementation BUCPostDetailModelDealer
 
 + (NSArray *)cacheArray:(NSArray<BUCPostDetailModel *> *)rawArray cacheMap:(NSMutableDictionary *)cacheMap{
@@ -80,33 +82,48 @@
         [content appendString:body];
     }
 
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
     NSMutableAttributedString *atttibutedString = [[BUCHtmlScraper sharedInstance] richTextFromHtml:content].copy;
     
     NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:atttibutedString];
-    [atttibutedString enumerateAttributesInRange:NSMakeRange(0, atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
-        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
-        if (attachment && attachment.url) {
-            UIImageView *imageView = [[UIImageView alloc] init];
-            imageView.bounds =  attachment.bounds;
-            
-            [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                BUCTextAttachment *newAttachment = [[BUCTextAttachment alloc] init];
-                newAttachment.image = image;
-                //todo attachment 尺寸
-                //                 if (image.size.width > attachment.bounds.size.width || image.size.height > attachment.bounds.size.height) {
-                //                     CGFloat scale = image.size.width * attachment.bounds.size.width / [UIScreen mainScreen].bounds.size.width;
-                //                     newAttachment.bounds = CGRectMake(0, 0, image.size.width * scale, image.size.height * scale);
-                //                 } else {
-                //                    newAttachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
-                //                 }
-                
-                newAttachment.bounds = attachment.bounds;
-                
-                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:newAttachment]];
-            }];
-        }
-    }];
+    
+//    [atttibutedString enumerateAttributesInRange:NSMakeRange(0, atttibutedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
+//        BUCTextAttachment *attachment = attrs[@"NSAttachment"];
+//        if (attachment && attachment.url) {
+//            UIImageView *imageView = [[UIImageView alloc] init];
+//            imageView.bounds =  attachment.bounds;
+//            
+//            [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                BUCTextAttachment *newAttachment = [[BUCTextAttachment alloc] init];
+//                newAttachment.image = image;
+//                
+//                if ((image.size.width / screenWidth) > 1) {
+//                    newAttachment.bounds = CGRectMake(0, 0, 250, image.size.height * 250 / image.size.width);
+//                } else {
+//                    newAttachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+//                }
+////                NSMutableAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:newAttachment].mutableCopy;
+////                
+////                [resultString replaceCharactersInRange:range withAttributedString:[NSAttributedString attributedStringWithAttachment:newAttachment]];
+////                
+////                NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+////                paragraphStyle.alignment = NSTextAlignmentCenter;
+////                [resultString addAttributes:@{NSParagraphStyleAttributeName : paragraphStyle} range:NSMakeRange(0, [NSAttributedString attributedStringWithAttachment:newAttachment].length)];
+//                
+//                
+//                NSMutableAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:newAttachment].mutableCopy;
+//                NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+//                paragraphStyle.alignment = NSTextAlignmentCenter;
+//                [attachmentString addAttributes:@{NSParagraphStyleAttributeName : paragraphStyle} range:NSMakeRange(0, attachmentString.length)];
+//                [resultString replaceCharactersInRange:range withAttributedString:attachmentString.copy];
+//                
+////                [[NSNotificationCenter defaultCenter] postNotificationName:kAttributedStringChangedNotification object:nil userInfo:@{@"pid" : postDetailModel.pid, @"attributedString" : resultString}];
+//
+//            }];
+//        }
+//    }];
+
     
     return resultString.copy;
 }

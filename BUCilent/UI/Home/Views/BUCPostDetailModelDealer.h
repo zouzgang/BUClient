@@ -6,8 +6,11 @@
 //  Copyright © 2016年 zouzhigang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 @class BUCPostDetailModel;
+
+extern NSString *const kAttributedStringChangedNotification;
+
 
 @interface BUCPostDetailModelDealer : NSObject
 

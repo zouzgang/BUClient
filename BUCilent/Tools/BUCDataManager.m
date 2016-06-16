@@ -141,7 +141,9 @@ NSString *const kShowLoadingViewWhenNetwork = @"kShowLoadingViewWhenNetwork";
                 errorBlcok(@"发帖失败，请检查内容是否只含有emoj字符");
             } else if ([msg isEqualToString:@"forum+need+password"]) {
                 errorBlcok(@"该论坛需要密码才能进入");
-            } else {
+            } else if ([msg isEqualToString:@"exceed+frequency"]) {
+                errorBlcok(@"发帖间隔不得少于一分钟");
+            }else {
                 errorBlcok(@"未知错误");
             }
         } else {

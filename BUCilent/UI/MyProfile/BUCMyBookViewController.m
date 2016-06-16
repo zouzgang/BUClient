@@ -144,7 +144,6 @@ const NSInteger kBookPageSize = 20;
      parameters[@"to"] = [NSString stringWithFormat:@"%ld",(_page + 1) * kBookPageSize];
     
     [[BUCDataManager sharedInstance] GET:url parameters:parameters attachment:nil isForm:NO configure:nil onError:^(NSString *text) {
-        
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"booklist success");
         NSArray *array = [MTLJSONAdapter modelsOfClass:BUCBookModel.class fromJSONArray:[result objectForKey:@"data"] error:Nil];

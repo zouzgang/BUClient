@@ -169,7 +169,13 @@
     parameters[@"session"] = [BUCDataManager sharedInstance].session;
     
     [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiHome] parameters:parameters attachment:nil isForm:NO configure:isFirst ? @{kShowLoadingViewWhenNetwork : @YES} : nil onError:^(NSString *text) {
+        if (_tableView.pullToRefreshView.state == BUCPullToRefreshStateLoading) {
+            [_tableView.pullToRefreshView stopAnimating];
+        }
         _pullDown = NO;
+        [BUCToast showToast:text];
+        self.networkButton.hidden = NO;
+        [self.view bringSubviewToFront:self.networkButton];
         
     } onSuccess:^(NSDictionary *result) {
         NSLog(@"home success");
@@ -251,9 +257,6 @@
     
     [[BUCDataManager sharedInstance] GET:[BUCNetworkAPI requestURL:kApiSearchThreads] parameters:parameters attachment:nil isForm:NO configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
         _pullDown = NO;
-        [BUCToast showToast:text];
-        self.networkButton.hidden = NO;
-        [self.view bringSubviewToFront:self.networkButton];
         
     } onSuccess:^(NSDictionary *result) {
         NSArray *array = [MTLJSONAdapter modelsOfClass:BUCSearchModel.class fromJSONArray:result[@"data"] error:Nil];

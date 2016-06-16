@@ -138,6 +138,40 @@
     return output;
 }
 
+- (NSString *)parseDatelineToStandard:(NSString *)dateline {
+    if (!dateline || (id)dateline == [NSNull null] || dateline.length == 0) {
+        return nil;
+    }
+    
+    static NSDateFormatter *dateFormatter;
+    static NSDateFormatter *parsingFormatter;
+    static NSRegularExpression *regex;
+    static dispatch_once_t onceEnsure;
+    dispatch_once(&onceEnsure, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"zh_Hans_CN"];
+        parsingFormatter = [[NSDateFormatter alloc] init];
+        [parsingFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]+$" options:NSRegularExpressionCaseInsensitive error:NULL];
+    });
+    
+    NSString *output;
+    NSDate *date;
+    
+    if ([regex numberOfMatchesInString:dateline options:0 range:NSMakeRange(0, dateline.length)] == 0) {
+        date = [parsingFormatter dateFromString:dateline];
+    } else {
+        date = [NSDate dateWithTimeIntervalSince1970:dateline.doubleValue];
+    }
+    
+    output = [dateFormatter stringFromDate:date];
+
+    
+    
+    return output;
+}
 
 
 

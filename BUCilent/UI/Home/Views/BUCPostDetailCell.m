@@ -104,7 +104,6 @@ const CGFloat kDetailCellTopPadding = 12;
     [_attachmentImageView addGestureRecognizer:tap];
     
     [self setupConstraints];
-
 }
 
 - (void)setupConstraints {
@@ -186,7 +185,40 @@ const CGFloat kDetailCellTopPadding = 12;
 - (void)setAttributedString:(NSAttributedString *)attributedString {
     _attributedString = attributedString;
     if (_attributedString) {
-        _contentTextView.attributedText = attributedString;
+        NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithAttributedString:attributedString];
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+         CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+
+        [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> *attrs, NSRange range, BOOL *stop) {
+            BUCTextAttachment *attachment = attrs[@"NSAttachment"];
+            if (attachment && attachment.url) {
+                UIImageView *imageView = [[UIImageView alloc] init];
+                imageView.bounds =  attachment.bounds;
+                
+                [imageView sd_setImageWithURL:attachment.url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    BUCTextAttachment *newAttachment = [[BUCTextAttachment alloc] init];
+                    newAttachment.image = image;
+                    
+                    if ((image.size.width / screenWidth) > 1 || (image.size.height / (screenHeight - 64) > 1)) {
+                        if (image.size.width > image.size.height) {
+                            newAttachment.bounds = CGRectMake(0, 0, 250, image.size.height * 250 / image.size.width);
+                        } else {
+                            newAttachment.bounds = CGRectMake(0, 0, image.size.width * 250 / image.size.height, 250);
+                        }
+                    } else {
+                        newAttachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+                    }
+
+                    NSMutableAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:newAttachment].mutableCopy;
+                    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+                    paragraphStyle.alignment = NSTextAlignmentCenter;
+                    [attachmentString addAttributes:@{NSParagraphStyleAttributeName : paragraphStyle} range:NSMakeRange(0, attachmentString.length)];
+                    [resultString replaceCharactersInRange:range withAttributedString:attachmentString.copy];
+                    _contentTextView.attributedText = resultString;
+                }];
+            }
+        }];
+        _contentTextView.attributedText = resultString;
     }
 }
 

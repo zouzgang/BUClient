@@ -19,5 +19,7 @@
 + (NSString *)cellReuseIdentifier;
 
 - (NSString *)parseDateline:(NSString *)dateline;
+- (NSString *)parseDatelineToStandard:(NSString *)dateline;
+
 
 @end

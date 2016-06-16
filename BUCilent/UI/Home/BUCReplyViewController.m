@@ -143,9 +143,11 @@
         
         [[BUCDataManager sharedInstance] POST:[BUCNetworkAPI requestURL:kApiNewPost] parameters:parameters attachment:_attachmentImage isForm:YES configure:@{kShowLoadingViewWhenNetwork : @YES} onError:^(NSString *text) {
             NSLog(@"reply fail");
+            [BUCToast showToast:text];
             self.navigationItem.rightBarButtonItem.enabled = YES;
         } onSuccess:^(NSDictionary *result) {
             NSLog(@"reply success");
+            [BUCToast showToast:@"已回复"];
             if (self.completBlock) {
                 self.completBlock(_textView.text, _attachmentImage);
             }

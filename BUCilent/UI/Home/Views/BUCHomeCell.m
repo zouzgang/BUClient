@@ -10,6 +10,7 @@
 #import <Masonry.h>
 #import "BUCHomeModel.h"
 #import "UIColor+BUC.h"
+#import "BUCForumListViewController.h"
 
 const CGFloat kLeftPadding = 12;
 const CGFloat kTopPadding = 12;
@@ -63,7 +64,11 @@ const CGFloat kTopPadding = 12;
     _forumLabel = [[UILabel alloc] init];
     _forumLabel.textColor = [UIColor blackColor];
     _forumLabel.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:_forumLabel];
+    [self.contentView addSubview:_forumLabel];\
+    
+    _forumLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didForumLabelTap)];
+    [_forumLabel addGestureRecognizer:tap];
     
     _authorLabel = [[UILabel alloc] init];
     _authorLabel.textColor = [UIColor blackColor];
@@ -140,6 +145,33 @@ const CGFloat kTopPadding = 12;
         _contentLabel.text = [self urldecode:homeModel.lastRelpyDict[@"what"]];
         _forumLabel.text = [self urldecode:homeModel.fname];
         _authorLabel.text = [self urldecode:homeModel.author];
+    }
+}
+
+- (void)didForumLabelTap {
+    UIWindow *keyWindow = ([UIApplication sharedApplication].delegate).window;
+    UIViewController *topViewController = [self getTopVisibleViewController:keyWindow.rootViewController];
+    
+    BUCForumListViewController *forum = [[BUCForumListViewController alloc] init];
+    forum.fid = _homeModel.fid;
+    forum.forumName = [self urldecode:_homeModel.fname];
+    forum.hidesBottomBarWhenPushed = YES;
+    
+    [topViewController.navigationController pushViewController:forum animated:YES];
+}
+
+- (UIViewController *)getTopVisibleViewController:(UIViewController *)rootViewController {
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController *)rootViewController;
+        return [self getTopVisibleViewController:tabBarController.selectedViewController];
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)rootViewController;
+        return [self getTopVisibleViewController:navigationController.visibleViewController];
+    } else if (rootViewController.presentedViewController) {
+        UIViewController *presentedViewController = rootViewController.presentedViewController;
+        return [self getTopVisibleViewController:presentedViewController];
+    } else {
+        return rootViewController;
     }
 }
 

@@ -9,6 +9,7 @@
 #import "BUCPostDetailCell+Reply.h"
 #import "BUCPostDetailModel.h"
 #import "BUCReplyViewController.h"
+#import "BUCHtmlScraper.h"
 
 @implementation BUCPostDetailCell (Reply)
 
@@ -22,9 +23,9 @@
         
     };
     reply.tid = postDetail.tid;
-//    title = [NSString stringWithFormat:@"<b>%@</b>\n\n", title];
-    reply.quoteContent = [NSString stringWithFormat:@"<table>%@</table>\n", postDetail.message];
-//    reply.quoteContent = postDetail.message;
+    
+    
+    reply.quoteContent = [NSString stringWithFormat:@"[quote=%@][b]%@[/b] %@ \n %@[/quote]", postDetail.tid, [self urldecode:postDetail.author], [self parseDatelineToStandard:postDetail.dateline], [[BUCHtmlScraper sharedInstance] convertQuote:[self urldecode:postDetail.message]]];
     [topViewController.navigationController pushViewController:reply animated:NO];
 }
 
@@ -42,5 +43,7 @@
         return rootViewController;
     }
 }
+
+
 
 @end

@@ -272,6 +272,83 @@ BOOL matchPattern(NSString *string, NSString *pattern, NSTextCheckingResult **ma
 }
 
 
+#pragma mark - Quote
+- (NSString *)convertQuote:(NSString *)quote {
+    NSMutableString *output;
+    output = [NSMutableString stringWithString:quote];
+
+    /*
+    //todo 这里需要把HTML 转换为UBB 格式   不熟悉正则先把链接标签和img标签都去掉
+   [output replaceOccurrencesOfString:@"<blockquote>.*?</blockquote>" withString:@"[引用]\n" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<a href='(.+?)'(?:.target='.+?')>(.+?)</a>" options:NSRegularExpressionCaseInsensitive error:NULL];
+    [regex enumerateMatchesInString:output options:0 range:NSMakeRange(0, output.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        NSString *discuz = [NSString stringWithFormat:@"[url=\"%@\"]\"%@\"[/url]\"",[output substringWithRange:[result rangeAtIndex:1]],[output substringWithRange:[result rangeAtIndex:2]]];
+        [output replaceOccurrencesOfString:[output substringWithRange:[result rangeAtIndex:0]] withString:discuz options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    }];
+    
+    //Image"<img[^>]src=["]([^"]+)[^>]*>"   @"<img src=\"([^>]+?).+?\">"
+    NSRegularExpression *imageRegex = [NSRegularExpression regularExpressionWithPattern:@"<img[^>]src=[\"]([^\"]+)[^>]*>" options:NSRegularExpressionCaseInsensitive error:NULL];
+    
+    [imageRegex enumerateMatchesInString:output options:0 range:NSMakeRange(0, output.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        [output replaceOccurrencesOfString:[output substringWithRange:[result rangeAtIndex:0]]  withString:[NSString stringWithFormat:@"[img]%@[/img]",[output substringWithRange:[result rangeAtIndex:1]]] options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    }];
+    */
+    
+    [output replaceOccurrencesOfString:@"<blockquote>.*?</blockquote>" withString:@"[引用]\n" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    
+    [output replaceOccurrencesOfString:@"<a href=.*?</a>" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    [output replaceOccurrencesOfString:@"<b>" withString:@"[b]" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    [output replaceOccurrencesOfString:@"</b>" withString:@"[/b]" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    [output replaceOccurrencesOfString:@"<i>" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    [output replaceOccurrencesOfString:@"</i>" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    [output replaceOccurrencesOfString:@"<br/>" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    [output replaceOccurrencesOfString:@"<br />" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    [output replaceOccurrencesOfString:@"<br>" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    
+    [output replaceOccurrencesOfString:@"..:: <span id=\"id_open_api_label\"> ::.." withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+
+    [output replaceOccurrencesOfString:@"<img src=\"([^>].*?)\">" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    
+    [output replaceOccurrencesOfString:@"<.*?>" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, output.length)];
+    
+    if (output.length > 250) {
+        output = [NSMutableString stringWithString:[NSString stringWithFormat:@"%@....", [output substringToIndex:250]]];
+    }
+
+    return output.copy;
+}
+
+//Pattern p = Pattern.compile("<a href='(.+?)'(?:.target='.+?')>(.+?)</a>");
+//Matcher m = p.matcher(quote);
+//while (m.find()) {
+//    String discuz = "[url=" + m.group(1) + "]" + m.group(2) + "[/url]";
+//    quote = quote.replace(m.group(0), discuz);
+//    m = p.matcher(quote);
+//}
+//
+//// 图片
+//p = Pattern.compile("<img src='([^>])'>");
+//m = p.matcher(quote);
+//while (m.find()) {
+//    quote = quote.replace(m.group(0), "[img]" + m.group(1) + "[/img]");
+//    m = p.matcher(quote);
+//}
+//
+//// 其他标签
+//quote = Html.fromHtml(quote).toString();
+//quote = "[quote=" + pid + "][b]" + CommonUtils.decode(author) + "[/b] "
+//+ CommonUtils.formatDateTime(CommonUtils.unixTimeStampToDate(dateline)) + "\n" + quote + "[/quote]\n";
+
+
+
+
+
+
+
+
+
+
 
 
 

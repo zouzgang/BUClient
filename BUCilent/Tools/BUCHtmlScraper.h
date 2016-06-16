@@ -21,5 +21,7 @@
 -(NSArray *)HtmlWithData:(NSData *)data XPath:(NSString *)path;
 - (NSURL *)avatarUrlFromHtml:(NSString *)html ;
 
+- (NSString *)convertQuote:(NSString *)quote;
+
 
 @end
